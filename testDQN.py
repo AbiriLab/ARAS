@@ -20,7 +20,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Select trained model
 # modelPath = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/policyDQN_phase2_bs64_ss4_rb25000_gamma0.99_decaylf20000_lr0.0001.pt'
-modelPath = "/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt"
+# modelPath = "/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt"
 
 # Get stack size from model trained in learnDQN.py from the model name 
 STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
