@@ -1,11 +1,11 @@
 ########## Test ############
-modelPath = "/home/tnlab/Projects/github/sharedcontrol_DQN_Kinova/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt"
+modelPath = "./models/pickplace_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt"
 
 
 
 ########### TRAIN ##########
 
-MODEL_NAME = 'test'
+MODEL_NAME = 'pickplace'
 
 # Declare number of total episodes
 num_episodes = 200000      #[25000,100000,500000] 

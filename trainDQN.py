@@ -22,8 +22,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 import torchvision.transforms as T
 
-from env_extended import jacoDiverseObjectEnv
-from utils import DQN, ReplayMemory, get_screen
+from jaco_env import jacoDiverseObjectEnv
+from utils import ReplayMemory, get_screen
+from DQN_net import DQN
 import pybullet as pb
 from config import *
 import os
@@ -35,7 +36,7 @@ np.random.seed(0)
 
 # Load env
 env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=30, dv=0.02,
-                           AutoXDistance=True, AutoGrasp=True, width=64, height=64, numObjects=3)
+                           AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=3)
 
 env.cid = pb.connect(pb.DIRECT)
 
@@ -173,7 +174,7 @@ if __name__ == "__main__":
     parser.add_option('-d', '--detail_level',
                     action="store", 
                     dest="detail_level",
-                    help="Level of detail (a,e,p)", 
+                    help="Level of detail (a,e,p)",
                     default="a")
     parser.add_option('-a', '--logging on both screen and logfile (default)',
                     action="store", 
@@ -197,7 +198,8 @@ if __name__ == "__main__":
 
 
     # Assume your pre-trained model's file path
-    PRETRAINED_MODEL_PATH = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt'
+    # PRETRAINED_MODEL_PATH = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt'
+    PRETRAINED_MODEL_PATH = ''
 
     # Check if the pretrained model file exists and load it
     if os.path.isfile(PRETRAINED_MODEL_PATH):
@@ -339,7 +341,7 @@ if __name__ == "__main__":
             print('Environment solved in {:d} episodes!\tAverage Score: {:.3f}'.format(i_episode+1, mean_reward))
             break
 
-  
+
     print('Average Score: {:.3f}'.format(mean_reward))
     elapsed = timeit.default_timer() - start_time
     print("Elapsed time: {}".format(timedelta(seconds=elapsed)))
@@ -375,7 +377,7 @@ for i_episode in range(episode):
         # Now using the policy network with both state and y_relative
         action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
         _, reward, done, _ = env.step(action.item())
-        
+    
         # Observe new state and y_relative
         next_state, next_y_relative = get_screen(env)
         stacked_states.append(next_state)
@@ -383,5 +385,6 @@ for i_episode in range(episode):
         
         if done:
             break
-            
+
     print(f"Episode: {i_episode+1}, Reward: {reward}")
+
