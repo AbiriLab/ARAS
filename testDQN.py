@@ -11,7 +11,7 @@ import torchvision.transforms as T
 from config import *
 
 # From pybullet_envs.bullet.jaco_diverse_object_gym_env import jacoDiverseObjectEnv
-from env_extended import jacoDiverseObjectEnv
+from jaco_env import jacoDiverseObjectEnv
 from utils import DQN, get_screen
 
 # If gpu is to be used
