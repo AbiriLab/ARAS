@@ -35,8 +35,8 @@ random.seed(0)
 np.random.seed(0)
 
 # Load env
-env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=30, dv=0.02,
-                           AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=3)
+env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=30, dv=0.02,
+                           AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
 
 env.cid = pb.connect(pb.DIRECT)
 
@@ -46,7 +46,6 @@ print(torch.cuda.is_available())
 
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
-
 
 
 def select_action(state, relative_position, i_episode):
@@ -144,6 +143,7 @@ will decay exponentially towards EPS_END. EPS_DECAY controls the rate of the dec
 # Get screen size so that we can initialize layers correctly based on shape
 # returned from pybullet (128, 128, 3).
 init_screen, _ = get_screen(env)
+# print(init_screen.shape)
 _, _, screen_height, screen_width = init_screen.shape
 
 # Get number of actions from gym action space

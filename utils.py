@@ -12,6 +12,8 @@ import os
 import pybullet as pb
 import glob
 import cv2
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
 
 # Define replay buffer
 class ReplayMemory(object):
@@ -47,17 +49,31 @@ def get_screen(env):
 
     global stacked_screens
     # Transpose screen into torch order (CHW).
-    rgb, depth, segmentation, y_relative = env._get_observation()
-    screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
+    # rgb, depth, segmentation, y_relative = env._get_observation()
+    segmentation, y_relative = env._get_observation()
+    # unique_ids = np.unique(segmentation)
+    # print(unique_ids)
+    segmentation = modify_segmentation(segmentation, env._numObjects)
+    # print(segmentation.shape)
+    # Visualize the segmentation image with a colormap
+    # plt.imshow(segmentation, cmap='tab20')  # 'tab10' is a colormap with 10 distinct colors
+    # plt.colorbar()  # Optionally display a color bar to indicate which colors map to which values
+    # plt.axis('off')
+    # plt.show()
+    show_image(segmentation, window_name="Segmentation", scale_factor=4)
+
+
+    # screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
+    screen = segmentation
     # Convert to float, rescale, convert to torch tensor
-    screen = np.ascontiguousarray(screen, dtype=np.float32) / 255
+    # screen = np.ascontiguousarray(screen, dtype=np.float32) / 255 # Normalization
     screen = torch.from_numpy(screen)
-    screen = preprocess(screen).unsqueeze(0)
+    # screen = preprocess(screen)
+    screen = screen.unsqueeze(0).unsqueeze(0)
     # print(screen.shape)
-    y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0)
+    y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
     # Resize, and add a batch dimension (BCHW)
     return screen.to(device), y_relative.to(device)
-
 
 
 def show_image(image, window_name="Image", scale_factor=4):
@@ -69,19 +85,26 @@ def show_image(image, window_name="Image", scale_factor=4):
     - window_name (str): The name of the window where the image will be displayed.
     - scale_factor (float): Factor by which to scale the image size.
     """
+    np.random.seed(42)  # Seed for reproducibility
+    unique_labels = np.unique(image)
+    color_map = np.random.randint(0, 255, (max(unique_labels) + 1, 3), dtype=np.uint8)
+
+    # Apply the color map to the segmentation image
+    color_segmentation_image = color_map[image]
+
     # Calculate new dimensions
-    height, width = image.shape[:2]
+    height, width = color_segmentation_image.shape[:2]
     new_dimensions = (int(width * scale_factor), int(height * scale_factor))
 
     # Resize the image
-    resized_image = cv2.resize(image, new_dimensions, interpolation=cv2.INTER_LINEAR)
+    resized_image = cv2.resize(color_segmentation_image, new_dimensions, interpolation=cv2.INTER_LINEAR)
 
     # Display the image
-    cv2.imshow(window_name, resized_image)
+    cv2.imshow(window_name ,resized_image)
     cv2.waitKey(1)
+            
 
-
-def convert_segmentation_to_color(segmentation, numobj):
+def modify_segmentation(segmentation, numobj):
     """
     Converts a segmentation image to a colored RGB image based on provided segmentation ID to color mappings.
 
@@ -93,32 +116,43 @@ def convert_segmentation_to_color(segmentation, numobj):
     Returns:
     - numpy.ndarray: An RGB image where each segmentation ID is mapped to a specified color.
     """
-    default_color=[0, 0, 0]
-    tray = numobj + 4
+    # print(segmentation.shape)
+    # bin = numobj + 4
+    # # BGR color format
+    # segmentation_ids = {
+    # 0: 0,   # Background white
+    # 1: 1,   # Table black
+    # 2: 2,   # Block
+    # 3: 3,   # Robot
+    # 4: 4,   # Mug
+    # bin:10,                                                                                                                                                                                                                                                                                                                                        
+    # # Add more mappings as needed
+    # }
+
+    bin = numobj + 3
     # BGR color format
-    segmentation_colors = {
-    0: [255, 255, 255], # Background white
-    1: [0, 0, 0],     # Table black
-    2: [130, 130, 130],   # Block
-    3: [255, 0, 0],     # Robot
-    4: [0, 255, 0],     # Mug
-    tray:[0, 0, 255],  
-                                                                                                                                                                                                                                                                                                                                              
+    segmentation_ids = {
+    0: 0,   # Background white
+    1: 1,   # Table black
+    2: 2,   # Robot
+    3: 3,   # Mug
+    bin:10,                                                                                                                                                                                                                                                                                                                                        
     # Add more mappings as needed
     }
 
     # Initialize an empty RGB image with the same dimensions as the segmentation image
     height, width = segmentation.shape
-    segmentation_rgb = np.zeros((height, width, 3), dtype=np.uint8)
+    modified_seg = np.zeros((height, width), dtype=np.uint8)
 
-    # Populate the RGB image with colors based on segmentation IDs
-    for seg_id, color in segmentation_colors.items():
-        segmentation_rgb[segmentation == seg_id] = color
+    # Populate the modified segs 
+    for obj, id in segmentation_ids.items():
+        modified_seg[segmentation == obj] = id
 
     # Set the default color for any other IDs
-    segmentation_rgb[np.isin(segmentation, list(segmentation_colors.keys()), invert=True)] = default_color
+    modified_seg[np.isin(segmentation, list(segmentation_ids.keys()), invert=True)] = 1
+    # modified_seg[(segmentation > bin) & (segmentation < 10)] = 2
     
-    return segmentation_rgb
+    return modified_seg
 
 
 def mask_specific_object(segmentation, specific_seg_id, segmentation_colors, default_color=[0, 0, 0]):
@@ -201,12 +235,13 @@ class ObjectPlacer:
             while not valid_position_found:
         
                 # xpos = random.uniform(0.16, 0.23)
-                xpos = 0.30
+                xpos = 0.13
 
                 if self._AutoXDistance:
                     # width = 0.05 + (xpos - 0.16) / 0.7
                     # ypos = random.uniform(-width, width)
                     ypos = random.choice([-0.17, 0, 0.17])
+                    # ypos = 0
                 else:
                     ypos = random.uniform(0, 0.2)
 
@@ -232,9 +267,9 @@ class ObjectPlacer:
             
             while not valid_position_found:
                 
-                xpos = 0.53
+                xpos = 0.35
                 ypos = random.choice([-0.2, 0, 0.2])
-                zpos = 0.2
+                # zpos = 0.2
                 ###########
                 # ypos = 0
                 

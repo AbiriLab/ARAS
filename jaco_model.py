@@ -17,8 +17,8 @@ class jaco:
         self.maxVelocity = .35
         self.maxForce = 200.
         self.fingerThumbForce = 3
-        self.fingerAForce = 2
-        self.fingerBForce = 2
+        self.fingerAForce = 3
+        self.fingerBForce = 3
         self.fingerforce = 6
         self.fingertipforce = 2 
         self.fingerIndices = [9, 11, 13]
@@ -59,14 +59,14 @@ class jaco:
         self.jacoUid = objects[0]
 
         # Keep robot at same position after every reset
-        jaco_orientation_euler = [0, math.pi/2, 0]
+        jaco_orientation_euler = [0, 0, 0]
         jaco_orientation_quaternion = pb.getQuaternionFromEuler(jaco_orientation_euler)
         # pb.resetBasePositionAndOrientation(self.jacoUid, [-0.76, -0.06, 0.47],jaco_orientation_quaternion)
-        pb.resetBasePositionAndOrientation(self.jacoUid, [-0.60, -0.06, 0.46], jaco_orientation_quaternion)
+        pb.resetBasePositionAndOrientation(self.jacoUid, [-0.5, -0.05, -0.28], jaco_orientation_quaternion)
 
 
-        self.jointPositions = [
-            0,0,0,1.5,1.55,0,0,math.pi,0,0,0.25,0,0.25,0,0.25
+        self.jointPositions = [# finger indices = [9 - 14]
+            0, 0, 0, 2.7, 5.7, -0.6, 1.60, 2.8, 0, 0, 0.25, 0, 0.25, 0, 0.25
         ]
         self.numJoints = pb.getNumJoints(self.jacoUid)
         
@@ -186,7 +186,7 @@ class jaco:
     
 
 
-    def apply_grasp(self, initial_finger_angle=0.6, final_finger_angle=3, step_increment=0.001, finger_force_multiplier=3,  AutoLift=True):
+    def apply_grasp(self, initial_finger_angle=0.6, final_finger_angle=5, step_increment=0.001, finger_force_multiplier=3,  AutoLift=True):
         # Close fingers
         
         finger_angle = initial_finger_angle
@@ -235,7 +235,7 @@ class jaco:
 
         # # Lift gripper after grasp  
         if AutoLift:  
-            for _ in range(160):
+            for _ in range(90): # 160
                 self.apply_move([0, 0, 0.01])
                 pb.stepSimulation()
                 if self.renders:

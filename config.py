@@ -12,7 +12,7 @@ num_episodes = 200000      #[25000,100000,500000]
 logfilename = 'learnDQN.log'
 
 # Hyperparameters, search for different combinations
-BATCH_SIZE = 64 
+BATCH_SIZE = 32 
 GAMMA = 0.99
 
 EPS_START = 0.99 # Max of exploration rate

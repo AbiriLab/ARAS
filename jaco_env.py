@@ -12,7 +12,7 @@ from pkg_resources import parse_version
 import gym
 from enum import Enum, auto
 from utils import ObjectPlacer
-from utils import convert_segmentation_to_color, show_image
+from utils import modify_segmentation, show_image
 
 RENDER_HEIGHT = 720
 RENDER_WIDTH = 960
@@ -126,7 +126,7 @@ class jacoDiverseObjectEnv(gym.Env):
             actions.append(Action.GRASP)
         
         ########## Testing ##########
-        # actions = [Action.FORWARD]
+        # actions = [Action.BACKWARD]
 
         self.action_space = spaces.Discrete(len(actions))
         self.action_map = {i: action for i, action in enumerate(actions)}
@@ -140,7 +140,7 @@ class jacoDiverseObjectEnv(gym.Env):
 
     def _getBaseLink(self):
         pos, ori = pb.getBasePositionAndOrientation(self._jaco.jacoUid)
-        com_p = (pos[0]+0.35, pos[1], pos[2]+0.3)
+        com_p = (pos[0]+0.25, pos[1], pos[2]+0.85)
         return com_p
 
 
@@ -177,9 +177,9 @@ class jacoDiverseObjectEnv(gym.Env):
         pb.setGravity(0, 0, -9.81)
 
         # Load a block for placing the bins in the environment
-        orn = pb.getQuaternionFromEuler([0, 0, math.radians(90)])
-        block = pb.loadURDF(os.path.join(self._urdfRoot, "block.urdf"), [0.53, 0.02, 0.1], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=True, globalScaling=10)
-        pb.changeVisualShape(block, -1, rgbaColor=[0.8, 0.8, 0.8, 1])
+        # orn = pb.getQuaternionFromEuler([0, 0, math.radians(90)])
+        # block = pb.loadURDF(os.path.join(self._urdfRoot, "block.urdf"), [0.5, 0.02, 0.1], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=True, globalScaling=10)
+        # pb.changeVisualShape(block, -1, rgbaColor=[0.8, 0.8, 0.8, 1])
 
         # Load jaco robotic arm into the environment
         self._jaco = jaco.jaco(urdfRootPath=self._urdfRoot, timeStep=self._timeStep, renders=self._renders)
@@ -196,6 +196,8 @@ class jacoDiverseObjectEnv(gym.Env):
         
         # Place loaded object randomly in the environment
         self._objectUids, self.container_uid = self.object_placer._randomly_place_objects(obj_urdfList, container_urdfList)
+        # print("Object UIDs: ", self._objectUids)
+        # print("Container UID: ", self.container_uid)
 
         # Human intention ( For now this is static but later can be dynamic )
         self.intention_object = self._objectUids[0]
@@ -246,13 +248,12 @@ class jacoDiverseObjectEnv(gym.Env):
         images = pb.getCameraImage(width=self._width, height=self._height, viewMatrix=view_matrix, projectionMatrix=proj_matrix, renderer=pb.ER_TINY_RENDERER)
         
         # Image processing
-        rgb = np.array(images[2], dtype=np.uint8).reshape(self._height, self._width, 4)[:, :, :3]
-        depth_buffer = np.array(images[3], dtype=np.float32).reshape(self._height, self._width)
-        depth = 10 * 0.01 / (10 - (10 - 0.01) * depth_buffer)
-        depth = np.stack([depth, depth, depth], axis=0).reshape(self._height, self._width, 3)
+        # rgb = np.array(images[2], dtype=np.uint8).reshape(self._height, self._width, 4)[:, :, :3]
+        # depth_buffer = np.array(images[3], dtype=np.float32).reshape(self._height, self._width)
+        # depth = 10 * 0.01 / (10 - (10 - 0.01) * depth_buffer)
+        # depth = np.stack([depth, depth, depth], axis=0).reshape(self._height, self._width, 3)
         segmentation = images[4]
-        segmentation = convert_segmentation_to_color(segmentation, self._numObjects)
-        show_image(segmentation)
+        # segmentation = convert_segmentation_to_color(segmentation, self._numObjects)
 
         # Human input
         gripper_pos = self._getGripper()
@@ -265,7 +266,7 @@ class jacoDiverseObjectEnv(gym.Env):
         relative_position = 0 if (abs(relative_position) < 0.025) else np.sign(relative_position)
 
         # Constructing the observation
-        observation = [rgb, depth, segmentation, relative_position]
+        observation = [segmentation, relative_position]
         return observation
 
     def step(self, action):
@@ -279,9 +280,9 @@ class jacoDiverseObjectEnv(gym.Env):
             action_enum = self.action_map[action]
             
             if action_enum == Action.LEFT:
-                dy = -dv
-            elif action_enum == Action.RIGHT:
                 dy = dv
+            elif action_enum == Action.RIGHT:
+                dy = -dv
             elif action_enum == Action.FORWARD:
                 dx = dv 
             elif action_enum == Action.BACKWARD:
@@ -294,7 +295,6 @@ class jacoDiverseObjectEnv(gym.Env):
             dz = dv * action[2]
             close_gripper = 1 if action[3] >= 0.5 else 0
 
-        
         return self._step_continuous([dx, dy, dz, close_gripper])
 
 
@@ -339,21 +339,22 @@ class jacoDiverseObjectEnv(gym.Env):
             self._attempt = True
             
 
+        # Return reward
+        reward = self._reward(self._observation[1], int(np.sign(action[1]))) # self.observation[1] is the relative position
+
         # Get new observation
-        observation = self._get_observation()
+        self._observation = self._get_observation()
 
         # If done is true, the episode ends
         done = self._termination()
 
-        # Return reward
-        reward = self._reward()
-
         debug = {'task_success': self._taskSuccess}
-        return observation, reward, done, debug  
+        return self._observation, reward, done, debug  
 
     
-    def _reward(self):
+    def _reward(self, command_action, taken_action):
         """Calculates the reward for the episode with modified strategy for grasping and placing."""
+        following_rew = 0
         self._taskSuccess = 0
         failure_penalty = -0.5  # Penalty for unsuccessful grasp attempts
         max_dist_rew = 0.2  # Maximum reward for distance improvement
@@ -374,13 +375,19 @@ class jacoDiverseObjectEnv(gym.Env):
             reward = 1 if mug2bin < placement_threshold else 0
             return reward
 
+        if command_action == taken_action:
+            following_rew += 0.02
+
         # Training Episode
         if self._gripperState == 'open':
-            dist_rew = (abs((self._gripper2mug_orignial - gripper2mug) / self._gripper2mug_orignial)) * max_dist_rew    
+            dist_rew = (abs((self._gripper2mug_orignial - gripper2mug) / self._gripper2mug_orignial)) * max_dist_rew   
 
         elif self._gripperState == 'close':
             dist_rew = (abs((self._gripper2bin_orignial - gripper2bin) / self._gripper2bin_orignial)) * max_dist_rew
 
+        if dist_rew < 0.05:
+            dist_rew = -0.02 
+        # print("Distance Reward: ", dist_rew)
         # If the mug is placed in the bin, give a big reward
         if self._attempt and mug2bin < placement_threshold:
             self._taskSuccess += 1
@@ -390,7 +397,7 @@ class jacoDiverseObjectEnv(gym.Env):
             if self._env_step == self._maxSteps:  # Assuming there's a way to check if grasp was the last action
                 reward = failure_penalty
             else:
-                reward = dist_rew + time_penalty
+                reward = dist_rew + following_rew + time_penalty
         # print("Reward: ", reward)   
         return reward
 
