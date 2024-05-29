@@ -53,14 +53,14 @@ def get_screen(env):
     segmentation, y_relative = env._get_observation()
     # unique_ids = np.unique(segmentation)
     # print(unique_ids)
-    segmentation = modify_segmentation(segmentation, env._numObjects)
+    segmentation = modify_segmentation(segmentation, env._numObjects, env._gripperState)
     # print(segmentation.shape)
     # Visualize the segmentation image with a colormap
     # plt.imshow(segmentation, cmap='tab20')  # 'tab10' is a colormap with 10 distinct colors
     # plt.colorbar()  # Optionally display a color bar to indicate which colors map to which values
     # plt.axis('off')
     # plt.show()
-    show_image(segmentation, window_name="Segmentation", scale_factor=4)
+    # show_image(segmentation, window_name="Segmentation", scale_factor=4)
 
 
     # screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
@@ -104,7 +104,7 @@ def show_image(image, window_name="Image", scale_factor=4):
     cv2.waitKey(1)
             
 
-def modify_segmentation(segmentation, numobj):
+def modify_segmentation(segmentation, numobj, gripper_state):
     """
     Converts a segmentation image to a colored RGB image based on provided segmentation ID to color mappings.
 
@@ -136,17 +136,24 @@ def modify_segmentation(segmentation, numobj):
     1: 1,   # Table black
     2: 2,   # Robot
     3: 3,   # Mug
-    bin:10,                                                                                                                                                                                                                                                                                                                                        
+    bin:4,  #10                                                                                                                                                                                                                                                                                                                                      
     # Add more mappings as needed
     }
 
     # Initialize an empty RGB image with the same dimensions as the segmentation image
     height, width = segmentation.shape
-    modified_seg = np.zeros((height, width), dtype=np.uint8)
+    modified_seg = np.ones((height, width), dtype=np.uint8)
 
     # Populate the modified segs 
     for obj, id in segmentation_ids.items():
-        modified_seg[segmentation == obj] = id
+        if obj == 0 or obj == 1 or obj == 2 or obj == 3: # Background, table, robot, mug
+            modified_seg[segmentation == obj] = id
+
+        # elif obj == 3 and gripper_state == "open":
+        #     modified_seg[segmentation == obj] = id 
+        
+        elif obj == bin and gripper_state == 'close':
+            modified_seg[segmentation == obj] = id
 
     # Set the default color for any other IDs
     modified_seg[np.isin(segmentation, list(segmentation_ids.keys()), invert=True)] = 1
@@ -214,7 +221,7 @@ class ObjectPlacer:
         return selected_objects_filenames
     
     
-    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.15):
+    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.16):
         """Check if the new position is at least min_distance away from all existing positions."""
         for pos in existing_positions:
             if abs(new_pos[1] - pos[1]) < min_distance:
@@ -235,7 +242,7 @@ class ObjectPlacer:
             while not valid_position_found:
         
                 # xpos = random.uniform(0.16, 0.23)
-                xpos = 0.13
+                xpos = random.uniform(0.08, 0.10)
 
                 if self._AutoXDistance:
                     # width = 0.05 + (xpos - 0.16) / 0.7
@@ -243,7 +250,11 @@ class ObjectPlacer:
                     ypos = random.choice([-0.17, 0, 0.17])
                     # ypos = 0
                 else:
-                    ypos = random.uniform(0, 0.2)
+                    ypos = random.choice([-0.17, 0, 0.17])
+                    # ypos = random.choice([-0.17, 0, 0.17])
+                    ######## Test #########
+                    # ypos = 0.2
+
 
 
                 if self._is_position_valid((xpos, ypos), existing_positions):
@@ -251,8 +262,10 @@ class ObjectPlacer:
                 else:
                     continue  # Find a new position
 
-                zpos = -0.02
-                angle = -np.pi / 2 + self._objectRandom * np.pi * random.random()
+                zpos = 0
+                # angle = -np.pi / 2 + self._objectRandom * np.pi * random.random()
+                angle = -np.pi / 2
+
                 orn = pb.getQuaternionFromEuler([0, 0, angle])
                 uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False)
 
@@ -267,11 +280,13 @@ class ObjectPlacer:
             
             while not valid_position_found:
                 
-                xpos = 0.35
-                ypos = random.choice([-0.2, 0, 0.2])
+                xpos = random.uniform(0.30, 0.33)
+                # ypos = random.choice([-0.2, 0, 0.2])
+                ypos = random.choice([-0.19, 0, 0.19])
+
                 # zpos = 0.2
                 ###########
-                # ypos = 0
+                # ypos = -0.2
                 
                 
                 if self._is_position_valid((xpos, ypos), existing_positions, min_distance=0.1):
@@ -281,7 +296,7 @@ class ObjectPlacer:
 
                 # Placing the trays
                 orn = pb.getQuaternionFromEuler([0, 0, 0])
-                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.3)
+                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.28)
 
                 container_uid.append(uid)
                 existing_positions.append((xpos, ypos))

@@ -15,15 +15,15 @@ class jaco:
         self._timeStep = timeStep
         self.renders = renders
         self.maxVelocity = .35
-        self.maxForce = 200.
-        self.fingerThumbForce = 3
-        self.fingerAForce = 3
-        self.fingerBForce = 3
-        self.fingerforce = 6
-        self.fingertipforce = 2 
+        self.maxForce = 500.
+        self.fingerThumbForce = 10
+        self.fingerAForce = 8
+        self.fingerBForce = 8
+        # self.fingerforce = 15
+        self.fingertipforce = 8 
         self.fingerIndices = [9, 11, 13]
-        self.fingerThumbtipforce = 3 * self.fingertipforce
-        self.fingerTipForce = 2
+        self.fingerThumbtipforce = 10
+        # self.fingerTipForce = 15
         self.fingertipIndices = [10, 12, 14]
         self.useInverseKinematics = 1
         self.useSimulation = 1
@@ -62,11 +62,11 @@ class jaco:
         jaco_orientation_euler = [0, 0, 0]
         jaco_orientation_quaternion = pb.getQuaternionFromEuler(jaco_orientation_euler)
         # pb.resetBasePositionAndOrientation(self.jacoUid, [-0.76, -0.06, 0.47],jaco_orientation_quaternion)
-        pb.resetBasePositionAndOrientation(self.jacoUid, [-0.5, -0.05, -0.28], jaco_orientation_quaternion)
+        pb.resetBasePositionAndOrientation(self.jacoUid, [-0.5, -0.05, -0.34], jaco_orientation_quaternion)
 
 
         self.jointPositions = [# finger indices = [9 - 14]
-            0, 0, 0, 2.7, 5.7, -0.6, 1.60, 2.8, 0, 0, 0.25, 0, 0.25, 0, 0.25
+            0, 0, 0, 2.7, 5.65, -0.6, 1.60, 2.8, 0, 0, 0.25, 0, 0.25, 0, 0.25
         ]
         self.numJoints = pb.getNumJoints(self.jacoUid)
         
@@ -81,9 +81,9 @@ class jaco:
         # Change dynamics of gripper and finger to grasp objects
         # TODO: Change dynamics directly in urdf file of jaco arm
         for i in range(9,14):
-            pb.changeDynamics(self.jacoUid,i,mass=0.3,lateralFriction=1,restitution=0,spinningFriction=0.1,contactStiffness=30000,contactDamping=1000)
+            pb.changeDynamics(self.jacoUid, i, mass=0.3, lateralFriction=2, restitution=0, spinningFriction=0.3, contactStiffness=20000, contactDamping=8000)
 
-        pb.changeDynamics(self.jacoUid,8,mass=0.5,lateralFriction=1,restitution=0.0,spinningFriction=0.1,contactStiffness=10,contactDamping=10)
+        pb.changeDynamics(self.jacoUid, 8, mass=0.5, lateralFriction=1, restitution=0.0, spinningFriction=0.1, contactStiffness=10, contactDamping=10)
         self.endEffectorPos = [0, 0, 0.035]
 
         self.motorNames = []
@@ -102,7 +102,7 @@ class jaco:
     def apply_move(self, motorCommands):
 
         if (self.useInverseKinematics):
-
+            
             dx = motorCommands[0]
             dy = motorCommands[1]
             dz = motorCommands[2]
@@ -186,7 +186,7 @@ class jaco:
     
 
 
-    def apply_grasp(self, initial_finger_angle=0.6, final_finger_angle=5, step_increment=0.001, finger_force_multiplier=3,  AutoLift=True):
+    def apply_grasp(self, initial_finger_angle=0.6, final_finger_angle=5, step_increment=0.001, finger_force_multiplier=1,  AutoLift=True):
         # Close fingers
         
         finger_angle = initial_finger_angle
@@ -214,7 +214,7 @@ class jaco:
 
         # Close fingertips
         tip_angle = initial_finger_angle  # Re-use initial_finger_angle if starting from the same position
-        for _ in range(200):
+        for _ in range(100):
 
             pb.setJointMotorControlArray(
                 bodyUniqueId=self.jacoUid,

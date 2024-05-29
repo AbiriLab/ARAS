@@ -35,7 +35,7 @@ random.seed(0)
 np.random.seed(0)
 
 # Load env
-env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=30, dv=0.02,
+env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=50, dv=0.02,
                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
 
 env.cid = pb.connect(pb.DIRECT)
@@ -48,8 +48,8 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
 
-def select_action(state, relative_position, i_episode):
-    global steps_done
+def select_action(state, relative_position, i_episode, step=None):
+    # global steps_done
     global eps_threshold
     sample = random.random()
     eps_threshold = max(EPS_END, EPS_START - (i_episode / EPS_DECAY_LAST_FRAME))
@@ -59,6 +59,10 @@ def select_action(state, relative_position, i_episode):
             return policy_net(state, relative_position).max(1)[1].view(1, 1)
     else:
         return torch.tensor([[random.randrange(n_actions)]], device=device, dtype=torch.long)
+
+    ####### TEST ######
+    # action_sequence = [0] * 9 + [3] * 10 + [1] * 20 + [3] *20
+    # return torch.tensor([[action_sequence[step]]], device=device, dtype=torch.long)
 
 def log(m):
     ct = datetime.datetime.now()
@@ -73,6 +77,7 @@ def log(m):
 '''
 Training loop
 '''
+
 # Update network
 def optimize_model():
     if len(memory) < BATCH_SIZE:
@@ -117,8 +122,6 @@ def optimize_model():
     optimizer.step()
 
 
-
-
 '''
 Main training loop
 '''
@@ -145,6 +148,7 @@ will decay exponentially towards EPS_END. EPS_DECAY controls the rate of the dec
 init_screen, _ = get_screen(env)
 # print(init_screen.shape)
 _, _, screen_height, screen_width = init_screen.shape
+# print("=======", screen_height, screen_width)
 
 # Get number of actions from gym action space
 n_actions = env.action_space.n
@@ -199,7 +203,7 @@ if __name__ == "__main__":
 
     # Assume your pre-trained model's file path
     # PRETRAINED_MODEL_PATH = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt'
-    PRETRAINED_MODEL_PATH = ''
+    # PRETRAINED_MODEL_PATH = ''
 
     # Check if the pretrained model file exists and load it
     if os.path.isfile(PRETRAINED_MODEL_PATH):
@@ -268,7 +272,7 @@ if __name__ == "__main__":
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
             y_relative_t = torch.cat(tuple(stacked_y_relative), dim=1)
             # Select and perform an action
-            action = select_action(stacked_states_t, y_relative_t, i_episode)  
+            action = select_action(stacked_states_t, y_relative_t, i_episode, t)  
             _, reward, done, _ = env.step(action.item())
             reward = torch.tensor([reward], device=device)
 
@@ -334,7 +338,7 @@ if __name__ == "__main__":
         # Update the target network, copying all weights and biases in DQN
         if i_episode % TARGET_UPDATE == 0:
             target_net.load_state_dict(policy_net.state_dict())
-            print(f"Mean Reward at episode {i_episode}: {mean_reward}")
+            log(f"Mean Reward at episode {i_episode}: {mean_reward}")
 
         # Declare termination condition of the training
         if i_episode >= 10000 and mean_reward > 0.999:

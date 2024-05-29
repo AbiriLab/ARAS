@@ -121,12 +121,14 @@ class jacoDiverseObjectEnv(gym.Env):
         
         if not self._AutoXDistance:
             actions.extend([Action.FORWARD, Action.BACKWARD])
+            # actions.extend([Action.FORWARD])
+
         
         if not self._AutoGrasp:
             actions.append(Action.GRASP)
         
         ########## Testing ##########
-        # actions = [Action.BACKWARD]
+        # actions = [Action.FORWARD]
 
         self.action_space = spaces.Discrete(len(actions))
         self.action_map = {i: action for i, action in enumerate(actions)}
@@ -196,6 +198,10 @@ class jacoDiverseObjectEnv(gym.Env):
         
         # Place loaded object randomly in the environment
         self._objectUids, self.container_uid = self.object_placer._randomly_place_objects(obj_urdfList, container_urdfList)
+        for id in self._objectUids:
+            pb.changeDynamics(id, -1, mass=0.07, lateralFriction=2, restitution=0.1, spinningFriction=0.3, contactStiffness=2000, contactDamping=8000)
+            
+
         # print("Object UIDs: ", self._objectUids)
         # print("Container UID: ", self.container_uid)
 
@@ -208,7 +214,7 @@ class jacoDiverseObjectEnv(gym.Env):
         pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
 
         # Adjust to "true" center of mug. Without self._mugPos[2] (z-direction) is the bottom of the cup
-        self._mugPos[2] = self._mugPos[2] + 0.03
+        self._mugPos[2] = self._mugPos[2] + 0.045
         
         # Get container position in xyz
         self._containerPos = np.array(pb.getBasePositionAndOrientation(self.intention_container)[0])
@@ -315,32 +321,32 @@ class jacoDiverseObjectEnv(gym.Env):
             action[0] = action[1] = action[2] = 0
 
         if self._AutoGrasp:
-            action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.02
-
+            action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.035
         for _ in range(self._actionRepeat):
             pb.stepSimulation()
             if self._renders:
                 time.sleep(self._timeStep)
             if self._termination():
                 break
-
-        # Perform commanded action.
-        self._env_step += 1
-        self._jaco.apply_move(action)
-
+        
         # If grasp action is true (action[3]==1), attempt grasp
         if action[3] and self._gripperState == 'open':
             self._jaco.apply_grasp()
             self._gripperState = 'close'
 
-        if (self._containerPos[0] - self._getGripper()[0] < 0.02) and self._gripperState == 'close':
+        elif np.linalg.norm(np.array(self._containerPos)[:2] - np.array(self._getGripper())[:2]) < 0.06 and self._gripperState == 'close':
             self._jaco.apply_release()
             self._gripperState = 'open'
             self._attempt = True
-            
+
+        else:
+            # Perform commanded action.
+            self._jaco.apply_move(action)
+
+        self._env_step += 1
 
         # Return reward
-        reward = self._reward(self._observation[1], int(np.sign(action[1]))) # self.observation[1] is the relative position
+        reward = self._reward(self._observation[1], action) # self.observation[1] is the relative position
 
         # Get new observation
         self._observation = self._get_observation()
@@ -357,10 +363,10 @@ class jacoDiverseObjectEnv(gym.Env):
         following_rew = 0
         self._taskSuccess = 0
         failure_penalty = -0.5  # Penalty for unsuccessful grasp attempts
-        max_dist_rew = 0.2  # Maximum reward for distance improvement
-        placement_threshold = 0.05 # Threshold for successful placement in the bin
+        max_dist_rew = 0.4  # Maximum reward for distance improvement
+        placement_threshold = 0.07 # Threshold for successful placement in the bin
         placement_success_reward = 1  # Big reward for successful placement in the bin
-        time_penalty = -0.01          # Small penalty for each timestep to encourage efficiency
+        time_penalty = -0.02          # Small penalty for each timestep to encourage efficiency
         
         # Get the information of the environment
         bin_position = self._containerPos  # You'll need to define the target bin's position
@@ -370,23 +376,30 @@ class jacoDiverseObjectEnv(gym.Env):
         mug2bin = np.linalg.norm(np.array(cur_mugPos)[:2] - np.array(bin_position)[:2])
         gripper2bin = np.linalg.norm(np.array(gripperPos)[:2] - np.array(bin_position)[:2])
 
+        # Get the information of the taken action
+        dx = int(np.sign(taken_action[0]))
+        dy = int(np.sign(taken_action[1]))
+
         # Test Episode
         if self._isTest:
             reward = 1 if mug2bin < placement_threshold else 0
             return reward
 
-        if command_action == taken_action:
-            following_rew += 0.02
-
         # Training Episode
+        if (command_action!= 0 and command_action == dy) or (command_action == 0 and dx > 0):
+            following_rew += 0.05
+        
+        if dx < 0:
+            following_rew -= 0.05
+
         if self._gripperState == 'open':
             dist_rew = (abs((self._gripper2mug_orignial - gripper2mug) / self._gripper2mug_orignial)) * max_dist_rew   
 
         elif self._gripperState == 'close':
             dist_rew = (abs((self._gripper2bin_orignial - gripper2bin) / self._gripper2bin_orignial)) * max_dist_rew
 
-        if dist_rew < 0.05:
-            dist_rew = -0.02 
+        if dist_rew < 0.1:
+            dist_rew = 0
         # print("Distance Reward: ", dist_rew)
         # If the mug is placed in the bin, give a big reward
         if self._attempt and mug2bin < placement_threshold:

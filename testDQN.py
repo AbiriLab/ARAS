@@ -12,7 +12,8 @@ from config import *
 
 # From pybullet_envs.bullet.jaco_diverse_object_gym_env import jacoDiverseObjectEnv
 from jaco_env import jacoDiverseObjectEnv
-from utils import DQN, get_screen
+from utils import get_screen
+from DQN_net import DQN
 
 # If gpu is to be used
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -44,8 +45,8 @@ for seed in range(seeds_total):
     scores_window = collections.deque(maxlen=100)  # Last 100 scores
     # isTest=True -> perform grasping on test set of objects. Currently just mug.
     # Select renders=True for GUI rendering
-    env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=30, dv=0.02,
-                           AutoXDistance=True, AutoGrasp=True, width=64, height=64, numObjects=3)
+    env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=50, dv=0.02,
+                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=2, numContainers=2)
     env.reset()
 
     init_screen, _ = get_screen(env)
