@@ -60,7 +60,7 @@ def get_screen(env):
     # plt.colorbar()  # Optionally display a color bar to indicate which colors map to which values
     # plt.axis('off')
     # plt.show()
-    # show_image(segmentation, window_name="Segmentation", scale_factor=4)
+    show_image(segmentation, window_name="Segmentation", scale_factor=4)
 
 
     # screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
@@ -72,6 +72,9 @@ def get_screen(env):
     screen = screen.unsqueeze(0).unsqueeze(0)
     # print(screen.shape)
     y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
+    print("y_relative", y_relative.shape)
+    print("screen", screen.shape)
+
     # Resize, and add a batch dimension (BCHW)
     return screen.to(device), y_relative.to(device)
 
@@ -242,15 +245,16 @@ class ObjectPlacer:
             while not valid_position_found:
         
                 # xpos = random.uniform(0.16, 0.23)
-                xpos = random.uniform(0.08, 0.10)
+                # xpos = random.uniform(0.09, 0.11)
+                xpos = 0.12
 
                 if self._AutoXDistance:
                     # width = 0.05 + (xpos - 0.16) / 0.7
                     # ypos = random.uniform(-width, width)
-                    ypos = random.choice([-0.17, 0, 0.17])
+                    ypos = random.choice([-0.12, 0, 0.12])
                     # ypos = 0
                 else:
-                    ypos = random.choice([-0.17, 0, 0.17])
+                    ypos = random.choice([-0.12, 0, 0.12])
                     # ypos = random.choice([-0.17, 0, 0.17])
                     ######## Test #########
                     # ypos = 0.2
@@ -264,7 +268,7 @@ class ObjectPlacer:
 
                 zpos = 0
                 # angle = -np.pi / 2 + self._objectRandom * np.pi * random.random()
-                angle = -np.pi / 2
+                angle = -np.pi / 2 
 
                 orn = pb.getQuaternionFromEuler([0, 0, angle])
                 uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False)
@@ -280,9 +284,10 @@ class ObjectPlacer:
             
             while not valid_position_found:
                 
-                xpos = random.uniform(0.30, 0.33)
+                # xpos = random.uniform(0.28, 0.30)
+                xpos = 0.32
                 # ypos = random.choice([-0.2, 0, 0.2])
-                ypos = random.choice([-0.19, 0, 0.19])
+                ypos = random.choice([-0.10, 0, 0.13])
 
                 # zpos = 0.2
                 ###########

@@ -46,7 +46,7 @@ for seed in range(seeds_total):
     # isTest=True -> perform grasping on test set of objects. Currently just mug.
     # Select renders=True for GUI rendering
     env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=50, dv=0.02,
-                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=2, numContainers=2)
+                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
     env.reset()
 
     init_screen, _ = get_screen(env)
@@ -69,11 +69,12 @@ for seed in range(seeds_total):
         
         for t in count():
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
-            stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  # Use the mean y_relative
+            stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  
             
             # Select and perform an action
             # Now using the policy network with both state and y_relative
             action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
+            # print(action, type(action))
             _, reward, done, _ = env.step(action.item())
             
             # Observe new state and y_relative

@@ -270,7 +270,7 @@ class jacoDiverseObjectEnv(gym.Env):
             relative_position = self._containerPos[1] - gripper_pos[1]
         
         relative_position = 0 if (abs(relative_position) < 0.025) else np.sign(relative_position)
-
+        # print(relative_position)
         # Constructing the observation
         observation = [segmentation, relative_position]
         return observation
@@ -321,7 +321,7 @@ class jacoDiverseObjectEnv(gym.Env):
             action[0] = action[1] = action[2] = 0
 
         if self._AutoGrasp:
-            action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.035
+            action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.03
         for _ in range(self._actionRepeat):
             pb.stepSimulation()
             if self._renders:
@@ -415,8 +415,6 @@ class jacoDiverseObjectEnv(gym.Env):
         return reward
 
 
-
-    
     def _termination(self):
         """Terminates the episode if we have tried to grasp or if we are above
         maxSteps steps.
