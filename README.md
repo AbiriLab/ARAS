@@ -19,7 +19,7 @@
 
 ## Demo
 
-[Click here to watch the video!](demo/amplification_demo.gif)
+[Click here to watch the video!](demo/amplification_demo.mp4)
 
 ## Install:
 
