@@ -19,7 +19,7 @@
 
 ## Demo
 
-[Click here to watch the video!](Demo/demo.gif)
+![Click here to watch the video!](https://github.com/ali-rabiee/amplification_DRL/blob/main/demo/amplification_demo.gif?raw=true)
 
 ## Install:
 
