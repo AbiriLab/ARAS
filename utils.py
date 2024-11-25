@@ -60,7 +60,7 @@ def get_screen(env):
     # plt.colorbar()  # Optionally display a color bar to indicate which colors map to which values
     # plt.axis('off')
     # plt.show()
-    show_image(segmentation, window_name="Segmentation", scale_factor=4)
+    # show_image(segmentation, window_name="Segmentation", scale_factor=4)
 
 
     # screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
@@ -72,8 +72,8 @@ def get_screen(env):
     screen = screen.unsqueeze(0).unsqueeze(0)
     # print(screen.shape)
     y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
-    print("y_relative", y_relative.shape)
-    print("screen", screen.shape)
+    # print("y_relative", y_relative.shape)
+    # print("screen", screen.shape)
 
     # Resize, and add a batch dimension (BCHW)
     return screen.to(device), y_relative.to(device)
@@ -224,7 +224,7 @@ class ObjectPlacer:
         return selected_objects_filenames
     
     
-    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.16):
+    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.11):
         """Check if the new position is at least min_distance away from all existing positions."""
         for pos in existing_positions:
             if abs(new_pos[1] - pos[1]) < min_distance:
@@ -251,13 +251,14 @@ class ObjectPlacer:
                 if self._AutoXDistance:
                     # width = 0.05 + (xpos - 0.16) / 0.7
                     # ypos = random.uniform(-width, width)
-                    ypos = random.choice([-0.12, 0, 0.12])
+                    ypos = random.choice([-0.12, 0.12])
                     # ypos = 0
                 else:
-                    ypos = random.choice([-0.12, 0, 0.12])
+                    # ypos = random.choice([-0.12, 0.12])
                     # ypos = random.choice([-0.17, 0, 0.17])
+                    ypos = random.uniform(-0.1, 0.1)
                     ######## Test #########
-                    # ypos = 0.2
+                    # ypos = -0.12
 
 
 
@@ -271,7 +272,7 @@ class ObjectPlacer:
                 angle = -np.pi / 2 
 
                 orn = pb.getQuaternionFromEuler([0, 0, angle])
-                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False)
+                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.90)
 
                 objectUids.append(uid)
                 existing_positions.append((xpos, ypos))
@@ -287,11 +288,11 @@ class ObjectPlacer:
                 # xpos = random.uniform(0.28, 0.30)
                 xpos = 0.32
                 # ypos = random.choice([-0.2, 0, 0.2])
-                ypos = random.choice([-0.10, 0, 0.13])
+                ypos = random.choice([-0.15, 0.05, 0.24])
 
                 # zpos = 0.2
                 ###########
-                # ypos = -0.2
+                # ypos = 0.2
                 
                 
                 if self._is_position_valid((xpos, ypos), existing_positions, min_distance=0.1):
@@ -301,7 +302,7 @@ class ObjectPlacer:
 
                 # Placing the trays
                 orn = pb.getQuaternionFromEuler([0, 0, 0])
-                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.28)
+                uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.27)
 
                 container_uid.append(uid)
                 existing_positions.append((xpos, ypos))

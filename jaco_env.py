@@ -49,6 +49,9 @@ class jacoDiverseObjectEnv(gym.Env):
                 height=48,
                 numObjects=1,
                 numContainers=1,
+                forward_limit = 0.30,
+                left_limit=0.2,
+                right_limit=-0.1,
                 isTest=False):
         
         """Initializes the jacoDiverseObjectEnv.
@@ -101,6 +104,9 @@ class jacoDiverseObjectEnv(gym.Env):
         self._numContainers = numContainers
         self._isTest = isTest
         self.object_placer = ObjectPlacer(urdfRoot, AutoXDistance, objectRandom)
+        self._forward_limit = forward_limit
+        self._left_limit = left_limit
+        self._right_limit = right_limit
         # Define action space
         self.define_action_space()
         if self._renders:
@@ -199,7 +205,7 @@ class jacoDiverseObjectEnv(gym.Env):
         # Place loaded object randomly in the environment
         self._objectUids, self.container_uid = self.object_placer._randomly_place_objects(obj_urdfList, container_urdfList)
         for id in self._objectUids:
-            pb.changeDynamics(id, -1, mass=0.07, lateralFriction=2, restitution=0.1, spinningFriction=0.3, contactStiffness=2000, contactDamping=8000)
+            pb.changeDynamics(id, -1, mass=0.05, lateralFriction=2, restitution=0.1, spinningFriction=0.3, contactStiffness=2000, contactDamping=8000)
             
 
         # print("Object UIDs: ", self._objectUids)
@@ -322,6 +328,24 @@ class jacoDiverseObjectEnv(gym.Env):
 
         if self._AutoGrasp:
             action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.03
+        
+        
+        gripper_pos = self._getGripper()
+        cur_mugPos, _ = pb.getBasePositionAndOrientation(self.intention_object)
+        limit_action = np.sign(gripper_pos[1] - cur_mugPos[1]) * self._dv
+        
+        # Check the boundries and limitations of the environment actions 
+        if gripper_pos[0] > self._forward_limit:
+            action[0], action[1] = max(0, self._forward_limit - gripper_pos[0]), limit_action
+            
+        # Check left limit
+        if gripper_pos[1] > self._left_limit:
+            action[1] = max(0, self._left_limit - gripper_pos[1])
+
+        # Check right limit
+        if gripper_pos[1] < self._right_limit:
+            action[1] = min(0, self._right_limit - gripper_pos[1])
+
         for _ in range(self._actionRepeat):
             pb.stepSimulation()
             if self._renders:

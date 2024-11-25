@@ -20,7 +20,7 @@ class jaco:
         self.fingerAForce = 8
         self.fingerBForce = 8
         # self.fingerforce = 15
-        self.fingertipforce = 8 
+        self.fingertipforce = 12 
         self.fingerIndices = [9, 11, 13]
         self.fingerThumbtipforce = 10
         # self.fingerTipForce = 15

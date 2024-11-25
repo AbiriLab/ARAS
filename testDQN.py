@@ -45,8 +45,8 @@ for seed in range(seeds_total):
     scores_window = collections.deque(maxlen=100)  # Last 100 scores
     # isTest=True -> perform grasping on test set of objects. Currently just mug.
     # Select renders=True for GUI rendering
-    env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=50, dv=0.02,
-                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
+    env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=70, dv=0.02,
+                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=3)
     env.reset()
 
     init_screen, _ = get_screen(env)
@@ -67,14 +67,15 @@ for seed in range(seeds_total):
         stacked_states = collections.deque(STACK_SIZE*[state], maxlen=STACK_SIZE)
         stacked_y_relatives = collections.deque(STACK_SIZE*[y_relative], maxlen=STACK_SIZE)  # Track y_relative
         
+        steps = 0
         for t in count():
+            steps += 1
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
             stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  
             
             # Select and perform an action
             # Now using the policy network with both state and y_relative
             action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
-            # print(action, type(action))
             _, reward, done, _ = env.step(action.item())
             
             # Observe new state and y_relative
@@ -84,7 +85,7 @@ for seed in range(seeds_total):
             
             if done:
                 break
-                
+        print("# of Steps:", steps)    
         if reward==1:
             s=s+1
         else: 

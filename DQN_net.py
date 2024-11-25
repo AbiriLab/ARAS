@@ -62,31 +62,47 @@ class DQN(nn.Module):
     def forward(self, x, relative_position):
 
         batch_size, stack_size, height, width = x.shape
+        # print(height, width)
         x = x.long()  # Convert to long type for embedding
         relative_position = relative_position + 1  # Adjusting indexes for embedding (-1,0,1) to (0,1,2)
 
         # Embed the frames
+        # print(x.shape)
         x = self.embed(x.view(batch_size * stack_size, height, width)).permute(0, 3, 1, 2)
         # print(x.shape)
 
         # Apply convolutions and pooling
         x = F.relu(self.bn1(self.conv1(x)))
+        # print(x.shape)
         x = F.max_pool2d(x, 2)
+        # print(x.shape)
         x = F.relu(self.bn2(self.conv2(x)))
+        # print(x.shape)
         x = F.max_pool2d(x, 2)
+        # print(x.shape)
         x = F.relu(self.bn3(self.conv3(x)))
+        # print(x.shape)
         x = F.max_pool2d(x, 2)
+        # print(x.shape)
         x = F.relu(self.bn4(self.conv4(x)))
+        # print(x.shape)
         x = F.max_pool2d(x, 2)
+        # print(x.shape)
         # Flatten and take mean across frames
         x = x.reshape(batch_size, stack_size, -1)
+        # print(x.shape)
         x = torch.mean(x, dim=1)
+        # print(x.shape)
 
         # Embed the relative position and concatenate with the conv output
         relative_position = relative_position.long().view(batch_size * stack_size, -1)
+        # print(x.shape)
         relative_pos_embedding = self.relative_pos_embed(relative_position).permute(0, 2, 1)
+        # print(relative_pos_embedding.shape)
         relative_pos_embedding = relative_pos_embedding.view(batch_size, stack_size, -1)
+        # print(relative_pos_embedding.shape)
         relative_pos_embedding = torch.mean(relative_pos_embedding, dim=1)
+        # print(relative_pos_embedding.shape)
 
         # Concatenate along the feature dimension
         x = torch.cat((x, relative_pos_embedding), dim=1)  
