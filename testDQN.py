@@ -9,6 +9,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as T
 from config import *
+import os
+import json
+import pybullet as pb
 
 # From pybullet_envs.bullet.jaco_diverse_object_gym_env import jacoDiverseObjectEnv
 from jaco_env import jacoDiverseObjectEnv
@@ -29,6 +32,10 @@ STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
 # Number of different seeds
 seeds_total = 5
 
+# Directory to save trajectory data
+save_dir = "./trajectory_test_data"
+os.makedirs(save_dir, exist_ok=True)
+
 """ Evaluation of trained DQN model on different seeds"""
 for seed in range(seeds_total):
 
@@ -43,10 +50,16 @@ for seed in range(seeds_total):
     episode = 1000   #[100,500,1000]
     
     scores_window = collections.deque(maxlen=100)  # Last 100 scores
+
+    try:
+        pb.disconnect()  # Ensure no previous connections exist
+    except:
+        pass
+
     # isTest=True -> perform grasping on test set of objects. Currently just mug.
     # Select renders=True for GUI rendering
-    env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=70, dv=0.02,
-                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=3)
+    env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=70, dv=0.02,
+                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3, numContainers=3)
     env.reset()
 
     init_screen, _ = get_screen(env)
@@ -61,12 +74,19 @@ for seed in range(seeds_total):
     # Success and failures
     s=0
     f=0
+
+    # Data for saving trajectories
+    trj_data = []
+
     for i_episode in range(episode):
         env.reset()
         state, y_relative = get_screen(env)  # Adjusted to new function
         stacked_states = collections.deque(STACK_SIZE*[state], maxlen=STACK_SIZE)
         stacked_y_relatives = collections.deque(STACK_SIZE*[y_relative], maxlen=STACK_SIZE)  # Track y_relative
         
+        # Track trajectory
+        gripper_trajectory = []
+
         steps = 0
         for t in count():
             steps += 1
@@ -74,10 +94,13 @@ for seed in range(seeds_total):
             stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  
             
             # Select and perform an action
-            # Now using the policy network with both state and y_relative
             action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
             _, reward, done, _ = env.step(action.item())
-            
+
+            # Record gripper trajectory
+            gripper_pos = env._getGripper()[:2]  # x, y position
+            gripper_trajectory.append(gripper_pos)
+
             # Observe new state and y_relative
             next_state, next_y_relative = get_screen(env)
             stacked_states.append(next_state)
@@ -85,12 +108,44 @@ for seed in range(seeds_total):
             
             if done:
                 break
+
         print("# of Steps:", steps)    
+
         if reward==1:
             s=s+1
+            
         else: 
             f=f+1
+
+
+        # Save episode data
+        episode_data = {
+            "episode": i_episode,
+            "trajectory": [list(pos) for pos in gripper_trajectory],  # Convert each position to list
+            "goal_position": env._mugPos[:2].tolist(),  # Convert numpy array to list
+            "bin_position": env._containerPos[:2].tolist(),  # Convert numpy array to list
+            "steps": steps,  # Number of steps
+            "success": bool(reward == 1)  # Success if reward indicates task completion
+        }
+        trj_data.append(episode_data)
+
         # Uncomment for immediate feedback after each episode   
         print("Successed: " + str(s) + "\tFailures: " + str(f) + "\t\tSuccessRate: " + str(s/(i_episode + 1)))
+
+    # Save trajectory data to file after every seed
+    save_path = os.path.join(save_dir, f"trajectory_data_{seed}_{i_episode+1}.json")
+
+    # Convert NumPy types to native Python types
+    for entry in trj_data:
+        entry["trajectory"] = [[float(x), float(y)] for x, y in entry["trajectory"]]
+        entry["goal_position"] = [float(x) for x in entry["goal_position"]]
+        entry["bin_position"] = [float(x) for x in entry["bin_position"]]
+        entry["steps"] = int(entry["steps"])
+        entry["success"] = bool(entry["success"])  # Convert numpy.bool_ to Python bool
+
+    with open(save_path, "w") as file:
+        json.dump(trj_data, file)
+
+
     # Feedback after each
     print("For Seed " + str(seed+1) +": \t Successed: " + str(s) + "\tFailures: " + str(f) + "\t\tSuccessRate: " + str(s/(i_episode + 1)))

@@ -191,7 +191,7 @@ class jaco:
         
         finger_angle = initial_finger_angle
         
-        for _ in range (200):
+        for _ in range (300):
             pb.setJointMotorControlArray(
                 bodyUniqueId=self.jacoUid,
                 jointIndices=self.fingerIndices,

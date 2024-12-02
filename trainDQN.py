@@ -28,6 +28,7 @@ from DQN_net import DQN
 import pybullet as pb
 from config import *
 import os
+import json
 
 # Set seed fixed for reproducibility, also try different seeds
 torch.manual_seed(0)
@@ -73,6 +74,31 @@ def log(m):
     if LOG_ON_SCREEN:
       print(mess)
     return ts
+
+def save_episode_data(data, file_path="/trajectory_data/trajectory_data.json"):
+    """
+    Save trajectory data to a JSON file, converting NumPy arrays to lists.
+    Args:
+        data: List of trajectory information (gripper, goal, bin positions).
+        file_path: Path to the JSON file.
+    """
+
+    # Ensure the directory exists
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Convert all NumPy arrays in the data to lists
+    for entry in data:
+        entry["trajectory"] = [pos.tolist() for pos in entry["trajectory"]]
+        entry["goal_position"] = entry["goal_position"]
+        entry["bin_position"] = entry["bin_position"]
+        entry["steps"] = int(entry["steps"])
+        entry["success"] = bool(entry["success"]) 
+
+    # Save to JSON
+    with open(file_path, 'w') as f:
+        json.dump(data, f)
 
 '''
 Training loop
@@ -144,11 +170,10 @@ will decay exponentially towards EPS_END. EPS_DECAY controls the rate of the dec
 '''
 
 # Get screen size so that we can initialize layers correctly based on shape
-# returned from pybullet (128, 128, 3).
+# returned from pybullet (128, 128, 3)
+
 init_screen, _ = get_screen(env)
-# print(init_screen.shape)
 _, _, screen_height, screen_width = init_screen.shape
-# print("=======", screen_height, screen_width)
 
 # Get number of actions from gym action space
 n_actions = env.action_space.n
@@ -248,6 +273,7 @@ if __name__ == "__main__":
     old_epoch_ts = -1
 
   # Begin training
+    training_data = []
     for i_episode in range(num_episodes):
         # Print Epochs
         if i_episode % 10 == 0:
@@ -275,6 +301,17 @@ if __name__ == "__main__":
             action = select_action(stacked_states_t, y_relative_t, i_episode, t)  
             _, reward, done, _ = env.step(action.item())
             reward = torch.tensor([reward], device=device)
+
+            # Collect trajectory data for the episode
+            episode_data = {
+                "episode": i_episode,
+                "trajectory": env.gripper_trajectory,
+                "goal_position": env._mugPos.tolist(),
+                "bin_position": env._containerPos.tolist(),
+                "steps": t + 1,
+                "success": bool(reward == 1)
+            }
+            training_data.append(episode_data)
 
             # Observe new state and relative position
             next_state, next_y_relative = get_screen(env)
@@ -335,6 +372,13 @@ if __name__ == "__main__":
                 writer.add_scalar('ten episodes average rewards', ten_rewards/10.0, i_episode)
                 ten_rewards = 0
 
+
+        # Save data every 1000 episodes
+        if (i_episode + 1) % 1 == 0:
+            save_episode_data(training_data, f"./trajectory_train_data/trajectory_data_{i_episode+1}.json")
+            training_data = []  # Reset data list to avoid memory issues
+
+
         # Update the target network, copying all weights and biases in DQN
         if i_episode % TARGET_UPDATE == 0:
             target_net.load_state_dict(policy_net.state_dict())
@@ -391,4 +435,3 @@ for i_episode in range(episode):
             break
 
     print(f"Episode: {i_episode+1}, Reward: {reward}")
-

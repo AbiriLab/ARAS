@@ -42,38 +42,15 @@ class ReplayMemory(object):
 # Function for recieving PyBullet camera data as input image
 def get_screen(env):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    preprocess = T.Compose([T.ToPILImage(),
-                        T.Grayscale(num_output_channels=1),
-                        T.Resize(128, interpolation=Image.BICUBIC),
-                        T.ToTensor()])
-
     global stacked_screens
-    # Transpose screen into torch order (CHW).
-    # rgb, depth, segmentation, y_relative = env._get_observation()
     segmentation, y_relative = env._get_observation()
-    # unique_ids = np.unique(segmentation)
-    # print(unique_ids)
-    segmentation = modify_segmentation(segmentation, env._numObjects, env._gripperState)
-    # print(segmentation.shape)
-    # Visualize the segmentation image with a colormap
-    # plt.imshow(segmentation, cmap='tab20')  # 'tab10' is a colormap with 10 distinct colors
-    # plt.colorbar()  # Optionally display a color bar to indicate which colors map to which values
-    # plt.axis('off')
-    # plt.show()
+    # segmentation = modify_segmentation(segmentation, env._numObjects, env._gripperState)
     # show_image(segmentation, window_name="Segmentation", scale_factor=4)
 
-
-    # screen = segmentation.transpose((2, 0, 1))   #[rgb.transpose((2, 0, 1)), depth.transpose((2, 0, 1)), segmentation] 
     screen = segmentation
-    # Convert to float, rescale, convert to torch tensor
-    # screen = np.ascontiguousarray(screen, dtype=np.float32) / 255 # Normalization
     screen = torch.from_numpy(screen)
-    # screen = preprocess(screen)
     screen = screen.unsqueeze(0).unsqueeze(0)
-    # print(screen.shape)
     y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
-    # print("y_relative", y_relative.shape)
-    # print("screen", screen.shape)
 
     # Resize, and add a batch dimension (BCHW)
     return screen.to(device), y_relative.to(device)
@@ -107,7 +84,7 @@ def show_image(image, window_name="Image", scale_factor=4):
     cv2.waitKey(1)
             
 
-def modify_segmentation(segmentation, numobj, gripper_state):
+def modify_segmentation(segmentation, intention_object_id, intention_container_id, gripper_state):
     """
     Converts a segmentation image to a colored RGB image based on provided segmentation ID to color mappings.
 
@@ -119,27 +96,14 @@ def modify_segmentation(segmentation, numobj, gripper_state):
     Returns:
     - numpy.ndarray: An RGB image where each segmentation ID is mapped to a specified color.
     """
-    # print(segmentation.shape)
-    # bin = numobj + 4
-    # # BGR color format
-    # segmentation_ids = {
-    # 0: 0,   # Background white
-    # 1: 1,   # Table black
-    # 2: 2,   # Block
-    # 3: 3,   # Robot
-    # 4: 4,   # Mug
-    # bin:10,                                                                                                                                                                                                                                                                                                                                        
-    # # Add more mappings as needed
-    # }
-
-    bin = numobj + 3
+    # bin = numobj + 3
     # BGR color format
     segmentation_ids = {
     0: 0,   # Background white
     1: 1,   # Table black
     2: 2,   # Robot
-    3: 3,   # Mug
-    bin:4,  #10                                                                                                                                                                                                                                                                                                                                      
+    intention_object_id: 3,   # Mug
+    intention_container_id: 4,                                                                                                                                                                                                                                                                                                                                       
     # Add more mappings as needed
     }
 
@@ -149,19 +113,14 @@ def modify_segmentation(segmentation, numobj, gripper_state):
 
     # Populate the modified segs 
     for obj, id in segmentation_ids.items():
-        if obj == 0 or obj == 1 or obj == 2 or obj == 3: # Background, table, robot, mug
+        if obj == 0 or obj == 1 or obj == 2 or obj == intention_object_id: # Background, table, robot, mug
             modified_seg[segmentation == obj] = id
-
-        # elif obj == 3 and gripper_state == "open":
-        #     modified_seg[segmentation == obj] = id 
         
-        elif obj == bin and gripper_state == 'close':
+        elif obj == intention_container_id and gripper_state == 'close':
             modified_seg[segmentation == obj] = id
 
     # Set the default color for any other IDs
     modified_seg[np.isin(segmentation, list(segmentation_ids.keys()), invert=True)] = 1
-    # modified_seg[(segmentation > bin) & (segmentation < 10)] = 2
-    
     return modified_seg
 
 
@@ -224,7 +183,7 @@ class ObjectPlacer:
         return selected_objects_filenames
     
     
-    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.11):
+    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.13):
         """Check if the new position is at least min_distance away from all existing positions."""
         for pos in existing_positions:
             if abs(new_pos[1] - pos[1]) < min_distance:
@@ -236,69 +195,66 @@ class ObjectPlacer:
         objectUids = []
         existing_positions = []
 
-        # attempt_limit = 100  # Set a reasonable attempt limit
-        # attempts = 0
+        attempt_limit = 100  # Set a reasonable attempt limit
 
-        for urdf_path in obj_urdfList:
-            valid_position_found = False
+        for i, urdf_path in enumerate(obj_urdfList):
 
-            while not valid_position_found:
-        
-                # xpos = random.uniform(0.16, 0.23)
-                # xpos = random.uniform(0.09, 0.11)
+            if i == 0:
                 xpos = 0.12
-
-                if self._AutoXDistance:
-                    # width = 0.05 + (xpos - 0.16) / 0.7
-                    # ypos = random.uniform(-width, width)
-                    ypos = random.choice([-0.12, 0.12])
-                    # ypos = 0
-                else:
-                    # ypos = random.choice([-0.12, 0.12])
-                    # ypos = random.choice([-0.17, 0, 0.17])
-                    ypos = random.uniform(-0.1, 0.1)
-                    ######## Test #########
-                    # ypos = -0.12
-
-
-
-                if self._is_position_valid((xpos, ypos), existing_positions):
-                    valid_position_found = True
-                else:
-                    continue  # Find a new position
-
+                ypos = random.uniform(-0.05, 0.05)
                 zpos = 0
-                # angle = -np.pi / 2 + self._objectRandom * np.pi * random.random()
-                angle = -np.pi / 2 
-
+                angle = -np.pi / 2
                 orn = pb.getQuaternionFromEuler([0, 0, angle])
                 uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.90)
-
                 objectUids.append(uid)
                 existing_positions.append((xpos, ypos))
-        
+
+            else:
+
+                valid_position_found = False
+                attempts = 0
+
+                while not valid_position_found and attempts < attempt_limit:
+            
+                    # xpos = random.uniform(0.16, 0.23)
+                    # xpos = random.uniform(0.09, 0.11)
+                    xpos = 0.12
+
+                    if self._AutoXDistance:
+                        # width = 0.05 + (xpos - 0.16) / 0.7
+                        # ypos = random.uniform(-width, width)
+                        ypos = random.choice([-0.12, 0.12])
+                        # ypos = 0
+                    else:
+                        # ypos = random.choice([-0.12, 0.12])
+                        # ypos = random.choice([-0.17, 0, 0.17])
+                        ypos = random.uniform(-0.18, 0.18)
+                        
+                        ######## Test #########
+                        # ypos = -0.12
+
+
+
+                    if self._is_position_valid((xpos, ypos), existing_positions):
+                        valid_position_found = True
+                        zpos = 0
+                        angle = -np.pi / 2 
+                        orn = pb.getQuaternionFromEuler([0, 0, angle])
+                        uid = pb.loadURDF(urdf_path, [xpos, ypos, zpos], [orn[0], orn[1], orn[2], orn[3]], useFixedBase=False, globalScaling=.90)
+                        objectUids.append(uid)
+                        existing_positions.append((xpos, ypos))
+
+                    else:
+                        attempts += 1  # Find a new position
+            
+
         existing_positions = []
         container_uid = []
 
-        for urdf_path in container_urdfList:
-            valid_position_found = False
-            
-            while not valid_position_found:
-                
-                # xpos = random.uniform(0.28, 0.30)
+        ypos_containers = [-0.15, 0.05, 0.24]
+        for urdf_path, ypos in zip(container_urdfList, ypos_containers):
+    
                 xpos = 0.32
-                # ypos = random.choice([-0.2, 0, 0.2])
-                ypos = random.choice([-0.15, 0.05, 0.24])
-
-                # zpos = 0.2
-                ###########
-                # ypos = 0.2
-                
-                
-                if self._is_position_valid((xpos, ypos), existing_positions, min_distance=0.1):
-                    valid_position_found = True
-                else:
-                    continue  # Find a new position
 
                 # Placing the trays
                 orn = pb.getQuaternionFromEuler([0, 0, 0])
