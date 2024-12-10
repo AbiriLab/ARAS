@@ -170,6 +170,7 @@ class jacoDiverseObjectEnv(gym.Env):
 
         self._attempt = False
         self._gripperState = 'open'
+        self._grasp_successfull = False
         self._env_step = 0
         self.terminated = 0
 
@@ -370,20 +371,29 @@ class jacoDiverseObjectEnv(gym.Env):
         debug = {'task_success': self._taskSuccess}
         return self._observation, reward, done, debug  
 
-    
     def _reward(self, command_action, taken_action):
-        """Calculates the reward for the episode"""
-        progress_reward = 0
-        following_rew = 0
-        self._taskSuccess = 0
-        failure_penalty = -0.5  # Penalty for unsuccessful grasp attempts
-        max_dist_rew = 0.4  # Maximum reward for distance improvement
-        placement_threshold = 0.07  # Threshold for successful placement in the bin
-        placement_success_reward = 1  # Big reward for successful placement in the bin
-        time_penalty = -0.02  # Small penalty for each timestep to encourage efficiency
-        no_progress_penalty = -0.05  # Penalty for lack of progress
 
-        # Get the information of the environment
+        """Calculates the reward for the episode, ensuring it is normalized to [0, 1]."""
+        # Constants
+        self._taskSuccess = 0
+        failure_penalty = -0.5
+        # max_dist_rew = 1
+        placement_threshold = 0.07
+        placement_success_reward = 1.0
+        grasp_success_reward = 0.5
+        # time_penalty = -0.01
+        lack_of_progress_penalty = -0.01
+        progress_reward_value = 0.005
+        following_rew_value = 0.015
+        following_penalty_value = -0.03
+
+        # Initialize variables
+        # progress_reward = 0
+        following_rew = 0
+        total_reward = 0
+        normalized_reward = 0
+
+        # Environment information
         bin_position = self._containerPos
         cur_mugPos, _ = pb.getBasePositionAndOrientation(self.intention_object)
         gripperPos = self._getGripper()
@@ -392,47 +402,86 @@ class jacoDiverseObjectEnv(gym.Env):
         mug2bin = np.linalg.norm(np.array(cur_mugPos)[:2] - np.array(bin_position)[:2])
         gripper2bin = np.linalg.norm(np.array(gripperPos)[:2] - np.array(bin_position)[:2])
 
-        # Get the information of the taken action
         dx = int(np.sign(taken_action[0]))
         dy = int(np.sign(taken_action[1]))
 
-        # Test Episode
-        if self._isTest:
-            reward = placement_success_reward if mug2bin < placement_threshold else 0
-            return reward
-
-        # Reward actions that align with the command direction
-        if (command_action != 0 and command_action == dy) or (command_action == 0 and dx > 0):
-            following_rew += 0.1
-        
-        # Penalize moving backward
         if dx < 0:
             following_rew -= 0.1
+        # Test episode reward
+        if self._isTest:
+            return 1.0 if mug2bin < placement_threshold else 0.0
 
-        # Calculate distance rewards for progress
+        # Direction following reward
+        if (command_action != 0 and command_action == dy) or (command_action == 0 and dx > 0):
+            following_rew += following_rew_value
+        else:
+            following_rew += following_penalty_value
+
+        # Distance based reward: Calculate progress or penalty based on the change in distance to the mug
         if self._gripperState == 'open':
-            # Progress toward the mug
-            progress_reward = max(0, (self._gripper2mug_orignial - gripper2mug) / self._gripper2mug_orignial) * max_dist_rew
+            
+            if hasattr(self, '_prev_gripper2mug'):
+                if gripper2mug < self._prev_gripper2mug:  # Getting closer
+                    # progress_reward = max(0, (self._gripper2mug_orignial - gripper2mug) / self._gripper2mug_orignial) * max_dist_rew
+                    progress_reward = progress_reward_value 
+                else:  # No progress or moving away
+                    progress_reward = lack_of_progress_penalty
+            else:
+                if gripper2mug < self._gripper2mug_orignial:
+                    progress_reward = progress_reward_value 
+                else: 
+                    progress_reward = lack_of_progress_penalty
+                
+            # Update the previous distance
+            self._prev_gripper2mug = gripper2mug
+
         elif self._gripperState == 'close':
-            # Progress toward the bin
-            progress_reward = max(0, (self._gripper2bin_orignial - gripper2bin) / self._gripper2bin_orignial) * max_dist_rew
+            # Calculate progress or penalty based on the change in distance to the bin
+            if hasattr(self, '_prev_gripper2bin'):
+                if gripper2bin < self._prev_gripper2bin:  # Getting closer
+                    # progress_reward = max(0, (self._gripper2bin_orignial - gripper2bin) / self._gripper2bin_orignial) * max_dist_rew
+                    progress_reward = progress_reward_value
+                else:  # No progress or moving away
+                    progress_reward = lack_of_progress_penalty
+            else:
+                # No previous state available, only calculate the progress reward
+                if gripper2bin < self._gripper2bin_orignial:
+                    progress_reward = progress_reward_value 
+                else:  # No progress or moving away
+                    progress_reward = lack_of_progress_penalty
 
-        # If no progress is made, apply a penalty
-        if progress_reward < 0.01:
-            progress_reward = no_progress_penalty
 
-        # Big reward for successful placement in the bin
+            # Update the previous distance
+            self._prev_gripper2bin = gripper2bin
+
+        progress_reward = np.clip(progress_reward, lack_of_progress_penalty, progress_reward_value)
+
+
+        # Check for task success (placement)
         if self._attempt and mug2bin < placement_threshold:
             self._taskSuccess += 1
-            reward = placement_success_reward
-        else:
-            # Apply failure penalty if the release action is taken but not successful
-            if self._env_step >= self._maxSteps:
-                reward = failure_penalty
-            else:
-                reward = progress_reward + following_rew + time_penalty
+            total_reward = placement_success_reward
 
-        return reward
+        # Check for successful grasp
+        elif cur_mugPos[2] > 0.05 and not self._grasp_successfull:
+            total_reward = grasp_success_reward
+            self._grasp_successfull = True
+
+        # Handle failure or ongoing progress
+        else:
+            if self._env_step >= self._maxSteps:
+                total_reward = failure_penalty
+            else:
+                total_reward = progress_reward + following_rew
+
+        # Normalize the reward to [0, 1]
+        # min_reward = failure_penalty  # Minimum possible reward
+        # max_reward = placement_success_reward   # Maximum possible reward
+        # normalized_reward = (total_reward - min_reward) / (max_reward - min_reward)
+        # normalized_reward = np.clip(normalized_reward, -1, 1)  
+
+        return total_reward
+
 
 
 

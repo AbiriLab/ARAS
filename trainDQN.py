@@ -36,7 +36,7 @@ random.seed(0)
 np.random.seed(0)
 
 # Load env
-env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=50, dv=0.02,
+env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=45, dv=0.02,
                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
 
 env.cid = pb.connect(pb.DIRECT)
@@ -273,8 +273,9 @@ if __name__ == "__main__":
     old_epoch_ts = -1
 
   # Begin training
-    training_data = []
+    cumulative_rewards_ten_episodes = 0
     for i_episode in range(num_episodes):
+        training_data = []
         # Print Epochs
         if i_episode % 10 == 0:
             ct = datetime.datetime.now()
@@ -284,7 +285,8 @@ if __name__ == "__main__":
             else:
                 diff = ""
             if options.detail_level != 'p':
-                old_epoch_ts = log("Epoc #\t" + str(i_episode) + "\t " + str(diff))
+                old_epoch_ts = log("Epoc #\t" + str(i_episode) + "\t " + f"Avg Cumulative Reward: {cumulative_rewards_ten_episodes / 10}" + "\t" + str(diff))
+                cumulative_rewards_ten_episodes = 0
 
         # Initialize the environment and state
         env.reset()
@@ -292,7 +294,8 @@ if __name__ == "__main__":
 
         stacked_states = collections.deque(STACK_SIZE * [state], maxlen=STACK_SIZE)
         stacked_y_relative = collections.deque(STACK_SIZE * [y_relative], maxlen=STACK_SIZE)  # Track y_relative
-  
+
+        cumulative_reward_episode = 0  # Initialize at the start of the episode
         for t in count():
             # Prepare the inputs for the network
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
@@ -301,6 +304,7 @@ if __name__ == "__main__":
             action = select_action(stacked_states_t, y_relative_t, i_episode, t)  
             _, reward, done, _ = env.step(action.item())
             reward = torch.tensor([reward], device=device)
+            cumulative_reward_episode += reward.cpu().numpy().item()
 
             # Collect trajectory data for the episode
             episode_data = {
@@ -328,7 +332,7 @@ if __name__ == "__main__":
                 next_stacked_states = None
                 next_stacked_y_relative = None
 
-            # Store the transition in memory (assuming memory can handle the new structure)
+            # Store the transition in memory
             memory.push((stacked_states_t, y_relative_t), action, 
                         (next_stacked_states_t, next_stacked_y_relative_t), reward)
 
@@ -340,6 +344,8 @@ if __name__ == "__main__":
             optimize_model()
 
             if done:
+                cumulative_rewards_ten_episodes += cumulative_reward_episode
+                # print(cumulative_reward_episode)
                 reward = reward.cpu().numpy().item()
                 ten_rewards += reward
                 total_rewards.append(reward)
@@ -374,7 +380,7 @@ if __name__ == "__main__":
 
 
         # Save data every 1000 episodes
-        if (i_episode + 1) % 1 == 0:
+        if (i_episode + 1) % 2000 == 0:
             save_episode_data(training_data, f"./trajectory_train_data/trajectory_data_{i_episode+1}.json")
             training_data = []  # Reset data list to avoid memory issues
 
