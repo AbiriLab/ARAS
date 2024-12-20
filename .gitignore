@@ -4,3 +4,4 @@ logs/
 .vscode/
 __pycache__/
 plot/
+figs/
