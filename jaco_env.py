@@ -479,7 +479,6 @@ class jacoDiverseObjectEnv(gym.Env):
         # max_reward = placement_success_reward   # Maximum possible reward
         # normalized_reward = (total_reward - min_reward) / (max_reward - min_reward)
         # normalized_reward = np.clip(normalized_reward, -1, 1)  
-
         return total_reward
 
 

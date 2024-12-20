@@ -44,7 +44,6 @@ def get_screen(env):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     global stacked_screens
     segmentation, y_relative = env._get_observation()
-    # segmentation = modify_segmentation(segmentation, env._numObjects, env._gripperState)
     # show_image(segmentation, window_name="Segmentation", scale_factor=4)
 
     screen = segmentation

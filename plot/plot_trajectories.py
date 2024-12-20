@@ -59,7 +59,7 @@ def plot_trajectories(data, save_path=None):
     plt.show()
 
 # Specify the file path to the saved trajectory data
-file_path = "./trajectory_train_data/trajectory_data_2000.json"  # Replace with your file path
+file_path = "./trajectory_train_data/trajectory_data_12000.json"  # Replace with your file path
 trajectory_data = load_trajectory_data(file_path)
 
 # Plot the trajectories

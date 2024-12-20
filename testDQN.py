@@ -96,7 +96,7 @@ for seed in range(seeds_total):
             # Select and perform an action
             action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
             _, reward, done, _ = env.step(action.item())
-
+            # print(action)
             # Record gripper trajectory
             gripper_pos = env._getGripper()[:2]  # x, y position
             gripper_trajectory.append(gripper_pos)

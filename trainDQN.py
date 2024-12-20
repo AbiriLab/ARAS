@@ -36,14 +36,13 @@ random.seed(0)
 np.random.seed(0)
 
 # Load env
-env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=45, dv=0.02,
-                           AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=1, numContainers=1)
+env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=70, dv=0.02,
+                           AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3, numContainers=3)
 
 env.cid = pb.connect(pb.DIRECT)
 
 # Choose system (CPU/GPU), depending if Nvidia Cuda is available
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(torch.cuda.is_available())
+# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
@@ -58,8 +57,13 @@ def select_action(state, relative_position, i_episode, step=None):
     if sample > eps_threshold:
         with torch.no_grad():
             return policy_net(state, relative_position).max(1)[1].view(1, 1)
+        
     else:
-        return torch.tensor([[random.randrange(n_actions)]], device=device, dtype=torch.long)
+        # Exploration: Choose a random action from valid actions only
+        valid_actions = [0, 1, 3]  # Exclude actions 2 and 4
+        random_action = random.choice(valid_actions)
+        return torch.tensor([[random_action]], device=device, dtype=torch.long)        
+        # return torch.tensor([[random.randrange(n_actions)]], device=device, dtype=torch.long)
 
     ####### TEST ######
     # action_sequence = [0] * 9 + [3] * 10 + [1] * 20 + [3] *20
@@ -111,41 +115,46 @@ def optimize_model():
     transitions = memory.sample(BATCH_SIZE)
     batch = Transition(*zip(*transitions))
 
-    non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
-                                            [s[0] for s in batch.next_state if s is not None])), 
-                                  device=device, dtype=torch.bool)
-    
-    # Assuming your Transition namedtuple or equivalent structure has 'next_state' as a tuple of (image, y_relative)
-    non_final_next_states = [s for s in batch.next_state if s is not None and s[0] is not None]
+    # Non-final mask
+    non_final_mask = torch.tensor([s is not None for s in batch.next_state], device=device, dtype=torch.bool)
+    non_final_next_states = [s for s in batch.next_state if s is not None]
 
-    # Separate the image and y_relative components for non-final next states
-    non_final_next_states_images = torch.cat([s[0] for s in non_final_next_states])
-    non_final_next_states_y_relative = torch.cat([s[1] for s in non_final_next_states])
+    # Separate image and y_relative components
+    non_final_next_states_images = torch.cat([s[0].to(device) for s in non_final_next_states]) if non_final_next_states else torch.empty(0, device=device)
+    non_final_next_states_y_relative = torch.cat([s[1].to(device) for s in non_final_next_states]) if non_final_next_states else torch.empty(0, device=device)
 
+    # Current state
+    state_batch_images = torch.cat([s[0].to(device) for s in batch.state])
+    state_batch_y_relative = torch.cat([s[1].to(device) for s in batch.state])
 
-    # Similarly, separate the image and y_relative components for the current state batch
-    state_batch_images = torch.cat([s[0] for s in batch.state])
-    state_batch_y_relative = torch.cat([s[1] for s in batch.state])
+    action_batch = torch.cat(batch.action).to(device)
+    reward_batch = torch.cat(batch.reward).to(device)
 
-    action_batch = torch.cat(batch.action)
-    reward_batch = torch.cat(batch.reward)
-
-    # Adjust the network forward pass to include y_relative
+    # Forward pass
     state_action_values = policy_net(state_batch_images, state_batch_y_relative).gather(1, action_batch)
 
+    # Compute next state values
     next_state_values = torch.zeros(BATCH_SIZE, device=device)
     if len(non_final_next_states_images) > 0:
         next_state_values[non_final_mask] = target_net(non_final_next_states_images, non_final_next_states_y_relative).max(1)[0].detach()
 
+    # Compute expected state-action values
     expected_state_action_values = (next_state_values * GAMMA) + reward_batch
 
+    # Compute loss
     loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
 
+    # Optimize the model
     optimizer.zero_grad()
     loss.backward()
-    for param in policy_net.parameters():
-        param.grad.data.clamp_(-1, 1)
+    torch.nn.utils.clip_grad_norm_(policy_net.parameters(), max_norm=1)
     optimizer.step()
+
+    # Debugging logs
+    # print(f"Loss: {loss.item():.4f}")
+    # print(f"State batch images shape: {state_batch_images.shape}")
+    # print(f"State batch y_relative shape: {state_batch_y_relative.shape}")
+
 
 
 '''
