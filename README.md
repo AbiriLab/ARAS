@@ -1,4 +1,4 @@
-# Amplification of limited user inputs for high-dimensional manipulation tasks using human guided deep RL
+# ARAS (Adaptive Reinforcement learning for Amplification of limited inputs in Shared autonomy)
 
 <img src="figs/Conceptual_Design.png" alt="Conceptual Design" width="500"/>
 
