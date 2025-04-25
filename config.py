@@ -5,7 +5,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ##########################################
 ########### TESTING PARAMETERS ##########
 modelPath = "./models/pickplace_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt"
-SCENARIO = "dynamic_both" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
+SCENARIO = "fixed" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
 EPISODE_NUMBER = 500
 RENDER = True  # Set to True for GUI rendering, False for fast testing
 
