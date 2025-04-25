@@ -44,7 +44,9 @@ def get_screen(env):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     global stacked_screens
     segmentation, y_relative = env._get_observation()
-    # show_image(segmentation, window_name="Segmentation", scale_factor=4)
+
+    if RENDER:
+        show_image(segmentation, window_name="Latent Image", scale_factor=4)
 
     screen = segmentation
     screen = torch.from_numpy(screen)
@@ -64,7 +66,7 @@ def show_image(image, window_name="Image", scale_factor=4):
     - window_name (str): The name of the window where the image will be displayed.
     - scale_factor (float): Factor by which to scale the image size.
     """
-    np.random.seed(42)  # Seed for reproducibility
+    np.random.seed(42)  # For reproducibility
     unique_labels = np.unique(image)
     color_map = np.random.randint(0, 255, (max(unique_labels) + 1, 3), dtype=np.uint8)
 
@@ -88,13 +90,29 @@ def modify_segmentation(segmentation, intention_object_id, intention_container_i
     Converts a segmentation image to a colored RGB image based on provided segmentation ID to color mappings.
 
     Parameters:
-    - segmentation (numpy.ndarray): The segmentation image.
-    - segmentation_colors (dict): A dictionary mapping segmentation IDs to RGB colors.
-    - default_color (list): Default RGB color for unmapped segmentation IDs.
+    - segmentation (numpy.ndarray or tuple): The segmentation image from pybullet.
+    - intention_object_id (int): ID of the object of interest
+    - intention_container_id (int): ID of the container 
+    - gripper_state (str): Current state of the gripper
 
     Returns:
-    - numpy.ndarray: An RGB image where each segmentation ID is mapped to a specified color.
+    - numpy.ndarray: A modified segmentation image.
     """
+    # Convert tuple to numpy array if necessary
+    if isinstance(segmentation, tuple):
+        # Assuming it's a tuple containing the segmentation array
+        # Based on PyBullet documentation, segmentation is returned as part of getCameraImage
+        # Convert to numpy array - adjust indexing if needed
+        segmentation = np.array(segmentation)
+    
+    # Check if segmentation is 1D and needs reshaping
+    if len(segmentation.shape) == 1:
+        # Calculate the dimensions - we assume it's a square image if not provided
+        total_pixels = segmentation.shape[0]
+        side_length = int(np.sqrt(total_pixels))
+        segmentation = segmentation.reshape(side_length, side_length)
+        # print(f"Reshaped segmentation from 1D to 2D with shape: {segmentation.shape}")
+    
     # bin = numobj + 3
     # BGR color format
     segmentation_ids = {
@@ -182,7 +200,7 @@ class ObjectPlacer:
         return selected_objects_filenames
     
     
-    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.13):
+    def _is_position_valid(self, new_pos, existing_positions, min_distance=0.1):
         """Check if the new position is at least min_distance away from all existing positions."""
         for pos in existing_positions:
             if abs(new_pos[1] - pos[1]) < min_distance:
@@ -200,7 +218,7 @@ class ObjectPlacer:
 
             if i == 0:
                 xpos = 0.12
-                ypos = random.uniform(-0.05, 0.05)
+                ypos = random.uniform(-0.02, 0.05)
                 zpos = 0
                 angle = -np.pi / 2
                 orn = pb.getQuaternionFromEuler([0, 0, angle])
@@ -215,8 +233,7 @@ class ObjectPlacer:
 
                 while not valid_position_found and attempts < attempt_limit:
             
-                    # xpos = random.uniform(0.16, 0.23)
-                    # xpos = random.uniform(0.09, 0.11)
+                    # xpos = random.uniform(0.12, 0.14)
                     xpos = 0.12
 
                     if self._AutoXDistance:
@@ -225,9 +242,9 @@ class ObjectPlacer:
                         ypos = random.choice([-0.12, 0.12])
                         # ypos = 0
                     else:
-                        # ypos = random.choice([-0.12, 0.12])
+                        ypos = random.choice([-0.18, 0.18])
                         # ypos = random.choice([-0.17, 0, 0.17])
-                        ypos = random.uniform(-0.18, 0.18)
+                        # ypos = random.uniform(-0.20, 0.20)
                         
                         ######## Test #########
                         # ypos = -0.12
@@ -253,7 +270,7 @@ class ObjectPlacer:
         ypos_containers = [-0.15, 0.05, 0.24]
         for urdf_path, ypos in zip(container_urdfList, ypos_containers):
     
-                xpos = 0.32
+                xpos = 0.30
 
                 # Placing the trays
                 orn = pb.getQuaternionFromEuler([0, 0, 0])

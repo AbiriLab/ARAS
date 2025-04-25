@@ -1,14 +1,16 @@
-# Add device selection
 import torch
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# device = torch.device("cpu")
-# print(torch.cuda.is_available())
 
-########## Test ############
+
+##########################################
+########### TESTING PARAMETERS ##########
 modelPath = "./models/pickplace_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt"
-# modelPath = "/home/tnlab/Projects/github/sharedcontrol_DQN_Kinova/models/pickplace_seg_v4_bs64_ss4_rb30000_gamma0.99_decaylf120000_lr0.001.pt"
+SCENARIO = "dynamic_both" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
+EPISODE_NUMBER = 500
+RENDER = True  # Set to True for GUI rendering, False for fast testing
 
-########### TRAIN ##########
+##########################################
+########### TRAINING PARAMETERS ##########
 PRETRAINED_MODEL_PATH = "./models/pickplace_v6_bs64_ss4_rb30000_gamma0.7_decaylf30000_lr0.0001.pt"
 
 MODEL_NAME = 'pickplace_v7'

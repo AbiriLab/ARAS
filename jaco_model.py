@@ -66,7 +66,7 @@ class jaco:
 
 
         self.jointPositions = [# finger indices = [9 - 14]
-            0, 0, 0, 2.7, 5.65, -0.6, 1.60, 2.8, 0, 0, 0.25, 0, 0.25, 0, 0.25
+            0, 0, 0, 2.8, 5.8, -0.6, 1.60, 2.8, 0, 0, 0.25, 0, 0.25, 0, 0.25
         ]
         self.numJoints = pb.getNumJoints(self.jacoUid)
         
@@ -79,7 +79,6 @@ class jaco:
                               force=self.maxForce) 
     
         # Change dynamics of gripper and finger to grasp objects
-        # TODO: Change dynamics directly in urdf file of jaco arm
         for i in range(9,14):
             pb.changeDynamics(self.jacoUid, i, mass=0.3, lateralFriction=2, restitution=0, spinningFriction=0.3, contactStiffness=20000, contactDamping=8000)
 

@@ -21,16 +21,11 @@ from DQN_net import DQN
 # If gpu is to be used
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
-# Select trained model
-# modelPath = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/policyDQN_phase2_bs64_ss4_rb25000_gamma0.99_decaylf20000_lr0.0001.pt'
-# modelPath = "/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt"
-
 # Get stack size from model trained in learnDQN.py from the model name 
 STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
 
 # Number of different seeds
-seeds_total = 5
+seeds_total = 1
 
 # Directory to save trajectory data
 save_dir = "./trajectory_test_data"
@@ -46,9 +41,6 @@ for seed in range(seeds_total):
 
     PATH = modelPath
 
-    # Number of trials per seed
-    episode = 1000   #[100,500,1000]
-    
     scores_window = collections.deque(maxlen=100)  # Last 100 scores
 
     try:
@@ -58,8 +50,9 @@ for seed in range(seeds_total):
 
     # isTest=True -> perform grasping on test set of objects. Currently just mug.
     # Select renders=True for GUI rendering
-    env = jacoDiverseObjectEnv(actionRepeat=80, renders=True, isDiscrete=True, maxSteps=70, dv=0.02,
-                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3, numContainers=3)
+    env = jacoDiverseObjectEnv(actionRepeat=80, renders=RENDER, isDiscrete=True, maxSteps=70, dv=0.02,
+                               AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3,
+                               numContainers=3, scenario=SCENARIO)
     env.reset()
 
     init_screen, _ = get_screen(env)
@@ -77,26 +70,39 @@ for seed in range(seeds_total):
 
     # Data for saving trajectories
     trj_data = []
+    episode_metrics_data_list = []
 
-    for i_episode in range(episode):
+    for i_episode in range(EPISODE_NUMBER):
         env.reset()
         state, y_relative = get_screen(env)  # Adjusted to new function
         stacked_states = collections.deque(STACK_SIZE*[state], maxlen=STACK_SIZE)
         stacked_y_relatives = collections.deque(STACK_SIZE*[y_relative], maxlen=STACK_SIZE)  # Track y_relative
         
-        # Track trajectory
+        # Initialize variables 
         gripper_trajectory = []
-
         steps = 0
+        total_inputs = 0
+        err_actions = 0
+        ampl_actions = 0
+
         for t in count():
             steps += 1
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
             stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  
             
-            # Select and perform an action
             action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
-            _, reward, done, _ = env.step(action.item())
-            # print(action)
+            action = action.item()
+            _, reward, done, _ = env.step(action)  
+            progress_reward, following_rew, total_reward = reward
+
+            if action == 0 or action == 1: # left, right
+                total_inputs += 1
+            else:
+                ampl_actions += 1
+
+            if progress_reward < 0:  # If the gripper is moving away from the goal
+                err_actions += 1
+
             # Record gripper trajectory
             gripper_pos = env._getGripper()[:2]  # x, y position
             gripper_trajectory.append(gripper_pos)
@@ -107,45 +113,72 @@ for seed in range(seeds_total):
             stacked_y_relatives.append(next_y_relative)  # Update stacked y_relatives
             
             if done:
-                break
+                break 
 
-        print("# of Steps:", steps)    
-
-        if reward==1:
-            s=s+1
-            
+        if total_reward==1:
+            s=s+1 
         else: 
             f=f+1
 
 
-        # Save episode data
-        episode_data = {
+        # Save trajectory data
+        # episode_trajectory_data = {
+        #     "episode": i_episode,
+        #     "trajectory": [list(pos) for pos in gripper_trajectory],  # Convert each position to list
+        #     "goal_position": env._mugPos[:2].tolist(),  # Convert numpy array to list
+        #     "bin_position": env._containerPos[:2].tolist(),  # Convert numpy array to list
+        # }
+        # trj_data.append(episode_trajectory_data)
+
+        # Save Metrics data
+        episode_metrics_data = {
             "episode": i_episode,
-            "trajectory": [list(pos) for pos in gripper_trajectory],  # Convert each position to list
-            "goal_position": env._mugPos[:2].tolist(),  # Convert numpy array to list
-            "bin_position": env._containerPos[:2].tolist(),  # Convert numpy array to list
-            "steps": steps,  # Number of steps
-            "success": bool(reward == 1)  # Success if reward indicates task completion
+            "steps": steps,
+            "success": bool(total_reward == 1),
+            "total_inputs": total_inputs / 0.05,
+            "error_actions": err_actions,
+            "amplified_actions": ampl_actions,
         }
-        trj_data.append(episode_data)
+
+        episode_metrics_data_list.append(episode_metrics_data)
 
         # Uncomment for immediate feedback after each episode   
+        print("#"*90)
+        print("Episode: " + str(i_episode))
         print("Successed: " + str(s) + "\tFailures: " + str(f) + "\t\tSuccessRate: " + str(s/(i_episode + 1)))
+        print("Steps: " + str(steps) + "\tTotal Inputs: " + str(total_inputs) + "\tError Actions: " + str(err_actions) + "\tAmplified Actions: " + str(ampl_actions))
+        print("#"*90)
 
-    # Save trajectory data to file after every seed
-    save_path = os.path.join(save_dir, f"trajectory_data_{seed}_{i_episode+1}.json")
-
-    # Convert NumPy types to native Python types
-    for entry in trj_data:
-        entry["trajectory"] = [[float(x), float(y)] for x, y in entry["trajectory"]]
-        entry["goal_position"] = [float(x) for x in entry["goal_position"]]
-        entry["bin_position"] = [float(x) for x in entry["bin_position"]]
-        entry["steps"] = int(entry["steps"])
-        entry["success"] = bool(entry["success"])  # Convert numpy.bool_ to Python bool
-
+    # Save metrics data to file
+    save_path = os.path.join(save_dir, f"metrics_data_{SCENARIO}.json")
     with open(save_path, "w") as file:
-        json.dump(trj_data, file)
+        json.dump(episode_metrics_data_list, file)
 
+    # # Save trajectory data to file after every seed
+    # save_path = os.path.join(save_dir, f"trajectory_data_{seed}_{i_episode+1}.json")
+
+    # # Convert NumPy types to native Python types
+    # for entry in trj_data:
+    #     entry["trajectory"] = [[float(x), float(y)] for x, y in entry["trajectory"]]
+    #     entry["goal_position"] = [float(x) for x in entry["goal_position"]]
+    #     entry["bin_position"] = [float(x) for x in entry["bin_position"]]
+    #     entry["steps"] = int(entry["steps"])
+    #     entry["success"] = bool(entry["success"])  # Convert numpy.bool_ to Python bool
+
+    # with open(save_path, "w") as file:
+    #     json.dump(trj_data, file)
 
     # Feedback after each
     print("For Seed " + str(seed+1) +": \t Successed: " + str(s) + "\tFailures: " + str(f) + "\t\tSuccessRate: " + str(s/(i_episode + 1)))
+    
+    # Print average metrics data 
+    avg_steps = np.mean([data["steps"] for data in episode_metrics_data_list])
+    avg_total_inputs = np.mean([data["total_inputs"] for data in episode_metrics_data_list])
+    avg_error_actions = np.mean([data["error_actions"] for data in episode_metrics_data_list])
+    avg_amplified_actions = np.mean([data["amplified_actions"] for data in episode_metrics_data_list])
+    avg_success_rate = np.mean([data["success"] for data in episode_metrics_data_list])
+
+    print("\n\n\n" + "*"*30 + f" Average Metrics for {SCENARIO}" + "*"*30)
+    print("Average Steps: " + str(avg_steps) + "\nAverage Total Inputs: " + str(avg_total_inputs) + "\nAverage Error Actions: " + str(avg_error_actions) + "\nAverage Amplified Actions: " + str(avg_amplified_actions))
+    print("Average Success Rate: " + str(avg_success_rate))
+
