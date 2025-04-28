@@ -12,7 +12,10 @@ from pkg_resources import parse_version
 import gym
 from enum import Enum, auto
 from utils import ObjectPlacer
-from utils import modify_segmentation, show_image
+from utils import modify_segmentation
+import torchvision.transforms as T
+from PIL import Image
+from config import *
 
 RENDER_HEIGHT = 720
 RENDER_WIDTH = 960
@@ -227,23 +230,28 @@ class jacoDiverseObjectEnv(gym.Env):
         proj_matrix = pb.computeProjectionMatrixFOV(fov=60, aspect=aspect, nearVal=0.01, farVal=10.0)
         images = pb.getCameraImage(width=self._width, height=self._height, viewMatrix=view_matrix, projectionMatrix=proj_matrix, renderer=pb.ER_TINY_RENDERER)
         
+
+        # Get rgb observation
+        rgb = np.array(images[2], dtype=np.uint8).reshape(self._height, self._width, 4)[:, :, :3]
+        rgb = rgb.transpose((2, 0, 1))
+        rgb = np.ascontiguousarray(rgb, dtype=np.float32) / 255
+        rgb = torch.from_numpy(rgb)
+
+        preprocess = T.Compose([T.ToPILImage(),
+                    T.Grayscale(num_output_channels=1),
+                    T.Resize(64, interpolation=Image.BICUBIC),
+                    lambda img: np.asarray(img)
+                    ])
+        grayscale = preprocess(rgb)
+ 
+        # Get segmentation observation
         segmentation = images[4]
-        # Convert segmentation to numpy array if it isn't already
         segmentation = np.array(segmentation)
-        
-        # Check if segmentation is 1D and needs reshaping
+
         if len(segmentation.shape) == 1:
-            # Reshape using the known width and height
             segmentation = segmentation.reshape(self._height, self._width)
-        
-        # Optionally visualize the camera output (for debugging)
-        # from utils import visualize_camera_output
-        # visualize_camera_output(rgba, depth, segmentation, save_path="camera_output.png")
-        
-        # Process the segmentation mask
+
         segmentation = modify_segmentation(segmentation, self.intention_object, self.intention_container, self._gripperState)
-
-
 
         # User inputs based on scenarios
         if self._scenario == 'fixed':
@@ -278,8 +286,11 @@ class jacoDiverseObjectEnv(gym.Env):
         
         relative_position = 0 if (abs(relative_position) < 0.025) else np.sign(relative_position)
 
-        # Constructing the observation
-        observation = [segmentation, relative_position]
+        if "ARAS" in modelPath:
+            observation = [segmentation, relative_position]
+        else:
+            observation = [grayscale, relative_position]
+
         return observation
 
     def step(self, action):

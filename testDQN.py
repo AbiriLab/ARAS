@@ -25,7 +25,7 @@ import datetime
 # From pybullet_envs.bullet.jaco_diverse_object_gym_env import jacoDiverseObjectEnv
 from jaco_env import jacoDiverseObjectEnv
 from utils import get_screen
-from DQN_net import DQN
+from networks import *
 
 # If gpu is to be used
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -67,7 +67,7 @@ for seed in range(seeds_total):
     init_screen, _ = get_screen(env)
     _, _, screen_height, screen_width = init_screen.shape
     n_actions = env.action_space.n  # Get number of actions from gym action space
-    # policy_net = DQN(screen_height, screen_width, n_actions).to(device)
+
     policy_net = DQN(screen_height, screen_width, n_actions, stack_size=STACK_SIZE).to(device)
     # Load trained model for the policy network
     checkpoint = torch.load(PATH, map_location=device)

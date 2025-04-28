@@ -43,12 +43,11 @@ class ReplayMemory(object):
 def get_screen(env):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     global stacked_screens
-    segmentation, y_relative = env._get_observation()
+    screen, y_relative = env._get_observation()
 
-    if RENDER:
-        show_image(segmentation, window_name="Latent Image", scale_factor=4)
+    if RENDER and "ARAS" in modelPath:
+        show_image(screen, window_name="Latent Image", scale_factor=4)
 
-    screen = segmentation
     screen = torch.from_numpy(screen)
     screen = screen.unsqueeze(0).unsqueeze(0)
     y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
@@ -76,6 +75,7 @@ def show_image(image, window_name="Image", scale_factor=4):
     # Calculate new dimensions
     height, width = color_segmentation_image.shape[:2]
     new_dimensions = (int(width * scale_factor), int(height * scale_factor))
+
 
     # Resize the image
     resized_image = cv2.resize(color_segmentation_image, new_dimensions, interpolation=cv2.INTER_LINEAR)

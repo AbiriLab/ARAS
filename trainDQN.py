@@ -24,7 +24,7 @@ import torchvision.transforms as T
 
 from jaco_env import jacoDiverseObjectEnv
 from utils import ReplayMemory, get_screen
-from DQN_net import DQN
+from networks import *
 import pybullet as pb
 from config import *
 import os
@@ -36,7 +36,7 @@ random.seed(0)
 np.random.seed(0)
 
 # Load env
-env = jacoDiverseObjectEnv(actionRepeat=80, renders=False, isDiscrete=True, maxSteps=70, dv=0.02,
+env = jacoDiverseObjectEnv(actionRepeat=80, renders=RENDER, isDiscrete=True, maxSteps=70, dv=0.02,
                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3, numContainers=3)
 
 env.cid = pb.connect(pb.DIRECT)
@@ -182,6 +182,7 @@ will decay exponentially towards EPS_END. EPS_DECAY controls the rate of the dec
 # returned from pybullet (128, 128, 3)
 
 init_screen, _ = get_screen(env)
+print(init_screen.shape)
 _, _, screen_height, screen_width = init_screen.shape
 
 # Get number of actions from gym action space
@@ -227,17 +228,14 @@ if __name__ == "__main__":
     # Init replay buffer, policy net and target net
     STACK_SIZE = Stack_Size
     memory = ReplayMemory(REPLAY_BUFFER_SIZE, Transition)
+
     policy_net = DQN(screen_height, screen_width, n_actions, stack_size=STACK_SIZE).to(device)
-    target_net = DQN(screen_height, screen_width, n_actions, stack_size=Stack_Size).to(device)
+    target_net = DQN(screen_height, screen_width, n_actions, stack_size=STACK_SIZE).to(device)
+
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
     # Use ADAM as optimizer
     optimizer = optim.Adam(policy_net.parameters(), lr=LEARNING_RATE)
-
-
-    # Assume your pre-trained model's file path
-    # PRETRAINED_MODEL_PATH = '/home/ali/Projects/RobaticRL/extended/main/phase2/models/FullAuto2obj_bs64_ss4_rb30000_gamma0.99_decaylf100000.0_lr0.001.pt'
-    # PRETRAINED_MODEL_PATH = ''
 
     # Check if the pretrained model file exists and load it
     if os.path.isfile(PRETRAINED_MODEL_PATH):
@@ -252,9 +250,6 @@ if __name__ == "__main__":
         print("Pre-trained model loaded successfully!")
     else:
         print("Pre-trained model not found. Starting training from scratch.")
-
-    # Now proceed with your training loop
-
 
     # Name of saved .log file and .pt model
     filename = "bs"+str(BATCH_SIZE)+"_ss" + str(STACK_SIZE) + "_rb" + str(REPLAY_BUFFER_SIZE)+"_gamma"+str(GAMMA)+"_decaylf"+str(EPS_DECAY_LAST_FRAME)+"_lr"+str(LEARNING_RATE)
@@ -273,6 +268,7 @@ if __name__ == "__main__":
     # Path of saved model
     PATH = f"models/{MODEL_NAME}_{filename}.pt" 
     if LOGFILE_POINTER == None:
+        os.makedirs(os.path.dirname(LOGFILE), exist_ok=True)
         LOGFILE_POINTER = open(LOGFILE, "w")
 
     old_reward_ts = log("Starting learning loop ...\n==================================================================")
@@ -291,10 +287,16 @@ if __name__ == "__main__":
             new_epoch_ts = ct.timestamp()
             if old_epoch_ts > 0:
                 diff = new_epoch_ts - old_epoch_ts
+                diff = f"{diff:.2f}"  
             else:
                 diff = ""
             if options.detail_level != 'p':
-                old_epoch_ts = log("Epoc #\t" + str(i_episode) + "\t " + f"Avg Cumulative Reward: {cumulative_rewards_ten_episodes / 10}" + "\t" + str(diff))
+                avg_reward = cumulative_rewards_ten_episodes / 10
+                old_epoch_ts = log(
+                    f"Epoch #\t{i_episode}\t"
+                    f"Avg Cumulative Reward: {avg_reward:.2f}\t"
+                    f"{diff}"
+                )
                 cumulative_rewards_ten_episodes = 0
 
         # Initialize the environment and state
@@ -312,7 +314,8 @@ if __name__ == "__main__":
             # Select and perform an action
             action = select_action(stacked_states_t, y_relative_t, i_episode, t)  
             _, reward, done, _ = env.step(action.item())
-            reward = torch.tensor([reward], device=device)
+            progress_reward, following_rew, total_reward = reward
+            reward = torch.tensor([total_reward], device=device)
             cumulative_reward_episode += reward.cpu().numpy().item()
 
             # Collect trajectory data for the episode
