@@ -1,3 +1,11 @@
+"""
+This file evaluates a trained DQN model in the jacoDiverseObjectEnv robotic environment.
+It loads a pre-trained policy network, runs it for a specified number of episodes across different
+scenarios, and tracks performance metrics including success rate, steps taken, user inputs,
+error actions, and amplified actions. The final average metrics are calculated and saved to a JSON file,
+providing a quantitative assessment of the DQN model's performance in shared autonomy tasks.
+"""
+
 import random
 import numpy as np
 from collections import namedtuple
@@ -12,6 +20,7 @@ from config import *
 import os
 import json
 import pybullet as pb
+import datetime
 
 # From pybullet_envs.bullet.jaco_diverse_object_gym_env import jacoDiverseObjectEnv
 from jaco_env import jacoDiverseObjectEnv
@@ -28,7 +37,7 @@ STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
 seeds_total = 1
 
 # Directory to save trajectory data
-save_dir = "./trajectory_test_data"
+save_dir = "./ARAS_results"
 os.makedirs(save_dir, exist_ok=True)
 
 """ Evaluation of trained DQN model on different seeds"""
@@ -178,7 +187,31 @@ for seed in range(seeds_total):
     avg_amplified_actions = np.mean([data["amplified_actions"] for data in episode_metrics_data_list])
     avg_success_rate = np.mean([data["success"] for data in episode_metrics_data_list])
 
-    print("\n\n\n" + "*"*30 + f" Average Metrics for {SCENARIO}" + "*"*30)
-    print("Average Steps: " + str(avg_steps) + "\nAverage Total Inputs: " + str(avg_total_inputs) + "\nAverage Error Actions: " + str(avg_error_actions) + "\nAverage Amplified Actions: " + str(avg_amplified_actions))
-    print("Average Success Rate: " + str(avg_success_rate))
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    final_metrics = {
+        "scenario": SCENARIO,
+        "model_path": modelPath,
+        "num_episodes": EPISODE_NUMBER,
+        "success_rate": float(avg_success_rate),
+        "avg_steps": float(avg_steps),
+        "avg_user_inputs": float(avg_total_inputs),
+        "avg_error_actions": float(avg_error_actions),
+        "avg_amplified_actions": float(avg_amplified_actions),
+        "timestamp": timestamp
+    }
+    
+    save_path = os.path.join(save_dir, f"ARAS_summary_{SCENARIO}_{timestamp}.json")
+    with open(save_path, "w") as f:
+        json.dump(final_metrics, f)
+
+    print("\n" + "=" * 50)
+    print(f"FINAL RESULTS FOR SCENARIO: {SCENARIO}")
+    print("=" * 50)
+    print(f"Success Rate: {avg_success_rate:.2f} ({s}/{EPISODE_NUMBER})")
+    print(f"Average Steps: {avg_steps:.2f}")
+    print(f"Average User Inputs: {avg_total_inputs:.2f}")
+    print(f"Average Error Actions: {avg_error_actions:.2f}")
+    print(f"Average Amplified Actions: {avg_amplified_actions:.2f}")
+    print("=" * 50)
+    print(f"Summary results saved to: {save_path}")
 

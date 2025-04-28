@@ -1,0 +1,1 @@
+{"scenario": "dynamic_dropoff", "num_episodes": 500, "success_rate": 0.848, "avg_steps": 38.682, "avg_user_inputs": 387.28, "avg_error_actions": 6.634, "avg_amplified_actions": 19.318, "timestamp": "20250428_001656"}

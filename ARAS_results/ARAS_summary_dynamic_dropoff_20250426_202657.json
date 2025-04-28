@@ -1,0 +1,1 @@
+{"scenario": "dynamic_dropoff", "model_path": "./models/pickplace_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt", "num_episodes": 500, "success_rate": 0.998, "avg_steps": 34.298, "avg_user_inputs": 276.24, "avg_error_actions": 4.514, "avg_amplified_actions": 20.486, "timestamp": "20250426_202657"}

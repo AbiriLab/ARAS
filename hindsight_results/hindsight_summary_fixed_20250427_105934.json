@@ -1,0 +1,1 @@
+{"scenario": "fixed", "num_episodes": 500, "success_rate": 0.86, "avg_steps": 35.83, "avg_user_inputs": 349.6, "avg_error_actions": 5.436, "avg_amplified_actions": 18.35, "timestamp": "20250427_105934"}
