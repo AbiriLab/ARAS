@@ -1,6 +1,5 @@
 venv/
 runs/
-logs/
 .vscode/
 __pycache__/
 plot/

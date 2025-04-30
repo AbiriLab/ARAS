@@ -37,7 +37,8 @@ STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
 seeds_total = 1
 
 # Directory to save trajectory data
-save_dir = "./ARAS_results"
+modelname = "ARAS" if "ARAS" in MODEL_NAME else "DQN_baseline"
+save_dir = f"./{modelname}_results"
 os.makedirs(save_dir, exist_ok=True)
 
 """ Evaluation of trained DQN model on different seeds"""
@@ -152,11 +153,10 @@ for seed in range(seeds_total):
         episode_metrics_data_list.append(episode_metrics_data)
 
         # Uncomment for immediate feedback after each episode   
-        print("#"*90)
-        print("Episode: " + str(i_episode))
+        print("Episode: " + str(i_episode+1))
         print("Successed: " + str(s) + "\tFailures: " + str(f) + "\t\tSuccessRate: " + str(s/(i_episode + 1)))
-        print("Steps: " + str(steps) + "\tTotal Inputs: " + str(total_inputs) + "\tError Actions: " + str(err_actions) + "\tAmplified Actions: " + str(ampl_actions))
-        print("#"*90)
+        print("Steps: " + str(steps) + "\tTotal Inputs: " + str(total_inputs / 0.05) + "\tError Actions: " + str(err_actions) + "\tAmplified Actions: " + str(ampl_actions))
+        print("-"*50)
 
     # Save metrics data to file
     save_path = os.path.join(save_dir, f"metrics_data_{SCENARIO}.json")
@@ -199,8 +199,8 @@ for seed in range(seeds_total):
         "avg_amplified_actions": float(avg_amplified_actions),
         "timestamp": timestamp
     }
-    
-    save_path = os.path.join(save_dir, f"ARAS_summary_{SCENARIO}_{timestamp}.json")
+
+    save_path = os.path.join(save_dir, f"{modelname}_summary_{SCENARIO}_{timestamp}.json")
     with open(save_path, "w") as f:
         json.dump(final_metrics, f)
 

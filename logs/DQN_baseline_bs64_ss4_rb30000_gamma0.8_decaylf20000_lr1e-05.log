@@ -1,0 +1,1287 @@
+2025-04-28 17:04:38.127748 - Starting learning loop ...
+==================================================================
+2025-04-28 17:04:38.127789 - Using Framebuffer of: 4 frames	 and 	ReplayBufferSize: 30000
+2025-04-28 17:04:38.127801 - Loglevel is set to: a
+2025-04-28 17:04:38.127823 - Epoch #	0	Avg Cumulative Reward: 0.00	
+2025-04-28 17:04:42.910231 - Mean Reward at episode 0: -0.04
+2025-04-28 17:05:38.326460 - Epoch #	10	Avg Cumulative Reward: 0.20	60.20
+2025-04-28 17:06:44.257296 - Epoch #	20	Avg Cumulative Reward: -0.56	65.93
+2025-04-28 17:07:53.104452 - Epoch #	30	Avg Cumulative Reward: -0.43	68.85
+2025-04-28 17:09:04.534218 - Epoch #	40	Avg Cumulative Reward: -0.87	71.43
+2025-04-28 17:10:16.303866 - Epoch #	50	Avg Cumulative Reward: -0.81	71.77
+2025-04-28 17:11:30.057482 - Epoch #	60	Avg Cumulative Reward: -0.15	73.75
+2025-04-28 17:12:42.286678 - Epoch #	70	Avg Cumulative Reward: -0.46	72.23
+2025-04-28 17:14:00.374942 - Epoch #	80	Avg Cumulative Reward: -0.09	78.09
+2025-04-28 17:15:16.005177 - Epoch #	90	Avg Cumulative Reward: -0.33	75.63
+2025-04-28 17:16:24.068193 - Epoch #	100	Avg Cumulative Reward: -0.11	68.06
+2025-04-28 17:17:14.500169 - Time between reward step: #	756.3723909854889
+2025-04-28 17:17:14.500287 - Average Score: 0.189 Elapsed time: 0:12:36.955457
+2025-04-28 17:17:43.639450 - Epoch #	110	Avg Cumulative Reward: 0.49	79.57
+2025-04-28 17:17:51.498696 - Time between reward step: #	793.3709180355072
+2025-04-28 17:17:51.498812 - Average Score: 0.193 Elapsed time: 0:13:13.953981
+2025-04-28 17:17:57.504670 - Time between reward step: #	799.3768939971924
+2025-04-28 17:17:57.504786 - Average Score: 0.198 Elapsed time: 0:13:19.959957
+2025-04-28 17:18:53.894072 - Epoch #	120	Avg Cumulative Reward: -0.89	70.25
+2025-04-28 17:19:36.774458 - Time between reward step: #	898.6466789245605
+2025-04-28 17:19:36.774577 - Average Score: 0.199 Elapsed time: 0:14:59.229747
+2025-04-28 17:19:44.688712 - Time between reward step: #	906.5609350204468
+2025-04-28 17:19:44.688829 - Average Score: 0.209 Elapsed time: 0:15:07.143998
+2025-04-28 17:19:50.808815 - Time between reward step: #	912.6810390949249
+2025-04-28 17:19:50.808933 - Average Score: 0.224 Elapsed time: 0:15:13.264104
+2025-04-28 17:19:58.191796 - Time between reward step: #	920.0640180110931
+2025-04-28 17:19:58.191910 - Average Score: 0.234 Elapsed time: 0:15:20.647080
+2025-04-28 17:20:04.883238 - Time between reward step: #	926.7554590702057
+2025-04-28 17:20:04.883354 - Average Score: 0.244 Elapsed time: 0:15:27.338526
+2025-04-28 17:20:13.453552 - Epoch #	130	Avg Cumulative Reward: 0.71	79.56
+2025-04-28 17:20:23.235363 - Time between reward step: #	945.1075839996338
+2025-04-28 17:20:23.235479 - Average Score: 0.259 Elapsed time: 0:15:45.690649
+2025-04-28 17:20:53.828097 - Time between reward step: #	975.7003180980682
+2025-04-28 17:20:53.828215 - Average Score: 0.264 Elapsed time: 0:16:16.283386
+2025-04-28 17:21:02.523536 - Time between reward step: #	984.3957579135895
+2025-04-28 17:21:02.523657 - Average Score: 0.269 Elapsed time: 0:16:24.978826
+2025-04-28 17:21:08.544541 - Time between reward step: #	990.4167630672455
+2025-04-28 17:21:08.544657 - Average Score: 0.279 Elapsed time: 0:16:30.999828
+2025-04-28 17:21:16.311118 - Time between reward step: #	998.1833338737488
+2025-04-28 17:21:16.311245 - Average Score: 0.294 Elapsed time: 0:16:38.766414
+2025-04-28 17:21:32.063572 - Epoch #	140	Avg Cumulative Reward: 0.58	78.61
+2025-04-28 17:21:39.244301 - Time between reward step: #	1021.1165208816528
+2025-04-28 17:21:39.244421 - Average Score: 0.299 Elapsed time: 0:17:01.699591
+2025-04-28 17:22:22.265949 - Time between reward step: #	1064.1381690502167
+2025-04-28 17:22:22.266071 - Average Score: 0.309 Elapsed time: 0:17:44.721241
+2025-04-28 17:22:27.442133 - Time between reward step: #	1069.3143560886383
+2025-04-28 17:22:27.442249 - Average Score: 0.314 Elapsed time: 0:17:49.897419
+2025-04-28 17:22:36.735322 - Time between reward step: #	1078.6075429916382
+2025-04-28 17:22:36.735447 - Average Score: 0.329 Elapsed time: 0:17:59.190616
+2025-04-28 17:22:45.015034 - Epoch #	150	Avg Cumulative Reward: -0.53	72.95
+2025-04-28 17:23:50.989439 - Epoch #	160	Avg Cumulative Reward: -1.39	65.97
+2025-04-28 17:25:10.389684 - Epoch #	170	Avg Cumulative Reward: -0.59	79.40
+2025-04-28 17:26:26.767413 - Epoch #	180	Avg Cumulative Reward: 0.05	76.38
+2025-04-28 17:27:40.391241 - Epoch #	190	Avg Cumulative Reward: -0.31	73.62
+2025-04-28 17:28:53.399322 - Epoch #	200	Avg Cumulative Reward: 0.15	73.01
+2025-04-28 17:30:04.345669 - Epoch #	210	Avg Cumulative Reward: -0.74	70.95
+2025-04-28 17:31:23.740334 - Epoch #	220	Avg Cumulative Reward: -0.34	79.39
+2025-04-28 17:32:42.400116 - Epoch #	230	Avg Cumulative Reward: 0.35	78.66
+2025-04-28 17:34:04.000264 - Epoch #	240	Avg Cumulative Reward: 0.26	81.60
+2025-04-28 17:35:26.826535 - Epoch #	250	Avg Cumulative Reward: -0.64	82.83
+2025-04-28 17:36:49.249159 - Epoch #	260	Avg Cumulative Reward: 0.12	82.42
+2025-04-28 17:38:12.351634 - Epoch #	270	Avg Cumulative Reward: 0.35	83.10
+2025-04-28 17:39:25.130250 - Epoch #	280	Avg Cumulative Reward: 0.10	72.78
+2025-04-28 17:40:36.700651 - Epoch #	290	Avg Cumulative Reward: 0.05	71.57
+2025-04-28 17:41:45.508937 - Epoch #	300	Avg Cumulative Reward: 0.12	68.81
+2025-04-28 17:43:07.657608 - Epoch #	310	Avg Cumulative Reward: -0.10	82.15
+2025-04-28 17:44:26.679826 - Epoch #	320	Avg Cumulative Reward: -0.36	79.02
+2025-04-28 17:45:46.872781 - Epoch #	330	Avg Cumulative Reward: -0.22	80.19
+2025-04-28 17:47:04.830442 - Epoch #	340	Avg Cumulative Reward: -0.56	77.96
+2025-04-28 17:48:21.505145 - Epoch #	350	Avg Cumulative Reward: 0.46	76.67
+2025-04-28 17:49:43.400286 - Epoch #	360	Avg Cumulative Reward: -0.34	81.90
+2025-04-28 17:51:00.025693 - Epoch #	370	Avg Cumulative Reward: 0.09	76.63
+2025-04-28 17:52:15.933587 - Epoch #	380	Avg Cumulative Reward: -0.71	75.91
+2025-04-28 17:53:31.524699 - Epoch #	390	Avg Cumulative Reward: -0.58	75.59
+2025-04-28 17:54:50.289766 - Epoch #	400	Avg Cumulative Reward: -0.89	78.77
+2025-04-28 17:55:27.373337 - Time between reward step: #	3049.245558977127
+2025-04-28 17:55:27.373458 - Average Score: 0.332 Elapsed time: 0:50:49.828627
+2025-04-28 17:55:35.288630 - Time between reward step: #	3057.160851955414
+2025-04-28 17:55:35.288748 - Average Score: 0.347 Elapsed time: 0:50:57.743917
+2025-04-28 17:55:45.596088 - Time between reward step: #	3067.4683089256287
+2025-04-28 17:55:45.596204 - Average Score: 0.362 Elapsed time: 0:51:08.051373
+2025-04-28 17:56:08.877086 - Epoch #	410	Avg Cumulative Reward: 0.93	78.59
+2025-04-28 17:56:22.456195 - Time between reward step: #	3104.3284130096436
+2025-04-28 17:56:22.456322 - Average Score: 0.367 Elapsed time: 0:51:44.911489
+2025-04-28 17:56:45.249668 - Time between reward step: #	3127.1218888759613
+2025-04-28 17:56:45.249792 - Average Score: 0.378 Elapsed time: 0:52:07.704959
+2025-04-28 17:57:12.825972 - Time between reward step: #	3154.6981930732727
+2025-04-28 17:57:12.826095 - Average Score: 0.393 Elapsed time: 0:52:35.281264
+2025-04-28 17:57:17.744873 - Time between reward step: #	3159.6170930862427
+2025-04-28 17:57:17.745019 - Average Score: 0.393 Elapsed time: 0:52:40.200187
+2025-04-28 17:57:25.366649 - Time between reward step: #	3167.238872051239
+2025-04-28 17:57:25.366765 - Average Score: 0.403 Elapsed time: 0:52:47.821935
+2025-04-28 17:57:25.366862 - Epoch #	420	Avg Cumulative Reward: 0.17	76.49
+2025-04-28 17:57:31.288880 - Time between reward step: #	3173.161101102829
+2025-04-28 17:57:31.289020 - Average Score: 0.417 Elapsed time: 0:52:53.744189
+2025-04-28 17:57:39.120332 - Time between reward step: #	3180.992553949356
+2025-04-28 17:57:39.120457 - Average Score: 0.427 Elapsed time: 0:53:01.575625
+2025-04-28 17:57:45.285650 - Time between reward step: #	3187.157872915268
+2025-04-28 17:57:45.285774 - Average Score: 0.437 Elapsed time: 0:53:07.740938
+2025-04-28 17:57:54.808170 - Time between reward step: #	3196.680391073227
+2025-04-28 17:57:54.808289 - Average Score: 0.437 Elapsed time: 0:53:17.263457
+2025-04-28 17:58:03.378330 - Time between reward step: #	3205.2505509853363
+2025-04-28 17:58:03.378444 - Average Score: 0.447 Elapsed time: 0:53:25.833613
+2025-04-28 17:58:20.081779 - Time between reward step: #	3221.954001903534
+2025-04-28 17:58:20.081913 - Average Score: 0.457 Elapsed time: 0:53:42.537081
+2025-04-28 17:58:30.199313 - Time between reward step: #	3232.071536064148
+2025-04-28 17:58:30.199428 - Average Score: 0.472 Elapsed time: 0:53:52.654598
+2025-04-28 17:58:41.034815 - Time between reward step: #	3242.9070360660553
+2025-04-28 17:58:41.034936 - Average Score: 0.487 Elapsed time: 0:54:03.490105
+2025-04-28 17:58:46.933370 - Epoch #	430	Avg Cumulative Reward: 1.16	81.57
+2025-04-28 17:59:28.904642 - Time between reward step: #	3290.7768630981445
+2025-04-28 17:59:28.904760 - Average Score: 0.488 Elapsed time: 0:54:51.359930
+2025-04-28 18:00:10.917266 - Epoch #	440	Avg Cumulative Reward: 0.10	83.98
+2025-04-28 18:01:25.832420 - Epoch #	450	Avg Cumulative Reward: -0.53	74.92
+2025-04-28 18:02:33.562791 - Time between reward step: #	3475.43501496315
+2025-04-28 18:02:33.562909 - Average Score: 0.488 Elapsed time: 0:57:56.018079
+2025-04-28 18:02:40.552713 - Epoch #	460	Avg Cumulative Reward: 0.07	74.72
+2025-04-28 18:03:34.173661 - Time between reward step: #	3536.045881986618
+2025-04-28 18:03:34.173786 - Average Score: 0.493 Elapsed time: 0:58:56.628954
+2025-04-28 18:04:06.226180 - Epoch #	470	Avg Cumulative Reward: -0.06	85.67
+2025-04-28 18:05:25.009614 - Epoch #	480	Avg Cumulative Reward: 0.63	78.78
+2025-04-28 18:05:33.844185 - Time between reward step: #	3655.7164039611816
+2025-04-28 18:05:33.844305 - Average Score: 0.503 Elapsed time: 1:00:56.299474
+2025-04-28 18:05:41.771921 - Time between reward step: #	3663.6441419124603
+2025-04-28 18:05:41.772039 - Average Score: 0.503 Elapsed time: 1:01:04.227209
+2025-04-28 18:06:11.131053 - Time between reward step: #	3693.0032749176025
+2025-04-28 18:06:11.131170 - Average Score: 0.513 Elapsed time: 1:01:33.586339
+2025-04-28 18:06:27.614445 - Time between reward step: #	3709.4866659641266
+2025-04-28 18:06:27.614563 - Average Score: 0.513 Elapsed time: 1:01:50.069732
+2025-04-28 18:06:45.729554 - Epoch #	490	Avg Cumulative Reward: 0.00	80.72
+2025-04-28 18:08:07.936414 - Epoch #	500	Avg Cumulative Reward: 0.10	82.21
+2025-04-28 18:09:26.486841 - Epoch #	510	Avg Cumulative Reward: 0.96	78.55
+2025-04-28 18:09:51.846015 - Time between reward step: #	3913.7182359695435
+2025-04-28 18:09:51.846140 - Average Score: 0.514 Elapsed time: 1:05:14.301308
+2025-04-28 18:10:45.698692 - Epoch #	520	Avg Cumulative Reward: 1.01	79.21
+2025-04-28 18:12:02.493544 - Epoch #	530	Avg Cumulative Reward: 0.97	76.79
+2025-04-28 18:13:29.394518 - Epoch #	540	Avg Cumulative Reward: 0.60	86.90
+2025-04-28 18:14:48.270573 - Time between reward step: #	4210.142793893814
+2025-04-28 18:14:48.270697 - Average Score: 0.518 Elapsed time: 1:10:10.725865
+2025-04-28 18:14:48.270819 - Epoch #	550	Avg Cumulative Reward: 0.86	78.88
+2025-04-28 18:15:29.018016 - Time between reward step: #	4250.890237092972
+2025-04-28 18:15:29.018133 - Average Score: 0.518 Elapsed time: 1:10:51.473302
+2025-04-28 18:15:38.350477 - Time between reward step: #	4260.222697973251
+2025-04-28 18:15:38.350613 - Average Score: 0.533 Elapsed time: 1:11:00.805781
+2025-04-28 18:16:02.256293 - Time between reward step: #	4284.128513097763
+2025-04-28 18:16:02.256419 - Average Score: 0.543 Elapsed time: 1:11:24.711588
+2025-04-28 18:16:10.397209 - Epoch #	560	Avg Cumulative Reward: 0.67	82.13
+2025-04-28 18:16:19.227696 - Time between reward step: #	4301.099916934967
+2025-04-28 18:16:19.227812 - Average Score: 0.553 Elapsed time: 1:11:41.682981
+2025-04-28 18:17:20.290601 - Time between reward step: #	4362.162822961807
+2025-04-28 18:17:20.290721 - Average Score: 0.553 Elapsed time: 1:12:42.745890
+2025-04-28 18:17:27.740461 - Time between reward step: #	4369.612684011459
+2025-04-28 18:17:27.740576 - Average Score: 0.563 Elapsed time: 1:12:50.195746
+2025-04-28 18:17:27.740672 - Epoch #	570	Avg Cumulative Reward: 0.76	77.34
+2025-04-28 18:17:35.312485 - Time between reward step: #	4377.1847059726715
+2025-04-28 18:17:35.312603 - Average Score: 0.578 Elapsed time: 1:12:57.767773
+2025-04-28 18:17:42.306315 - Time between reward step: #	4384.178536891937
+2025-04-28 18:17:42.306450 - Average Score: 0.593 Elapsed time: 1:13:04.761619
+2025-04-28 18:18:00.418886 - Time between reward step: #	4402.29110789299
+2025-04-28 18:18:00.419006 - Average Score: 0.603 Elapsed time: 1:13:22.874175
+2025-04-28 18:18:35.162887 - Epoch #	580	Avg Cumulative Reward: 1.15	67.42
+2025-04-28 18:19:53.957041 - Epoch #	590	Avg Cumulative Reward: -0.08	78.79
+2025-04-28 18:20:02.231021 - Time between reward step: #	4524.103241920471
+2025-04-28 18:20:02.231139 - Average Score: 0.608 Elapsed time: 1:15:24.686308
+2025-04-28 18:20:13.512602 - Time between reward step: #	4535.384823083878
+2025-04-28 18:20:13.512718 - Average Score: 0.608 Elapsed time: 1:15:35.967889
+2025-04-28 18:20:29.213461 - Time between reward step: #	4551.085680961609
+2025-04-28 18:20:29.213583 - Average Score: 0.623 Elapsed time: 1:15:51.668752
+2025-04-28 18:21:15.083251 - Time between reward step: #	4596.955471038818
+2025-04-28 18:21:15.083377 - Average Score: 0.627 Elapsed time: 1:16:37.538547
+2025-04-28 18:21:15.083491 - Epoch #	600	Avg Cumulative Reward: 0.82	81.13
+2025-04-28 18:22:29.137631 - Epoch #	610	Avg Cumulative Reward: 0.55	74.05
+2025-04-28 18:23:59.378919 - Epoch #	620	Avg Cumulative Reward: -0.76	90.24
+2025-04-28 18:25:17.808115 - Epoch #	630	Avg Cumulative Reward: 0.12	78.43
+2025-04-28 18:26:32.824764 - Epoch #	640	Avg Cumulative Reward: 0.68	75.02
+2025-04-28 18:27:54.216375 - Epoch #	650	Avg Cumulative Reward: 0.09	81.39
+2025-04-28 18:29:17.559665 - Epoch #	660	Avg Cumulative Reward: -0.35	83.34
+2025-04-28 18:30:40.674374 - Epoch #	670	Avg Cumulative Reward: 0.93	83.11
+2025-04-28 18:31:55.047410 - Epoch #	680	Avg Cumulative Reward: 1.31	74.37
+2025-04-28 18:33:17.855325 - Epoch #	690	Avg Cumulative Reward: 0.03	82.81
+2025-04-28 18:34:39.092224 - Epoch #	700	Avg Cumulative Reward: -0.30	81.24
+2025-04-28 18:35:58.853170 - Epoch #	710	Avg Cumulative Reward: -0.55	79.76
+2025-04-28 18:37:20.627788 - Epoch #	720	Avg Cumulative Reward: -0.34	81.77
+2025-04-28 18:38:39.221702 - Epoch #	730	Avg Cumulative Reward: 0.89	78.59
+2025-04-28 18:40:02.252762 - Epoch #	740	Avg Cumulative Reward: 0.31	83.03
+2025-04-28 18:41:18.080966 - Epoch #	750	Avg Cumulative Reward: 0.76	75.83
+2025-04-28 18:42:41.338177 - Epoch #	760	Avg Cumulative Reward: 0.59	83.26
+2025-04-28 18:43:59.801760 - Epoch #	770	Avg Cumulative Reward: -0.68	78.46
+2025-04-28 18:45:18.998412 - Epoch #	780	Avg Cumulative Reward: -0.27	79.20
+2025-04-28 18:46:44.620680 - Epoch #	790	Avg Cumulative Reward: 0.05	85.62
+2025-04-28 18:48:07.703258 - Epoch #	800	Avg Cumulative Reward: 0.38	83.08
+2025-04-28 18:49:23.747835 - Epoch #	810	Avg Cumulative Reward: 0.10	76.04
+2025-04-28 18:50:41.581754 - Epoch #	820	Avg Cumulative Reward: 1.12	77.83
+2025-04-28 18:52:03.314156 - Epoch #	830	Avg Cumulative Reward: 1.02	81.73
+2025-04-28 18:53:26.280096 - Epoch #	840	Avg Cumulative Reward: 1.25	82.97
+2025-04-28 18:54:38.333304 - Epoch #	850	Avg Cumulative Reward: 1.24	72.05
+2025-04-28 18:56:03.356118 - Epoch #	860	Avg Cumulative Reward: 0.44	85.02
+2025-04-28 18:57:27.850173 - Epoch #	870	Avg Cumulative Reward: 0.96	84.49
+2025-04-28 18:57:50.725553 - Time between reward step: #	6792.597774028778
+2025-04-28 18:57:50.725675 - Average Score: 0.630 Elapsed time: 1:53:13.180844
+2025-04-28 18:58:29.953061 - Time between reward step: #	6831.825282096863
+2025-04-28 18:58:29.953184 - Average Score: 0.645 Elapsed time: 1:53:52.408352
+2025-04-28 18:58:43.148554 - Epoch #	880	Avg Cumulative Reward: 0.61	75.30
+2025-04-28 19:00:04.280936 - Epoch #	890	Avg Cumulative Reward: 0.54	81.13
+2025-04-28 19:01:24.221952 - Epoch #	900	Avg Cumulative Reward: 0.38	79.94
+2025-04-28 19:01:57.817554 - Time between reward step: #	7039.6897740364075
+2025-04-28 19:01:57.817680 - Average Score: 0.645 Elapsed time: 1:57:20.272849
+2025-04-28 19:02:40.377007 - Time between reward step: #	7082.2492299079895
+2025-04-28 19:02:40.377130 - Average Score: 0.660 Elapsed time: 1:58:02.832298
+2025-04-28 19:02:48.533325 - Epoch #	910	Avg Cumulative Reward: 0.40	84.31
+2025-04-28 19:02:58.478233 - Time between reward step: #	7100.350454092026
+2025-04-28 19:02:58.478371 - Average Score: 0.670 Elapsed time: 1:58:20.933540
+2025-04-28 19:04:07.291041 - Epoch #	920	Avg Cumulative Reward: -0.54	78.76
+2025-04-28 19:05:20.350474 - Epoch #	930	Avg Cumulative Reward: 0.68	73.06
+2025-04-28 19:06:41.414152 - Epoch #	940	Avg Cumulative Reward: 1.30	81.06
+2025-04-28 19:08:01.801544 - Epoch #	950	Avg Cumulative Reward: 0.08	80.39
+2025-04-28 19:09:22.175477 - Epoch #	960	Avg Cumulative Reward: 0.01	80.37
+2025-04-28 19:10:38.105453 - Epoch #	970	Avg Cumulative Reward: -0.43	75.93
+2025-04-28 19:11:58.300035 - Epoch #	980	Avg Cumulative Reward: -0.00	80.19
+2025-04-28 19:13:23.576991 - Epoch #	990	Avg Cumulative Reward: 0.93	85.28
+2025-04-28 19:14:40.532496 - Epoch #	1000	Avg Cumulative Reward: 0.54	76.96
+2025-04-28 19:14:47.554428 - Mean Reward at episode 1000: 0.5173
+2025-04-28 19:16:00.764218 - Epoch #	1010	Avg Cumulative Reward: -0.27	80.23
+2025-04-28 19:17:20.176911 - Epoch #	1020	Avg Cumulative Reward: -0.09	79.41
+2025-04-28 19:18:35.736613 - Epoch #	1030	Avg Cumulative Reward: 0.18	75.56
+2025-04-28 19:19:49.947135 - Epoch #	1040	Avg Cumulative Reward: -1.25	74.21
+2025-04-28 19:21:09.286884 - Epoch #	1050	Avg Cumulative Reward: -0.05	79.34
+2025-04-28 19:22:24.250194 - Epoch #	1060	Avg Cumulative Reward: 0.29	74.96
+2025-04-28 19:23:36.986101 - Epoch #	1070	Avg Cumulative Reward: 0.15	72.74
+2025-04-28 19:24:57.437711 - Epoch #	1080	Avg Cumulative Reward: -0.18	80.45
+2025-04-28 19:26:16.576107 - Epoch #	1090	Avg Cumulative Reward: 0.66	79.14
+2025-04-28 19:27:32.524177 - Epoch #	1100	Avg Cumulative Reward: 0.47	75.95
+2025-04-28 19:28:50.195667 - Epoch #	1110	Avg Cumulative Reward: 0.12	77.67
+2025-04-28 19:30:12.119132 - Epoch #	1120	Avg Cumulative Reward: -0.06	81.92
+2025-04-28 19:31:32.046689 - Epoch #	1130	Avg Cumulative Reward: 0.80	79.93
+2025-04-28 19:32:48.210016 - Epoch #	1140	Avg Cumulative Reward: -1.60	76.16
+2025-04-28 19:33:59.471372 - Epoch #	1150	Avg Cumulative Reward: 0.48	71.26
+2025-04-28 19:35:18.469288 - Epoch #	1160	Avg Cumulative Reward: 0.36	79.00
+2025-04-28 19:36:39.739275 - Epoch #	1170	Avg Cumulative Reward: 0.10	81.27
+2025-04-28 19:38:02.459935 - Epoch #	1180	Avg Cumulative Reward: 0.12	82.72
+2025-04-28 19:39:19.366524 - Epoch #	1190	Avg Cumulative Reward: -1.41	76.91
+2025-04-28 19:40:43.347470 - Epoch #	1200	Avg Cumulative Reward: 1.08	83.98
+2025-04-28 19:42:01.632562 - Epoch #	1210	Avg Cumulative Reward: 0.57	78.29
+2025-04-28 19:43:20.786046 - Epoch #	1220	Avg Cumulative Reward: 0.26	79.15
+2025-04-28 19:44:36.018677 - Epoch #	1230	Avg Cumulative Reward: -0.62	75.23
+2025-04-28 19:46:00.721795 - Epoch #	1240	Avg Cumulative Reward: 0.43	84.70
+2025-04-28 19:47:12.973256 - Epoch #	1250	Avg Cumulative Reward: 0.19	72.25
+2025-04-28 19:48:37.085174 - Epoch #	1260	Avg Cumulative Reward: 1.06	84.11
+2025-04-28 19:49:54.627850 - Epoch #	1270	Avg Cumulative Reward: 0.51	77.54
+2025-04-28 19:51:14.842790 - Epoch #	1280	Avg Cumulative Reward: 1.06	80.21
+2025-04-28 19:52:23.141529 - Epoch #	1290	Avg Cumulative Reward: -1.15	68.30
+2025-04-28 19:53:48.168792 - Epoch #	1300	Avg Cumulative Reward: -0.34	85.03
+2025-04-28 19:55:04.136462 - Epoch #	1310	Avg Cumulative Reward: -1.40	75.97
+2025-04-28 19:56:13.910775 - Epoch #	1320	Avg Cumulative Reward: -0.33	69.77
+2025-04-28 19:57:27.481309 - Epoch #	1330	Avg Cumulative Reward: 0.69	73.57
+2025-04-28 19:58:43.464499 - Epoch #	1340	Avg Cumulative Reward: 0.46	75.98
+2025-04-28 20:00:05.020055 - Epoch #	1350	Avg Cumulative Reward: 0.27	81.56
+2025-04-28 20:01:20.824687 - Epoch #	1360	Avg Cumulative Reward: 0.12	75.80
+2025-04-28 20:02:36.062575 - Epoch #	1370	Avg Cumulative Reward: -0.96	75.24
+2025-04-28 20:03:56.914634 - Epoch #	1380	Avg Cumulative Reward: -0.12	80.85
+2025-04-28 20:05:14.209152 - Epoch #	1390	Avg Cumulative Reward: -0.09	77.29
+2025-04-28 20:06:34.824246 - Epoch #	1400	Avg Cumulative Reward: 0.85	80.62
+2025-04-28 20:07:54.003534 - Epoch #	1410	Avg Cumulative Reward: -0.05	79.18
+2025-04-28 20:09:06.989348 - Epoch #	1420	Avg Cumulative Reward: 1.52	72.99
+2025-04-28 20:10:20.945539 - Epoch #	1430	Avg Cumulative Reward: -0.11	73.96
+2025-04-28 20:11:33.403721 - Epoch #	1440	Avg Cumulative Reward: 1.31	72.46
+2025-04-28 20:12:55.868123 - Epoch #	1450	Avg Cumulative Reward: 0.48	82.46
+2025-04-28 20:14:07.306888 - Epoch #	1460	Avg Cumulative Reward: 0.05	71.44
+2025-04-28 20:15:28.536856 - Epoch #	1470	Avg Cumulative Reward: 0.77	81.23
+2025-04-28 20:16:40.540636 - Epoch #	1480	Avg Cumulative Reward: 1.31	72.00
+2025-04-28 20:17:57.991362 - Epoch #	1490	Avg Cumulative Reward: 1.09	77.45
+2025-04-28 20:19:19.219551 - Epoch #	1500	Avg Cumulative Reward: 0.99	81.23
+2025-04-28 20:20:44.919934 - Epoch #	1510	Avg Cumulative Reward: 1.03	85.70
+2025-04-28 20:21:58.996905 - Epoch #	1520	Avg Cumulative Reward: -0.58	74.08
+2025-04-28 20:23:16.960418 - Epoch #	1530	Avg Cumulative Reward: 0.42	77.96
+2025-04-28 20:24:28.989930 - Epoch #	1540	Avg Cumulative Reward: -0.42	72.03
+2025-04-28 20:25:52.283611 - Epoch #	1550	Avg Cumulative Reward: -0.19	83.29
+2025-04-28 20:27:08.110692 - Epoch #	1560	Avg Cumulative Reward: 0.29	75.83
+2025-04-28 20:28:21.487443 - Epoch #	1570	Avg Cumulative Reward: 0.32	73.38
+2025-04-28 20:29:45.773545 - Epoch #	1580	Avg Cumulative Reward: -0.50	84.29
+2025-04-28 20:30:58.843574 - Epoch #	1590	Avg Cumulative Reward: 0.42	73.07
+2025-04-28 20:32:13.930317 - Epoch #	1600	Avg Cumulative Reward: 1.24	75.09
+2025-04-28 20:33:30.670053 - Epoch #	1610	Avg Cumulative Reward: 0.41	76.74
+2025-04-28 20:34:42.083234 - Epoch #	1620	Avg Cumulative Reward: 0.65	71.41
+2025-04-28 20:36:04.785630 - Epoch #	1630	Avg Cumulative Reward: 0.40	82.70
+2025-04-28 20:37:24.148355 - Epoch #	1640	Avg Cumulative Reward: 0.96	79.36
+2025-04-28 20:38:42.498600 - Epoch #	1650	Avg Cumulative Reward: 1.35	78.35
+2025-04-28 20:40:00.909600 - Epoch #	1660	Avg Cumulative Reward: 0.87	78.41
+2025-04-28 20:41:20.269094 - Epoch #	1670	Avg Cumulative Reward: 0.54	79.36
+2025-04-28 20:42:42.724924 - Epoch #	1680	Avg Cumulative Reward: 0.52	82.46
+2025-04-28 20:44:01.193141 - Epoch #	1690	Avg Cumulative Reward: 1.08	78.47
+2025-04-28 20:45:22.636871 - Epoch #	1700	Avg Cumulative Reward: 0.76	81.44
+2025-04-28 20:46:39.188206 - Epoch #	1710	Avg Cumulative Reward: 0.92	76.55
+2025-04-28 20:47:50.961848 - Epoch #	1720	Avg Cumulative Reward: 0.94	71.77
+2025-04-28 20:49:02.766430 - Epoch #	1730	Avg Cumulative Reward: 1.06	71.80
+2025-04-28 20:50:29.060721 - Epoch #	1740	Avg Cumulative Reward: 0.57	86.29
+2025-04-28 20:51:55.404129 - Epoch #	1750	Avg Cumulative Reward: 1.51	86.34
+2025-04-28 20:53:13.106571 - Epoch #	1760	Avg Cumulative Reward: 0.13	77.70
+2025-04-28 20:54:32.333812 - Epoch #	1770	Avg Cumulative Reward: 0.59	79.23
+2025-04-28 20:55:50.174133 - Epoch #	1780	Avg Cumulative Reward: 1.01	77.84
+2025-04-28 20:57:01.333952 - Epoch #	1790	Avg Cumulative Reward: 0.77	71.16
+2025-04-28 20:58:23.715237 - Epoch #	1800	Avg Cumulative Reward: 0.87	82.38
+2025-04-28 20:59:47.155286 - Epoch #	1810	Avg Cumulative Reward: -0.97	83.44
+2025-04-28 21:01:12.732863 - Epoch #	1820	Avg Cumulative Reward: 0.59	85.58
+2025-04-28 21:02:36.899824 - Epoch #	1830	Avg Cumulative Reward: 0.29	84.17
+2025-04-28 21:03:50.183489 - Epoch #	1840	Avg Cumulative Reward: 0.88	73.28
+2025-04-28 21:05:06.953950 - Epoch #	1850	Avg Cumulative Reward: -0.21	76.77
+2025-04-28 21:06:23.811256 - Epoch #	1860	Avg Cumulative Reward: -0.12	76.86
+2025-04-28 21:07:40.031309 - Epoch #	1870	Avg Cumulative Reward: 1.04	76.22
+2025-04-28 21:08:59.435204 - Epoch #	1880	Avg Cumulative Reward: 1.02	79.40
+2025-04-28 21:10:08.212142 - Epoch #	1890	Avg Cumulative Reward: 1.52	68.78
+2025-04-28 21:11:27.319064 - Epoch #	1900	Avg Cumulative Reward: 0.25	79.11
+2025-04-28 21:12:39.483019 - Epoch #	1910	Avg Cumulative Reward: -0.20	72.16
+2025-04-28 21:13:53.508518 - Epoch #	1920	Avg Cumulative Reward: 0.62	74.03
+2025-04-28 21:15:07.381189 - Epoch #	1930	Avg Cumulative Reward: 0.71	73.87
+2025-04-28 21:16:25.817931 - Epoch #	1940	Avg Cumulative Reward: 0.35	78.44
+2025-04-28 21:17:47.492923 - Epoch #	1950	Avg Cumulative Reward: -0.11	81.67
+2025-04-28 21:19:11.150396 - Epoch #	1960	Avg Cumulative Reward: 1.20	83.66
+2025-04-28 21:20:24.653417 - Epoch #	1970	Avg Cumulative Reward: 1.16	73.50
+2025-04-28 21:21:42.847869 - Epoch #	1980	Avg Cumulative Reward: 0.45	78.19
+2025-04-28 21:23:04.036822 - Epoch #	1990	Avg Cumulative Reward: -0.25	81.19
+2025-04-28 21:24:24.684174 - Epoch #	2000	Avg Cumulative Reward: 0.74	80.65
+2025-04-28 21:24:34.062586 - Mean Reward at episode 2000: 0.5871
+2025-04-28 21:25:40.515679 - Epoch #	2010	Avg Cumulative Reward: 0.54	75.83
+2025-04-28 21:26:58.068134 - Epoch #	2020	Avg Cumulative Reward: -0.01	77.55
+2025-04-28 21:28:11.262929 - Epoch #	2030	Avg Cumulative Reward: 0.87	73.19
+2025-04-28 21:29:31.490047 - Epoch #	2040	Avg Cumulative Reward: 0.95	80.23
+2025-04-28 21:30:40.290686 - Epoch #	2050	Avg Cumulative Reward: 0.60	68.80
+2025-04-28 21:31:58.191610 - Epoch #	2060	Avg Cumulative Reward: 0.05	77.90
+2025-04-28 21:33:13.030897 - Epoch #	2070	Avg Cumulative Reward: 1.15	74.84
+2025-04-28 21:34:34.419813 - Epoch #	2080	Avg Cumulative Reward: 0.88	81.39
+2025-04-28 21:35:57.370758 - Epoch #	2090	Avg Cumulative Reward: 1.05	82.95
+2025-04-28 21:37:13.984394 - Epoch #	2100	Avg Cumulative Reward: -0.26	76.61
+2025-04-28 21:38:28.819038 - Epoch #	2110	Avg Cumulative Reward: -0.59	74.83
+2025-04-28 21:39:46.322153 - Epoch #	2120	Avg Cumulative Reward: 0.69	77.50
+2025-04-28 21:41:03.790755 - Epoch #	2130	Avg Cumulative Reward: 0.60	77.47
+2025-04-28 21:42:11.548793 - Epoch #	2140	Avg Cumulative Reward: 0.22	67.76
+2025-04-28 21:43:31.257911 - Epoch #	2150	Avg Cumulative Reward: 0.31	79.71
+2025-04-28 21:44:56.951622 - Epoch #	2160	Avg Cumulative Reward: 0.58	85.69
+2025-04-28 21:46:11.896316 - Epoch #	2170	Avg Cumulative Reward: 1.32	74.94
+2025-04-28 21:47:22.596516 - Epoch #	2180	Avg Cumulative Reward: 0.02	70.70
+2025-04-28 21:48:48.485267 - Epoch #	2190	Avg Cumulative Reward: 1.21	85.89
+2025-04-28 21:49:40.211076 - Time between reward step: #	17102.083293914795
+2025-04-28 21:49:40.211197 - Average Score: 0.678 Elapsed time: 4:45:02.666366
+2025-04-28 21:50:04.789551 - Epoch #	2200	Avg Cumulative Reward: 0.35	76.30
+2025-04-28 21:50:37.449418 - Time between reward step: #	17159.321639060974
+2025-04-28 21:50:37.449542 - Average Score: 0.684 Elapsed time: 4:45:59.904710
+2025-04-28 21:50:54.469952 - Time between reward step: #	17176.342171907425
+2025-04-28 21:50:54.470073 - Average Score: 0.694 Elapsed time: 4:46:16.925241
+2025-04-28 21:51:08.344207 - Time between reward step: #	17190.216428041458
+2025-04-28 21:51:08.344332 - Average Score: 0.704 Elapsed time: 4:46:30.799501
+2025-04-28 21:51:15.060237 - Time between reward step: #	17196.932456970215
+2025-04-28 21:51:15.060355 - Average Score: 0.708 Elapsed time: 4:46:37.515524
+2025-04-28 21:51:26.022975 - Epoch #	2210	Avg Cumulative Reward: 1.40	81.23
+2025-04-28 21:51:45.103029 - Time between reward step: #	17226.975250959396
+2025-04-28 21:51:45.103158 - Average Score: 0.708 Elapsed time: 4:47:07.558322
+2025-04-28 21:52:01.597323 - Time between reward step: #	17243.469542980194
+2025-04-28 21:52:01.597443 - Average Score: 0.723 Elapsed time: 4:47:24.052612
+2025-04-28 21:52:48.872885 - Epoch #	2220	Avg Cumulative Reward: 1.09	82.85
+2025-04-28 21:54:06.460796 - Epoch #	2230	Avg Cumulative Reward: 0.38	77.59
+2025-04-28 21:55:26.826098 - Time between reward step: #	17448.698318958282
+2025-04-28 21:55:26.826217 - Average Score: 0.729 Elapsed time: 4:50:49.281387
+2025-04-28 21:55:26.826324 - Epoch #	2240	Avg Cumulative Reward: 1.35	80.37
+2025-04-28 21:55:48.680052 - Time between reward step: #	17470.55227303505
+2025-04-28 21:55:48.680173 - Average Score: 0.733 Elapsed time: 4:51:11.135342
+2025-04-28 21:55:57.248858 - Time between reward step: #	17479.121078968048
+2025-04-28 21:55:57.248996 - Average Score: 0.748 Elapsed time: 4:51:19.704164
+2025-04-28 21:56:03.937443 - Time between reward step: #	17485.809664964676
+2025-04-28 21:56:03.937561 - Average Score: 0.748 Elapsed time: 4:51:26.392732
+2025-04-28 21:56:38.279792 - Epoch #	2250	Avg Cumulative Reward: 0.41	71.45
+2025-04-28 21:57:50.884016 - Epoch #	2260	Avg Cumulative Reward: -0.85	72.60
+2025-04-28 21:59:03.415191 - Epoch #	2270	Avg Cumulative Reward: 0.31	72.53
+2025-04-28 22:00:21.575370 - Epoch #	2280	Avg Cumulative Reward: 0.65	78.16
+2025-04-28 22:01:40.335236 - Epoch #	2290	Avg Cumulative Reward: -0.35	78.76
+2025-04-28 22:02:57.776084 - Epoch #	2300	Avg Cumulative Reward: -0.40	77.44
+2025-04-28 22:04:17.461240 - Epoch #	2310	Avg Cumulative Reward: -0.07	79.69
+2025-04-28 22:05:36.652984 - Epoch #	2320	Avg Cumulative Reward: 0.03	79.19
+2025-04-28 22:06:56.608265 - Epoch #	2330	Avg Cumulative Reward: 0.72	79.96
+2025-04-28 22:08:20.081741 - Epoch #	2340	Avg Cumulative Reward: 0.56	83.47
+2025-04-28 22:09:44.906208 - Epoch #	2350	Avg Cumulative Reward: 1.00	84.82
+2025-04-28 22:11:02.453479 - Epoch #	2360	Avg Cumulative Reward: 1.26	77.55
+2025-04-28 22:12:22.472893 - Epoch #	2370	Avg Cumulative Reward: 1.02	80.02
+2025-04-28 22:13:41.493017 - Epoch #	2380	Avg Cumulative Reward: 1.23	79.02
+2025-04-28 22:14:59.700094 - Epoch #	2390	Avg Cumulative Reward: 0.60	78.21
+2025-04-28 22:16:24.825941 - Epoch #	2400	Avg Cumulative Reward: 1.44	85.13
+2025-04-28 22:17:30.156628 - Epoch #	2410	Avg Cumulative Reward: 0.49	65.33
+2025-04-28 22:18:49.486874 - Epoch #	2420	Avg Cumulative Reward: 0.95	79.33
+2025-04-28 22:20:08.133544 - Epoch #	2430	Avg Cumulative Reward: 1.26	78.65
+2025-04-28 22:21:22.394365 - Epoch #	2440	Avg Cumulative Reward: 1.09	74.26
+2025-04-28 22:22:34.692959 - Epoch #	2450	Avg Cumulative Reward: -0.64	72.30
+2025-04-28 22:23:54.036456 - Epoch #	2460	Avg Cumulative Reward: -0.74	79.34
+2025-04-28 22:25:10.849988 - Epoch #	2470	Avg Cumulative Reward: 0.29	76.81
+2025-04-28 22:26:38.842167 - Epoch #	2480	Avg Cumulative Reward: 1.22	87.99
+2025-04-28 22:27:41.776472 - Epoch #	2490	Avg Cumulative Reward: 1.21	62.93
+2025-04-28 22:28:56.338876 - Epoch #	2500	Avg Cumulative Reward: 1.63	74.56
+2025-04-28 22:30:16.971429 - Epoch #	2510	Avg Cumulative Reward: 0.18	80.63
+2025-04-28 22:31:36.551480 - Epoch #	2520	Avg Cumulative Reward: 0.95	79.58
+2025-04-28 22:32:53.583617 - Epoch #	2530	Avg Cumulative Reward: 1.40	77.03
+2025-04-28 22:34:06.227029 - Epoch #	2540	Avg Cumulative Reward: 1.32	72.64
+2025-04-28 22:35:30.256855 - Epoch #	2550	Avg Cumulative Reward: 0.73	84.03
+2025-04-28 22:36:44.771975 - Epoch #	2560	Avg Cumulative Reward: 1.00	74.52
+2025-04-28 22:38:01.487887 - Epoch #	2570	Avg Cumulative Reward: 0.23	76.72
+2025-04-28 22:39:13.726220 - Epoch #	2580	Avg Cumulative Reward: -0.09	72.24
+2025-04-28 22:40:23.395449 - Epoch #	2590	Avg Cumulative Reward: -0.44	69.67
+2025-04-28 22:41:38.808499 - Epoch #	2600	Avg Cumulative Reward: -0.39	75.41
+2025-04-28 22:42:57.326013 - Epoch #	2610	Avg Cumulative Reward: 0.26	78.52
+2025-04-28 22:44:19.820647 - Epoch #	2620	Avg Cumulative Reward: 1.43	82.49
+2025-04-28 22:45:49.215184 - Epoch #	2630	Avg Cumulative Reward: 1.19	89.39
+2025-04-28 22:47:03.955076 - Epoch #	2640	Avg Cumulative Reward: 1.16	74.74
+2025-04-28 22:48:14.305165 - Epoch #	2650	Avg Cumulative Reward: 0.75	70.35
+2025-04-28 22:49:26.575136 - Epoch #	2660	Avg Cumulative Reward: 1.36	72.27
+2025-04-28 22:50:47.677549 - Epoch #	2670	Avg Cumulative Reward: 1.13	81.10
+2025-04-28 22:52:03.958738 - Epoch #	2680	Avg Cumulative Reward: 0.80	76.28
+2025-04-28 22:53:18.733827 - Epoch #	2690	Avg Cumulative Reward: 1.38	74.78
+2025-04-28 22:54:38.049103 - Epoch #	2700	Avg Cumulative Reward: 0.14	79.32
+2025-04-28 22:55:55.517896 - Epoch #	2710	Avg Cumulative Reward: 0.56	77.47
+2025-04-28 22:57:16.824863 - Epoch #	2720	Avg Cumulative Reward: -0.88	81.31
+2025-04-28 22:58:31.248524 - Epoch #	2730	Avg Cumulative Reward: -0.95	74.42
+2025-04-28 22:59:52.891144 - Epoch #	2740	Avg Cumulative Reward: 0.66	81.64
+2025-04-28 23:01:05.863678 - Epoch #	2750	Avg Cumulative Reward: 0.05	72.97
+2025-04-28 23:02:21.026265 - Epoch #	2760	Avg Cumulative Reward: 1.68	75.16
+2025-04-28 23:03:32.019536 - Epoch #	2770	Avg Cumulative Reward: 1.43	70.99
+2025-04-28 23:04:52.306840 - Epoch #	2780	Avg Cumulative Reward: 1.11	80.29
+2025-04-28 23:06:13.889344 - Epoch #	2790	Avg Cumulative Reward: -0.99	81.58
+2025-04-28 23:07:32.578003 - Epoch #	2800	Avg Cumulative Reward: 1.72	78.69
+2025-04-28 23:08:46.308063 - Epoch #	2810	Avg Cumulative Reward: 0.72	73.73
+2025-04-28 23:09:57.809547 - Epoch #	2820	Avg Cumulative Reward: 0.95	71.50
+2025-04-28 23:11:19.597051 - Epoch #	2830	Avg Cumulative Reward: 1.15	81.79
+2025-04-28 23:12:41.607136 - Epoch #	2840	Avg Cumulative Reward: 1.59	82.01
+2025-04-28 23:13:49.057010 - Epoch #	2850	Avg Cumulative Reward: -0.27	67.45
+2025-04-28 23:15:09.075047 - Epoch #	2860	Avg Cumulative Reward: 0.01	80.02
+2025-04-28 23:16:20.170208 - Epoch #	2870	Avg Cumulative Reward: 1.69	71.10
+2025-04-28 23:17:41.238712 - Epoch #	2880	Avg Cumulative Reward: -0.39	81.07
+2025-04-28 23:19:01.613213 - Epoch #	2890	Avg Cumulative Reward: -0.28	80.37
+2025-04-28 23:20:13.191097 - Epoch #	2900	Avg Cumulative Reward: 0.63	71.58
+2025-04-28 23:21:22.175234 - Epoch #	2910	Avg Cumulative Reward: 0.37	68.98
+2025-04-28 23:22:40.743060 - Epoch #	2920	Avg Cumulative Reward: 1.01	78.57
+2025-04-28 23:23:56.629523 - Epoch #	2930	Avg Cumulative Reward: -0.30	75.89
+2025-04-28 23:25:05.515895 - Epoch #	2940	Avg Cumulative Reward: 1.36	68.89
+2025-04-28 23:26:20.088418 - Epoch #	2950	Avg Cumulative Reward: 0.64	74.57
+2025-04-28 23:27:38.129296 - Epoch #	2960	Avg Cumulative Reward: 0.47	78.04
+2025-04-28 23:28:54.612705 - Epoch #	2970	Avg Cumulative Reward: 0.58	76.48
+2025-04-28 23:30:12.177501 - Epoch #	2980	Avg Cumulative Reward: 0.67	77.56
+2025-04-28 23:31:31.891096 - Epoch #	2990	Avg Cumulative Reward: 0.65	79.71
+2025-04-28 23:32:51.291528 - Epoch #	3000	Avg Cumulative Reward: 1.07	79.40
+2025-04-28 23:32:58.545842 - Mean Reward at episode 3000: 0.6777
+2025-04-28 23:34:08.216998 - Epoch #	3010	Avg Cumulative Reward: 1.04	76.93
+2025-04-28 23:35:32.105875 - Epoch #	3020	Avg Cumulative Reward: 1.01	83.89
+2025-04-28 23:36:51.055282 - Epoch #	3030	Avg Cumulative Reward: 1.04	78.95
+2025-04-28 23:38:01.382064 - Epoch #	3040	Avg Cumulative Reward: 1.33	70.33
+2025-04-28 23:39:12.355179 - Epoch #	3050	Avg Cumulative Reward: 0.43	70.97
+2025-04-28 23:40:40.907525 - Epoch #	3060	Avg Cumulative Reward: -0.75	88.55
+2025-04-28 23:41:52.504777 - Epoch #	3070	Avg Cumulative Reward: 1.07	71.60
+2025-04-28 23:43:00.724312 - Epoch #	3080	Avg Cumulative Reward: 0.50	68.22
+2025-04-28 23:44:16.057145 - Epoch #	3090	Avg Cumulative Reward: 1.25	75.33
+2025-04-28 23:45:33.926779 - Epoch #	3100	Avg Cumulative Reward: 1.01	77.87
+2025-04-28 23:46:50.063997 - Epoch #	3110	Avg Cumulative Reward: 1.05	76.14
+2025-04-28 23:48:06.996879 - Epoch #	3120	Avg Cumulative Reward: 1.31	76.93
+2025-04-28 23:49:17.612243 - Epoch #	3130	Avg Cumulative Reward: 1.51	70.62
+2025-04-28 23:50:33.087157 - Epoch #	3140	Avg Cumulative Reward: 1.42	75.47
+2025-04-28 23:51:38.060712 - Epoch #	3150	Avg Cumulative Reward: -0.05	64.97
+2025-04-28 23:52:57.025338 - Epoch #	3160	Avg Cumulative Reward: 1.37	78.96
+2025-04-28 23:53:38.203722 - Time between reward step: #	24540.07594203949
+2025-04-28 23:53:38.203863 - Average Score: 0.752 Elapsed time: 6:49:00.659030
+2025-04-28 23:54:15.660107 - Epoch #	3170	Avg Cumulative Reward: 1.32	78.63
+2025-04-28 23:55:38.712308 - Epoch #	3180	Avg Cumulative Reward: 1.19	83.05
+2025-04-28 23:56:48.886314 - Epoch #	3190	Avg Cumulative Reward: 0.90	70.17
+2025-04-28 23:57:56.012703 - Epoch #	3200	Avg Cumulative Reward: 0.95	67.13
+2025-04-28 23:59:23.831003 - Epoch #	3210	Avg Cumulative Reward: 1.40	87.82
+2025-04-29 00:00:41.419808 - Epoch #	3220	Avg Cumulative Reward: 1.28	77.59
+2025-04-29 00:01:58.961885 - Epoch #	3230	Avg Cumulative Reward: 1.24	77.54
+2025-04-29 00:03:07.425314 - Epoch #	3240	Avg Cumulative Reward: 0.61	68.46
+2025-04-29 00:04:12.382354 - Epoch #	3250	Avg Cumulative Reward: 0.48	64.96
+2025-04-29 00:05:22.510274 - Epoch #	3260	Avg Cumulative Reward: 1.12	70.13
+2025-04-29 00:06:48.610015 - Epoch #	3270	Avg Cumulative Reward: 0.96	86.10
+2025-04-29 00:08:09.365126 - Epoch #	3280	Avg Cumulative Reward: 1.60	80.76
+2025-04-29 00:09:21.917049 - Epoch #	3290	Avg Cumulative Reward: 1.22	72.55
+2025-04-29 00:10:28.671427 - Epoch #	3300	Avg Cumulative Reward: 0.24	66.75
+2025-04-29 00:11:45.293690 - Epoch #	3310	Avg Cumulative Reward: 1.47	76.62
+2025-04-29 00:13:03.264102 - Epoch #	3320	Avg Cumulative Reward: 0.87	77.97
+2025-04-29 00:14:18.935061 - Epoch #	3330	Avg Cumulative Reward: 0.52	75.67
+2025-04-29 00:15:42.838414 - Epoch #	3340	Avg Cumulative Reward: 0.22	83.90
+2025-04-29 00:16:59.779341 - Epoch #	3350	Avg Cumulative Reward: 0.16	76.94
+2025-04-29 00:18:16.274331 - Epoch #	3360	Avg Cumulative Reward: 1.24	76.49
+2025-04-29 00:19:27.704001 - Epoch #	3370	Avg Cumulative Reward: 0.71	71.43
+2025-04-29 00:20:48.301299 - Epoch #	3380	Avg Cumulative Reward: 0.51	80.60
+2025-04-29 00:22:07.178103 - Epoch #	3390	Avg Cumulative Reward: 0.83	78.88
+2025-04-29 00:23:19.209537 - Epoch #	3400	Avg Cumulative Reward: -0.44	72.03
+2025-04-29 00:24:27.825413 - Epoch #	3410	Avg Cumulative Reward: 0.14	68.62
+2025-04-29 00:25:47.050253 - Epoch #	3420	Avg Cumulative Reward: 1.32	79.22
+2025-04-29 00:26:59.072084 - Epoch #	3430	Avg Cumulative Reward: -0.22	72.02
+2025-04-29 00:28:11.737438 - Epoch #	3440	Avg Cumulative Reward: 1.41	72.67
+2025-04-29 00:29:20.123037 - Epoch #	3450	Avg Cumulative Reward: 1.55	68.39
+2025-04-29 00:30:39.808703 - Epoch #	3460	Avg Cumulative Reward: 1.37	79.69
+2025-04-29 00:31:54.436326 - Epoch #	3470	Avg Cumulative Reward: 0.32	74.63
+2025-04-29 00:33:03.764900 - Epoch #	3480	Avg Cumulative Reward: 0.68	69.33
+2025-04-29 00:34:15.519061 - Epoch #	3490	Avg Cumulative Reward: 1.49	71.75
+2025-04-29 00:35:32.168484 - Epoch #	3500	Avg Cumulative Reward: 0.07	76.65
+2025-04-29 00:36:38.245231 - Epoch #	3510	Avg Cumulative Reward: 1.31	66.08
+2025-04-29 00:38:04.933310 - Epoch #	3520	Avg Cumulative Reward: 1.31	86.69
+2025-04-29 00:39:00.623207 - Time between reward step: #	27262.495428085327
+2025-04-29 00:39:00.623340 - Average Score: 0.758 Elapsed time: 7:34:23.078507
+2025-04-29 00:39:22.772847 - Epoch #	3530	Avg Cumulative Reward: 1.49	77.84
+2025-04-29 00:40:40.502694 - Epoch #	3540	Avg Cumulative Reward: 1.26	77.73
+2025-04-29 00:41:54.077108 - Epoch #	3550	Avg Cumulative Reward: 1.35	73.57
+2025-04-29 00:43:08.258325 - Epoch #	3560	Avg Cumulative Reward: 0.01	74.18
+2025-04-29 00:44:33.371617 - Epoch #	3570	Avg Cumulative Reward: 1.00	85.11
+2025-04-29 00:45:46.820048 - Epoch #	3580	Avg Cumulative Reward: 1.46	73.45
+2025-04-29 00:47:05.204918 - Epoch #	3590	Avg Cumulative Reward: 0.57	78.38
+2025-04-29 00:48:13.044171 - Epoch #	3600	Avg Cumulative Reward: 1.03	67.84
+2025-04-29 00:49:33.490193 - Epoch #	3610	Avg Cumulative Reward: 0.83	80.45
+2025-04-29 00:50:56.279996 - Epoch #	3620	Avg Cumulative Reward: 0.04	82.79
+2025-04-29 00:52:11.085843 - Epoch #	3630	Avg Cumulative Reward: 0.28	74.81
+2025-04-29 00:53:19.971171 - Epoch #	3640	Avg Cumulative Reward: 0.58	68.89
+2025-04-29 00:54:28.841201 - Epoch #	3650	Avg Cumulative Reward: 1.58	68.87
+2025-04-29 00:55:42.372241 - Epoch #	3660	Avg Cumulative Reward: 1.45	73.53
+2025-04-29 00:56:57.785712 - Epoch #	3670	Avg Cumulative Reward: 0.46	75.41
+2025-04-29 00:58:05.874327 - Epoch #	3680	Avg Cumulative Reward: 0.51	68.09
+2025-04-29 00:59:22.026528 - Epoch #	3690	Avg Cumulative Reward: 0.48	76.15
+2025-04-29 01:00:38.260339 - Epoch #	3700	Avg Cumulative Reward: 1.37	76.23
+2025-04-29 01:01:45.793797 - Epoch #	3710	Avg Cumulative Reward: 1.52	67.53
+2025-04-29 01:03:01.361411 - Epoch #	3720	Avg Cumulative Reward: 0.30	75.57
+2025-04-29 01:04:11.481603 - Epoch #	3730	Avg Cumulative Reward: 0.03	70.12
+2025-04-29 01:05:31.816068 - Epoch #	3740	Avg Cumulative Reward: -0.21	80.33
+2025-04-29 01:06:54.695831 - Epoch #	3750	Avg Cumulative Reward: 1.09	82.88
+2025-04-29 01:08:10.687275 - Epoch #	3760	Avg Cumulative Reward: 0.74	75.99
+2025-04-29 01:09:20.269597 - Epoch #	3770	Avg Cumulative Reward: 1.21	69.58
+2025-04-29 01:10:46.406869 - Epoch #	3780	Avg Cumulative Reward: 0.96	86.14
+2025-04-29 01:12:02.855575 - Epoch #	3790	Avg Cumulative Reward: 1.59	76.45
+2025-04-29 01:12:41.809155 - Time between reward step: #	29283.68137693405
+2025-04-29 01:12:41.809275 - Average Score: 0.760 Elapsed time: 8:08:04.264444
+2025-04-29 01:13:20.696634 - Epoch #	3800	Avg Cumulative Reward: 0.87	77.84
+2025-04-29 01:14:35.859602 - Epoch #	3810	Avg Cumulative Reward: 0.64	75.16
+2025-04-29 01:15:56.104702 - Epoch #	3820	Avg Cumulative Reward: 0.27	80.25
+2025-04-29 01:17:12.631737 - Epoch #	3830	Avg Cumulative Reward: 1.36	76.53
+2025-04-29 01:17:48.820638 - Time between reward step: #	29590.692859888077
+2025-04-29 01:17:48.820759 - Average Score: 0.770 Elapsed time: 8:13:11.275929
+2025-04-29 01:17:57.516605 - Time between reward step: #	29599.388825893402
+2025-04-29 01:17:57.516721 - Average Score: 0.785 Elapsed time: 8:13:19.971890
+2025-04-29 01:18:28.186122 - Epoch #	3840	Avg Cumulative Reward: 1.20	75.55
+2025-04-29 01:18:47.015397 - Time between reward step: #	29648.88761806488
+2025-04-29 01:18:47.015519 - Average Score: 0.790 Elapsed time: 8:14:09.470688
+2025-04-29 01:19:43.645162 - Epoch #	3850	Avg Cumulative Reward: 0.89	75.46
+2025-04-29 01:20:58.325514 - Epoch #	3860	Avg Cumulative Reward: 1.44	74.68
+2025-04-29 01:21:51.462422 - Time between reward step: #	29833.334642887115
+2025-04-29 01:21:51.462547 - Average Score: 0.795 Elapsed time: 8:17:13.917716
+2025-04-29 01:22:11.365650 - Epoch #	3870	Avg Cumulative Reward: 0.61	73.04
+2025-04-29 01:23:26.077732 - Epoch #	3880	Avg Cumulative Reward: 1.39	74.71
+2025-04-29 01:24:42.757140 - Epoch #	3890	Avg Cumulative Reward: 0.27	76.68
+2025-04-29 01:26:03.696538 - Epoch #	3900	Avg Cumulative Reward: 1.47	80.94
+2025-04-29 01:27:20.912737 - Epoch #	3910	Avg Cumulative Reward: 0.67	77.22
+2025-04-29 01:28:35.665675 - Epoch #	3920	Avg Cumulative Reward: 0.61	74.75
+2025-04-29 01:29:48.278363 - Epoch #	3930	Avg Cumulative Reward: 1.08	72.61
+2025-04-29 01:31:06.392133 - Epoch #	3940	Avg Cumulative Reward: 0.83	78.11
+2025-04-29 01:32:20.528698 - Epoch #	3950	Avg Cumulative Reward: 0.52	74.14
+2025-04-29 01:33:36.611195 - Epoch #	3960	Avg Cumulative Reward: 0.20	76.08
+2025-04-29 01:34:52.243229 - Epoch #	3970	Avg Cumulative Reward: 0.69	75.63
+2025-04-29 01:36:15.715803 - Epoch #	3980	Avg Cumulative Reward: 0.48	83.47
+2025-04-29 01:37:31.248397 - Epoch #	3990	Avg Cumulative Reward: 1.73	75.53
+2025-04-29 01:38:37.870598 - Epoch #	4000	Avg Cumulative Reward: 1.27	66.62
+2025-04-29 01:38:48.468699 - Mean Reward at episode 4000: 0.7228499999999998
+2025-04-29 01:39:46.466041 - Epoch #	4010	Avg Cumulative Reward: 0.31	68.60
+2025-04-29 01:41:03.426588 - Epoch #	4020	Avg Cumulative Reward: 1.24	76.96
+2025-04-29 01:42:17.508052 - Epoch #	4030	Avg Cumulative Reward: 1.42	74.08
+2025-04-29 01:43:30.248256 - Epoch #	4040	Avg Cumulative Reward: 0.32	72.74
+2025-04-29 01:44:45.005348 - Epoch #	4050	Avg Cumulative Reward: 1.44	74.76
+2025-04-29 01:45:53.319408 - Epoch #	4060	Avg Cumulative Reward: 0.65	68.31
+2025-04-29 01:47:17.294066 - Epoch #	4070	Avg Cumulative Reward: 1.41	83.97
+2025-04-29 01:48:40.981045 - Epoch #	4080	Avg Cumulative Reward: 0.43	83.69
+2025-04-29 01:49:57.350498 - Epoch #	4090	Avg Cumulative Reward: 0.45	76.37
+2025-04-29 01:51:07.380321 - Epoch #	4100	Avg Cumulative Reward: 1.04	70.03
+2025-04-29 01:52:21.987253 - Epoch #	4110	Avg Cumulative Reward: 0.98	74.61
+2025-04-29 01:53:36.723104 - Epoch #	4120	Avg Cumulative Reward: 0.38	74.74
+2025-04-29 01:54:45.616600 - Epoch #	4130	Avg Cumulative Reward: 1.27	68.89
+2025-04-29 01:55:50.136585 - Epoch #	4140	Avg Cumulative Reward: 1.52	64.52
+2025-04-29 01:57:01.402706 - Epoch #	4150	Avg Cumulative Reward: 1.42	71.27
+2025-04-29 01:58:14.177175 - Epoch #	4160	Avg Cumulative Reward: 0.04	72.77
+2025-04-29 01:59:36.345060 - Epoch #	4170	Avg Cumulative Reward: 0.80	82.17
+2025-04-29 02:00:42.260303 - Epoch #	4180	Avg Cumulative Reward: 0.39	65.92
+2025-04-29 02:02:00.800225 - Epoch #	4190	Avg Cumulative Reward: 0.86	78.54
+2025-04-29 02:03:11.111478 - Epoch #	4200	Avg Cumulative Reward: 1.21	70.31
+2025-04-29 02:04:27.516450 - Epoch #	4210	Avg Cumulative Reward: 1.31	76.40
+2025-04-29 02:05:37.891794 - Epoch #	4220	Avg Cumulative Reward: 1.58	70.38
+2025-04-29 02:06:10.136574 - Time between reward step: #	32492.008792877197
+2025-04-29 02:06:10.136700 - Average Score: 0.805 Elapsed time: 9:01:32.591867
+2025-04-29 02:06:52.649171 - Epoch #	4230	Avg Cumulative Reward: 1.40	74.76
+2025-04-29 02:08:05.710909 - Epoch #	4240	Avg Cumulative Reward: 1.02	73.06
+2025-04-29 02:09:26.472023 - Epoch #	4250	Avg Cumulative Reward: 1.09	80.76
+2025-04-29 02:10:44.041310 - Epoch #	4260	Avg Cumulative Reward: 0.76	77.57
+2025-04-29 02:11:50.960474 - Epoch #	4270	Avg Cumulative Reward: 1.13	66.92
+2025-04-29 02:13:05.044518 - Epoch #	4280	Avg Cumulative Reward: 0.91	74.08
+2025-04-29 02:14:13.094039 - Epoch #	4290	Avg Cumulative Reward: -0.01	68.05
+2025-04-29 02:15:24.747119 - Epoch #	4300	Avg Cumulative Reward: 1.05	71.65
+2025-04-29 02:16:34.441166 - Epoch #	4310	Avg Cumulative Reward: 0.65	69.69
+2025-04-29 02:17:52.866435 - Epoch #	4320	Avg Cumulative Reward: 0.90	78.43
+2025-04-29 02:19:07.647505 - Epoch #	4330	Avg Cumulative Reward: 1.51	74.78
+2025-04-29 02:20:34.867099 - Epoch #	4340	Avg Cumulative Reward: 1.74	87.22
+2025-04-29 02:21:47.782706 - Epoch #	4350	Avg Cumulative Reward: -0.05	72.92
+2025-04-29 02:23:03.595599 - Epoch #	4360	Avg Cumulative Reward: 0.42	75.81
+2025-04-29 02:24:10.543855 - Epoch #	4370	Avg Cumulative Reward: 1.04	66.95
+2025-04-29 02:25:19.955727 - Epoch #	4380	Avg Cumulative Reward: 0.83	69.41
+2025-04-29 02:26:35.018084 - Epoch #	4390	Avg Cumulative Reward: 0.85	75.06
+2025-04-29 02:27:52.499949 - Epoch #	4400	Avg Cumulative Reward: 0.25	77.48
+2025-04-29 02:29:08.460233 - Epoch #	4410	Avg Cumulative Reward: 0.93	75.96
+2025-04-29 02:30:23.886263 - Epoch #	4420	Avg Cumulative Reward: 0.22	75.43
+2025-04-29 02:31:39.640191 - Epoch #	4430	Avg Cumulative Reward: 1.48	75.75
+2025-04-29 02:32:54.065999 - Epoch #	4440	Avg Cumulative Reward: 1.47	74.43
+2025-04-29 02:34:16.111187 - Epoch #	4450	Avg Cumulative Reward: 1.15	82.05
+2025-04-29 02:35:37.358660 - Epoch #	4460	Avg Cumulative Reward: 1.18	81.25
+2025-04-29 02:36:44.392948 - Epoch #	4470	Avg Cumulative Reward: 1.14	67.03
+2025-04-29 02:38:01.818890 - Epoch #	4480	Avg Cumulative Reward: 1.32	77.43
+2025-04-29 02:39:20.779433 - Epoch #	4490	Avg Cumulative Reward: 1.56	78.96
+2025-04-29 02:40:34.961104 - Epoch #	4500	Avg Cumulative Reward: 1.14	74.18
+2025-04-29 02:41:53.026361 - Epoch #	4510	Avg Cumulative Reward: 0.95	78.07
+2025-04-29 02:42:55.789377 - Epoch #	4520	Avg Cumulative Reward: 0.87	62.76
+2025-04-29 02:44:13.586604 - Epoch #	4530	Avg Cumulative Reward: 0.71	77.80
+2025-04-29 02:45:32.777241 - Epoch #	4540	Avg Cumulative Reward: -0.83	79.19
+2025-04-29 02:46:52.279014 - Epoch #	4550	Avg Cumulative Reward: 1.53	79.50
+2025-04-29 02:48:05.454844 - Epoch #	4560	Avg Cumulative Reward: 1.30	73.18
+2025-04-29 02:49:24.279204 - Epoch #	4570	Avg Cumulative Reward: 1.69	78.82
+2025-04-29 02:50:42.324666 - Epoch #	4580	Avg Cumulative Reward: -0.26	78.05
+2025-04-29 02:51:52.890467 - Epoch #	4590	Avg Cumulative Reward: 1.27	70.57
+2025-04-29 02:53:05.048762 - Epoch #	4600	Avg Cumulative Reward: 1.31	72.16
+2025-04-29 02:54:19.336811 - Epoch #	4610	Avg Cumulative Reward: -0.16	74.29
+2025-04-29 02:55:40.343538 - Epoch #	4620	Avg Cumulative Reward: 0.67	81.01
+2025-04-29 02:56:54.134381 - Epoch #	4630	Avg Cumulative Reward: 0.94	73.79
+2025-04-29 02:58:04.600988 - Epoch #	4640	Avg Cumulative Reward: 1.26	70.47
+2025-04-29 02:59:15.093962 - Epoch #	4650	Avg Cumulative Reward: 1.65	70.49
+2025-04-29 03:00:27.552546 - Epoch #	4660	Avg Cumulative Reward: 1.48	72.46
+2025-04-29 03:01:36.673653 - Epoch #	4670	Avg Cumulative Reward: -0.42	69.12
+2025-04-29 03:02:56.535806 - Epoch #	4680	Avg Cumulative Reward: -1.06	79.86
+2025-04-29 03:04:16.800447 - Epoch #	4690	Avg Cumulative Reward: 0.57	80.26
+2025-04-29 03:05:32.693225 - Epoch #	4700	Avg Cumulative Reward: 1.82	75.89
+2025-04-29 03:06:52.502157 - Epoch #	4710	Avg Cumulative Reward: 1.53	79.81
+2025-04-29 03:08:03.381971 - Epoch #	4720	Avg Cumulative Reward: 1.40	70.88
+2025-04-29 03:09:10.158331 - Epoch #	4730	Avg Cumulative Reward: 1.17	66.78
+2025-04-29 03:10:23.275336 - Epoch #	4740	Avg Cumulative Reward: 1.49	73.12
+2025-04-29 03:11:38.367697 - Epoch #	4750	Avg Cumulative Reward: 0.83	75.09
+2025-04-29 03:12:46.966028 - Epoch #	4760	Avg Cumulative Reward: 1.76	68.60
+2025-04-29 03:13:56.877746 - Epoch #	4770	Avg Cumulative Reward: 1.51	69.91
+2025-04-29 03:15:10.680836 - Epoch #	4780	Avg Cumulative Reward: 1.44	73.80
+2025-04-29 03:15:32.280629 - Time between reward step: #	36654.15284895897
+2025-04-29 03:15:32.280748 - Average Score: 0.809 Elapsed time: 10:10:54.735917
+2025-04-29 03:15:38.969207 - Time between reward step: #	36660.84142899513
+2025-04-29 03:15:38.969324 - Average Score: 0.824 Elapsed time: 10:11:01.424494
+2025-04-29 03:16:30.990931 - Epoch #	4790	Avg Cumulative Reward: 1.26	80.31
+2025-04-29 03:17:40.773562 - Epoch #	4800	Avg Cumulative Reward: 1.36	69.78
+2025-04-29 03:18:51.527254 - Epoch #	4810	Avg Cumulative Reward: 1.43	70.75
+2025-04-29 03:19:59.117453 - Epoch #	4820	Avg Cumulative Reward: 0.25	67.59
+2025-04-29 03:21:04.670322 - Epoch #	4830	Avg Cumulative Reward: 1.11	65.55
+2025-04-29 03:22:17.334781 - Epoch #	4840	Avg Cumulative Reward: 1.72	72.66
+2025-04-29 03:23:34.351598 - Epoch #	4850	Avg Cumulative Reward: 1.19	77.02
+2025-04-29 03:24:45.494747 - Epoch #	4860	Avg Cumulative Reward: 1.33	71.14
+2025-04-29 03:26:01.043805 - Epoch #	4870	Avg Cumulative Reward: -0.33	75.55
+2025-04-29 03:27:05.946315 - Epoch #	4880	Avg Cumulative Reward: 0.83	64.90
+2025-04-29 03:28:09.760778 - Epoch #	4890	Avg Cumulative Reward: 0.33	63.81
+2025-04-29 03:29:25.872808 - Epoch #	4900	Avg Cumulative Reward: 0.90	76.11
+2025-04-29 03:30:42.207746 - Epoch #	4910	Avg Cumulative Reward: 0.92	76.33
+2025-04-29 03:32:00.057803 - Epoch #	4920	Avg Cumulative Reward: 1.61	77.85
+2025-04-29 03:33:17.791616 - Epoch #	4930	Avg Cumulative Reward: 0.39	77.73
+2025-04-29 03:34:43.777534 - Epoch #	4940	Avg Cumulative Reward: 1.20	85.99
+2025-04-29 03:35:56.081221 - Epoch #	4950	Avg Cumulative Reward: -0.31	72.30
+2025-04-29 03:37:10.629279 - Epoch #	4960	Avg Cumulative Reward: 1.48	74.55
+2025-04-29 03:38:27.839945 - Epoch #	4970	Avg Cumulative Reward: 1.20	77.21
+2025-04-29 03:39:34.715710 - Epoch #	4980	Avg Cumulative Reward: 1.72	66.88
+2025-04-29 03:40:46.249642 - Epoch #	4990	Avg Cumulative Reward: 1.51	71.53
+2025-04-29 03:41:56.705765 - Epoch #	5000	Avg Cumulative Reward: 1.55	70.46
+2025-04-29 03:42:03.274767 - Mean Reward at episode 5000: 0.8232499999999999
+2025-04-29 03:43:06.561830 - Epoch #	5010	Avg Cumulative Reward: 1.06	69.86
+2025-04-29 03:44:09.569186 - Epoch #	5020	Avg Cumulative Reward: 1.72	63.01
+2025-04-29 03:45:31.067558 - Epoch #	5030	Avg Cumulative Reward: 0.58	81.50
+2025-04-29 03:46:41.041016 - Epoch #	5040	Avg Cumulative Reward: 0.75	69.97
+2025-04-29 03:47:57.106582 - Epoch #	5050	Avg Cumulative Reward: 1.49	76.07
+2025-04-29 03:49:08.719935 - Epoch #	5060	Avg Cumulative Reward: 1.53	71.61
+2025-04-29 03:49:53.490358 - Time between reward step: #	38715.362578868866
+2025-04-29 03:49:53.490479 - Average Score: 0.829 Elapsed time: 10:45:15.945647
+2025-04-29 03:50:13.178575 - Epoch #	5070	Avg Cumulative Reward: 1.56	64.46
+2025-04-29 03:51:22.015062 - Epoch #	5080	Avg Cumulative Reward: 1.23	68.84
+2025-04-29 03:52:38.233699 - Epoch #	5090	Avg Cumulative Reward: 1.76	76.22
+2025-04-29 03:53:42.911448 - Epoch #	5100	Avg Cumulative Reward: 1.33	64.68
+2025-04-29 03:54:48.509201 - Epoch #	5110	Avg Cumulative Reward: 1.49	65.60
+2025-04-29 03:56:02.263749 - Epoch #	5120	Avg Cumulative Reward: 1.57	73.75
+2025-04-29 03:56:45.439867 - Time between reward step: #	39127.31208896637
+2025-04-29 03:56:45.439989 - Average Score: 0.833 Elapsed time: 10:52:07.895158
+2025-04-29 03:57:06.156219 - Time between reward step: #	39148.0284409523
+2025-04-29 03:57:06.156341 - Average Score: 0.848 Elapsed time: 10:52:28.611510
+2025-04-29 03:57:06.156457 - Epoch #	5130	Avg Cumulative Reward: 1.43	63.89
+2025-04-29 03:58:09.354381 - Time between reward step: #	39211.22660303116
+2025-04-29 03:58:09.354503 - Average Score: 0.853 Elapsed time: 10:53:31.809673
+2025-04-29 03:58:16.605656 - Time between reward step: #	39218.47787690163
+2025-04-29 03:58:16.605777 - Average Score: 0.853 Elapsed time: 10:53:39.060945
+2025-04-29 03:58:26.322626 - Epoch #	5140	Avg Cumulative Reward: 1.10	80.17
+2025-04-29 03:59:33.487610 - Epoch #	5150	Avg Cumulative Reward: 1.52	67.16
+2025-04-29 03:59:41.327324 - Time between reward step: #	39303.19954395294
+2025-04-29 03:59:41.327444 - Average Score: 0.863 Elapsed time: 10:55:03.782612
+2025-04-29 04:00:50.256561 - Epoch #	5160	Avg Cumulative Reward: 1.17	76.77
+2025-04-29 04:01:58.991290 - Epoch #	5170	Avg Cumulative Reward: 1.56	68.73
+2025-04-29 04:03:08.171538 - Epoch #	5180	Avg Cumulative Reward: 1.79	69.18
+2025-04-29 04:04:29.266209 - Epoch #	5190	Avg Cumulative Reward: 0.73	81.09
+2025-04-29 04:05:37.317237 - Epoch #	5200	Avg Cumulative Reward: -0.49	68.05
+2025-04-29 04:06:50.945608 - Epoch #	5210	Avg Cumulative Reward: -0.34	73.63
+2025-04-29 04:07:58.281669 - Epoch #	5220	Avg Cumulative Reward: 1.38	67.34
+2025-04-29 04:09:12.165292 - Epoch #	5230	Avg Cumulative Reward: 1.41	73.88
+2025-04-29 04:10:22.532502 - Epoch #	5240	Avg Cumulative Reward: 1.70	70.37
+2025-04-29 04:11:30.887642 - Epoch #	5250	Avg Cumulative Reward: 0.93	68.36
+2025-04-29 04:12:35.323930 - Epoch #	5260	Avg Cumulative Reward: 0.95	64.44
+2025-04-29 04:13:49.032896 - Epoch #	5270	Avg Cumulative Reward: 1.48	73.71
+2025-04-29 04:15:05.324317 - Epoch #	5280	Avg Cumulative Reward: 1.08	76.29
+2025-04-29 04:16:27.275930 - Epoch #	5290	Avg Cumulative Reward: 1.13	81.95
+2025-04-29 04:17:44.218836 - Epoch #	5300	Avg Cumulative Reward: 1.50	76.94
+2025-04-29 04:19:00.678123 - Epoch #	5310	Avg Cumulative Reward: 1.85	76.46
+2025-04-29 04:20:13.974699 - Epoch #	5320	Avg Cumulative Reward: 1.74	73.30
+2025-04-29 04:21:29.300673 - Epoch #	5330	Avg Cumulative Reward: 0.90	75.33
+2025-04-29 04:22:45.125728 - Epoch #	5340	Avg Cumulative Reward: 0.68	75.83
+2025-04-29 04:23:51.302626 - Epoch #	5350	Avg Cumulative Reward: 0.75	66.18
+2025-04-29 04:25:07.385576 - Epoch #	5360	Avg Cumulative Reward: 1.67	76.08
+2025-04-29 04:26:12.890669 - Epoch #	5370	Avg Cumulative Reward: -0.33	65.51
+2025-04-29 04:27:21.000492 - Epoch #	5380	Avg Cumulative Reward: 0.81	68.11
+2025-04-29 04:28:32.093067 - Epoch #	5390	Avg Cumulative Reward: 0.77	71.09
+2025-04-29 04:29:41.711226 - Epoch #	5400	Avg Cumulative Reward: 1.25	69.62
+2025-04-29 04:30:54.231328 - Epoch #	5410	Avg Cumulative Reward: 1.39	72.52
+2025-04-29 04:32:01.525096 - Epoch #	5420	Avg Cumulative Reward: 1.56	67.29
+2025-04-29 04:33:08.178632 - Epoch #	5430	Avg Cumulative Reward: 1.74	66.65
+2025-04-29 04:34:18.133564 - Epoch #	5440	Avg Cumulative Reward: 1.03	69.95
+2025-04-29 04:35:32.053481 - Epoch #	5450	Avg Cumulative Reward: 1.54	73.92
+2025-04-29 04:36:36.066754 - Epoch #	5460	Avg Cumulative Reward: -0.56	64.01
+2025-04-29 04:37:46.862587 - Epoch #	5470	Avg Cumulative Reward: 1.42	70.80
+2025-04-29 04:38:59.564980 - Epoch #	5480	Avg Cumulative Reward: 1.57	72.70
+2025-04-29 04:40:24.575768 - Epoch #	5490	Avg Cumulative Reward: 1.50	85.01
+2025-04-29 04:41:35.186040 - Epoch #	5500	Avg Cumulative Reward: -0.01	70.61
+2025-04-29 04:42:48.479271 - Epoch #	5510	Avg Cumulative Reward: 1.71	73.29
+2025-04-29 04:44:02.007909 - Epoch #	5520	Avg Cumulative Reward: -0.25	73.53
+2025-04-29 04:45:15.913074 - Epoch #	5530	Avg Cumulative Reward: 1.54	73.91
+2025-04-29 04:46:25.883036 - Epoch #	5540	Avg Cumulative Reward: 1.59	69.97
+2025-04-29 04:47:38.943699 - Epoch #	5550	Avg Cumulative Reward: 1.45	73.06
+2025-04-29 04:48:54.996498 - Epoch #	5560	Avg Cumulative Reward: 1.70	76.05
+2025-04-29 04:50:09.334047 - Epoch #	5570	Avg Cumulative Reward: 1.10	74.34
+2025-04-29 04:51:20.093276 - Epoch #	5580	Avg Cumulative Reward: 1.65	70.76
+2025-04-29 04:52:35.522819 - Epoch #	5590	Avg Cumulative Reward: 0.43	75.43
+2025-04-29 04:53:56.098386 - Epoch #	5600	Avg Cumulative Reward: 0.09	80.58
+2025-04-29 04:55:03.818509 - Epoch #	5610	Avg Cumulative Reward: 1.57	67.72
+2025-04-29 04:56:15.971660 - Epoch #	5620	Avg Cumulative Reward: 1.28	72.15
+2025-04-29 04:57:22.441493 - Epoch #	5630	Avg Cumulative Reward: 1.50	66.47
+2025-04-29 04:58:30.645846 - Epoch #	5640	Avg Cumulative Reward: 1.34	68.20
+2025-04-29 04:59:43.474693 - Epoch #	5650	Avg Cumulative Reward: 1.67	72.83
+2025-04-29 05:00:50.757889 - Epoch #	5660	Avg Cumulative Reward: 1.74	67.28
+2025-04-29 05:01:58.609214 - Epoch #	5670	Avg Cumulative Reward: 1.70	67.85
+2025-04-29 05:03:11.783486 - Epoch #	5680	Avg Cumulative Reward: 1.38	73.17
+2025-04-29 05:04:19.727833 - Epoch #	5690	Avg Cumulative Reward: 1.74	67.94
+2025-04-29 05:05:38.897673 - Epoch #	5700	Avg Cumulative Reward: -0.34	79.17
+2025-04-29 05:06:50.156721 - Epoch #	5710	Avg Cumulative Reward: -0.17	71.26
+2025-04-29 05:07:57.667343 - Epoch #	5720	Avg Cumulative Reward: 1.30	67.51
+2025-04-29 05:09:09.276355 - Epoch #	5730	Avg Cumulative Reward: 1.70	71.61
+2025-04-29 05:10:21.435130 - Epoch #	5740	Avg Cumulative Reward: 1.39	72.16
+2025-04-29 05:11:32.643371 - Epoch #	5750	Avg Cumulative Reward: 1.38	71.21
+2025-04-29 05:12:50.012247 - Epoch #	5760	Avg Cumulative Reward: 1.46	77.37
+2025-04-29 05:14:03.317483 - Epoch #	5770	Avg Cumulative Reward: 1.26	73.31
+2025-04-29 05:15:07.790611 - Epoch #	5780	Avg Cumulative Reward: 1.56	64.47
+2025-04-29 05:16:20.927916 - Epoch #	5790	Avg Cumulative Reward: 1.78	73.14
+2025-04-29 05:17:34.644755 - Epoch #	5800	Avg Cumulative Reward: 1.14	73.72
+2025-04-29 05:18:24.257180 - Time between reward step: #	44026.129401922226
+2025-04-29 05:18:24.257299 - Average Score: 0.869 Elapsed time: 12:13:46.712468
+2025-04-29 05:18:39.005312 - Time between reward step: #	44040.877532958984
+2025-04-29 05:18:39.005438 - Average Score: 0.879 Elapsed time: 12:14:01.460607
+2025-04-29 05:18:39.005559 - Epoch #	5810	Avg Cumulative Reward: 1.69	64.36
+2025-04-29 05:19:07.722578 - Time between reward step: #	44069.594798088074
+2025-04-29 05:19:07.722700 - Average Score: 0.889 Elapsed time: 12:14:30.177869
+2025-04-29 05:19:13.995645 - Time between reward step: #	44075.8678650856
+2025-04-29 05:19:13.995771 - Average Score: 0.890 Elapsed time: 12:14:36.450938
+2025-04-29 05:19:43.690052 - Time between reward step: #	44105.56227493286
+2025-04-29 05:19:43.690172 - Average Score: 0.890 Elapsed time: 12:15:06.145342
+2025-04-29 05:19:49.892363 - Epoch #	5820	Avg Cumulative Reward: 1.60	70.89
+2025-04-29 05:19:59.245396 - Time between reward step: #	44121.11761689186
+2025-04-29 05:19:59.245518 - Average Score: 0.890 Elapsed time: 12:15:21.700687
+2025-04-29 05:20:58.153952 - Epoch #	5830	Avg Cumulative Reward: 0.46	68.26
+2025-04-29 05:22:12.108103 - Epoch #	5840	Avg Cumulative Reward: 1.67	73.95
+2025-04-29 05:23:25.136113 - Epoch #	5850	Avg Cumulative Reward: 1.78	73.03
+2025-04-29 05:24:32.888185 - Epoch #	5860	Avg Cumulative Reward: 1.61	67.75
+2025-04-29 05:25:39.738936 - Time between reward step: #	44461.611155986786
+2025-04-29 05:25:39.739058 - Average Score: 0.899 Elapsed time: 12:21:02.194227
+2025-04-29 05:25:39.739194 - Epoch #	5870	Avg Cumulative Reward: 1.73	66.85
+2025-04-29 05:25:49.974113 - Time between reward step: #	44471.846333026886
+2025-04-29 05:25:49.974230 - Average Score: 0.899 Elapsed time: 12:21:12.429400
+2025-04-29 05:26:25.961997 - Time between reward step: #	44507.83422088623
+2025-04-29 05:26:25.962117 - Average Score: 0.909 Elapsed time: 12:21:48.417287
+2025-04-29 05:26:44.412453 - Epoch #	5880	Avg Cumulative Reward: 1.75	64.67
+2025-04-29 05:27:53.180380 - Epoch #	5890	Avg Cumulative Reward: 1.27	68.77
+2025-04-29 05:29:05.434457 - Epoch #	5900	Avg Cumulative Reward: 1.61	72.25
+2025-04-29 05:30:16.293660 - Epoch #	5910	Avg Cumulative Reward: 1.83	70.86
+2025-04-29 05:31:30.970775 - Epoch #	5920	Avg Cumulative Reward: 1.65	74.68
+2025-04-29 05:32:42.973287 - Epoch #	5930	Avg Cumulative Reward: 1.31	72.00
+2025-04-29 05:32:49.819374 - Time between reward step: #	44891.691595077515
+2025-04-29 05:32:49.819496 - Average Score: 0.915 Elapsed time: 12:28:12.274665
+2025-04-29 05:33:05.774536 - Time between reward step: #	44907.646756887436
+2025-04-29 05:33:05.774657 - Average Score: 0.915 Elapsed time: 12:28:28.229825
+2025-04-29 05:33:53.168610 - Epoch #	5940	Avg Cumulative Reward: 1.74	70.20
+2025-04-29 05:35:08.106342 - Epoch #	5950	Avg Cumulative Reward: 0.62	74.94
+2025-04-29 05:36:23.415385 - Epoch #	5960	Avg Cumulative Reward: 1.82	75.31
+2025-04-29 05:37:38.823923 - Epoch #	5970	Avg Cumulative Reward: 1.56	75.41
+2025-04-29 05:38:51.518865 - Epoch #	5980	Avg Cumulative Reward: 1.38	72.69
+2025-04-29 05:40:01.065829 - Epoch #	5990	Avg Cumulative Reward: 1.39	69.55
+2025-04-29 05:41:06.543219 - Epoch #	6000	Avg Cumulative Reward: 0.85	65.48
+2025-04-29 05:41:13.354802 - Mean Reward at episode 6000: 0.8595
+2025-04-29 05:42:19.787295 - Epoch #	6010	Avg Cumulative Reward: 0.65	73.24
+2025-04-29 05:43:42.201063 - Epoch #	6020	Avg Cumulative Reward: 1.67	82.41
+2025-04-29 05:44:50.975810 - Epoch #	6030	Avg Cumulative Reward: 0.26	68.77
+2025-04-29 05:46:03.133744 - Epoch #	6040	Avg Cumulative Reward: 0.99	72.16
+2025-04-29 05:47:12.381501 - Epoch #	6050	Avg Cumulative Reward: 1.79	69.25
+2025-04-29 05:48:22.898929 - Epoch #	6060	Avg Cumulative Reward: 1.72	70.52
+2025-04-29 05:49:45.803661 - Epoch #	6070	Avg Cumulative Reward: 1.74	82.90
+2025-04-29 05:50:50.709299 - Epoch #	6080	Avg Cumulative Reward: 1.35	64.91
+2025-04-29 05:51:58.557519 - Epoch #	6090	Avg Cumulative Reward: 1.80	67.85
+2025-04-29 05:53:05.149852 - Epoch #	6100	Avg Cumulative Reward: 0.83	66.59
+2025-04-29 05:54:09.322691 - Epoch #	6110	Avg Cumulative Reward: 0.46	64.17
+2025-04-29 05:55:16.809682 - Epoch #	6120	Avg Cumulative Reward: 1.21	67.49
+2025-04-29 05:56:23.813095 - Epoch #	6130	Avg Cumulative Reward: 1.81	67.00
+2025-04-29 05:57:34.380017 - Epoch #	6140	Avg Cumulative Reward: 1.70	70.57
+2025-04-29 05:58:41.470692 - Epoch #	6150	Avg Cumulative Reward: 1.47	67.09
+2025-04-29 05:59:54.448490 - Epoch #	6160	Avg Cumulative Reward: 1.43	72.98
+2025-04-29 06:01:09.062943 - Epoch #	6170	Avg Cumulative Reward: 1.72	74.61
+2025-04-29 06:02:10.464523 - Epoch #	6180	Avg Cumulative Reward: 1.57	61.40
+2025-04-29 06:03:27.609030 - Epoch #	6190	Avg Cumulative Reward: 1.56	77.14
+2025-04-29 06:04:40.684618 - Epoch #	6200	Avg Cumulative Reward: 0.90	73.08
+2025-04-29 06:05:52.705778 - Epoch #	6210	Avg Cumulative Reward: 0.73	72.02
+2025-04-29 06:07:02.427564 - Epoch #	6220	Avg Cumulative Reward: 0.59	69.72
+2025-04-29 06:08:23.975501 - Epoch #	6230	Avg Cumulative Reward: 0.81	81.55
+2025-04-29 06:09:45.760314 - Epoch #	6240	Avg Cumulative Reward: 1.49	81.78
+2025-04-29 06:11:07.273586 - Epoch #	6250	Avg Cumulative Reward: 1.65	81.51
+2025-04-29 06:12:06.372554 - Epoch #	6260	Avg Cumulative Reward: 1.46	59.10
+2025-04-29 06:13:13.043612 - Epoch #	6270	Avg Cumulative Reward: 1.57	66.67
+2025-04-29 06:14:24.997576 - Epoch #	6280	Avg Cumulative Reward: 1.65	71.95
+2025-04-29 06:15:41.047702 - Epoch #	6290	Avg Cumulative Reward: 1.44	76.05
+2025-04-29 06:16:51.793010 - Epoch #	6300	Avg Cumulative Reward: 1.46	70.75
+2025-04-29 06:17:58.662038 - Epoch #	6310	Avg Cumulative Reward: 1.52	66.87
+2025-04-29 06:19:14.869347 - Epoch #	6320	Avg Cumulative Reward: 1.88	76.21
+2025-04-29 06:20:23.478810 - Epoch #	6330	Avg Cumulative Reward: 0.88	68.61
+2025-04-29 06:21:35.437699 - Epoch #	6340	Avg Cumulative Reward: 1.90	71.96
+2025-04-29 06:22:35.474567 - Epoch #	6350	Avg Cumulative Reward: 0.68	60.04
+2025-04-29 06:23:42.655483 - Epoch #	6360	Avg Cumulative Reward: 1.64	67.18
+2025-04-29 06:25:00.500716 - Epoch #	6370	Avg Cumulative Reward: 0.34	77.85
+2025-04-29 06:26:11.666708 - Epoch #	6380	Avg Cumulative Reward: 0.89	71.17
+2025-04-29 06:27:22.274081 - Epoch #	6390	Avg Cumulative Reward: 0.63	70.61
+2025-04-29 06:28:37.246992 - Epoch #	6400	Avg Cumulative Reward: 1.81	74.97
+2025-04-29 06:29:49.477027 - Epoch #	6410	Avg Cumulative Reward: 1.78	72.23
+2025-04-29 06:31:05.289855 - Epoch #	6420	Avg Cumulative Reward: 0.05	75.81
+2025-04-29 06:32:25.288621 - Epoch #	6430	Avg Cumulative Reward: 1.72	80.00
+2025-04-29 06:33:43.570118 - Epoch #	6440	Avg Cumulative Reward: 1.68	78.28
+2025-04-29 06:34:50.028810 - Epoch #	6450	Avg Cumulative Reward: 1.69	66.46
+2025-04-29 06:35:58.626181 - Epoch #	6460	Avg Cumulative Reward: 1.66	68.60
+2025-04-29 06:37:08.438248 - Epoch #	6470	Avg Cumulative Reward: 1.66	69.81
+2025-04-29 06:38:20.537035 - Epoch #	6480	Avg Cumulative Reward: 1.83	72.10
+2025-04-29 06:39:28.449456 - Epoch #	6490	Avg Cumulative Reward: 0.74	67.91
+2025-04-29 06:40:31.919128 - Epoch #	6500	Avg Cumulative Reward: 1.73	63.47
+2025-04-29 06:41:45.535493 - Epoch #	6510	Avg Cumulative Reward: 0.32	73.62
+2025-04-29 06:43:00.027818 - Epoch #	6520	Avg Cumulative Reward: 1.77	74.49
+2025-04-29 06:44:15.573173 - Epoch #	6530	Avg Cumulative Reward: 1.53	75.55
+2025-04-29 06:45:22.009609 - Epoch #	6540	Avg Cumulative Reward: 1.43	66.44
+2025-04-29 06:46:25.741652 - Epoch #	6550	Avg Cumulative Reward: 1.79	63.73
+2025-04-29 06:47:29.196948 - Epoch #	6560	Avg Cumulative Reward: 1.85	63.46
+2025-04-29 06:48:33.922065 - Epoch #	6570	Avg Cumulative Reward: 1.79	64.73
+2025-04-29 06:49:50.390259 - Epoch #	6580	Avg Cumulative Reward: 1.55	76.47
+2025-04-29 06:50:56.979188 - Epoch #	6590	Avg Cumulative Reward: 1.73	66.59
+2025-04-29 06:52:05.502441 - Epoch #	6600	Avg Cumulative Reward: 1.80	68.52
+2025-04-29 06:52:19.761228 - Time between reward step: #	49661.633449077606
+2025-04-29 06:52:19.761345 - Average Score: 0.919 Elapsed time: 13:47:42.216514
+2025-04-29 06:53:06.048464 - Time between reward step: #	49707.92068004608
+2025-04-29 06:53:06.048592 - Average Score: 0.934 Elapsed time: 13:48:28.503760
+2025-04-29 06:53:22.451105 - Epoch #	6610	Avg Cumulative Reward: 1.45	76.95
+2025-04-29 06:54:30.005985 - Epoch #	6620	Avg Cumulative Reward: 1.56	67.55
+2025-04-29 06:55:35.508515 - Epoch #	6630	Avg Cumulative Reward: 1.69	65.50
+2025-04-29 06:56:31.644649 - Time between reward step: #	49913.516869068146
+2025-04-29 06:56:31.644779 - Average Score: 0.938 Elapsed time: 13:51:54.099946
+2025-04-29 06:56:48.762361 - Time between reward step: #	49930.634582042694
+2025-04-29 06:56:48.762481 - Average Score: 0.939 Elapsed time: 13:52:11.217650
+2025-04-29 06:56:48.762621 - Epoch #	6640	Avg Cumulative Reward: 1.73	73.25
+2025-04-29 06:57:52.198977 - Epoch #	6650	Avg Cumulative Reward: 1.62	63.44
+2025-04-29 06:59:02.100242 - Epoch #	6660	Avg Cumulative Reward: 1.88	69.90
+2025-04-29 07:00:11.438305 - Epoch #	6670	Avg Cumulative Reward: 1.88	69.34
+2025-04-29 07:01:15.709755 - Epoch #	6680	Avg Cumulative Reward: 1.58	64.27
+2025-04-29 07:02:26.406556 - Epoch #	6690	Avg Cumulative Reward: 1.68	70.70
+2025-04-29 07:03:41.644759 - Epoch #	6700	Avg Cumulative Reward: 1.54	75.24
+2025-04-29 07:04:46.925294 - Epoch #	6710	Avg Cumulative Reward: 1.77	65.28
+2025-04-29 07:05:48.200837 - Time between reward step: #	50470.07305788994
+2025-04-29 07:05:48.200976 - Average Score: 0.939 Elapsed time: 14:01:10.656127
+2025-04-29 07:05:56.195471 - Epoch #	6720	Avg Cumulative Reward: 1.63	69.27
+2025-04-29 07:06:35.764680 - Time between reward step: #	50517.636900901794
+2025-04-29 07:06:35.764801 - Average Score: 0.949 Elapsed time: 14:01:58.219970
+2025-04-29 07:07:14.320643 - Epoch #	6730	Avg Cumulative Reward: 0.95	78.13
+2025-04-29 07:08:21.047338 - Epoch #	6740	Avg Cumulative Reward: 1.01	66.73
+2025-04-29 07:09:28.190303 - Epoch #	6750	Avg Cumulative Reward: 1.03	67.14
+2025-04-29 07:10:36.717943 - Epoch #	6760	Avg Cumulative Reward: 1.45	68.53
+2025-04-29 07:11:49.553728 - Epoch #	6770	Avg Cumulative Reward: 1.34	72.84
+2025-04-29 07:12:57.123703 - Epoch #	6780	Avg Cumulative Reward: 0.64	67.57
+2025-04-29 07:14:09.867246 - Epoch #	6790	Avg Cumulative Reward: 1.89	72.74
+2025-04-29 07:15:26.856759 - Epoch #	6800	Avg Cumulative Reward: 0.88	76.99
+2025-04-29 07:16:42.548872 - Epoch #	6810	Avg Cumulative Reward: 1.46	75.69
+2025-04-29 07:17:53.486699 - Epoch #	6820	Avg Cumulative Reward: 0.19	70.94
+2025-04-29 07:18:58.349914 - Epoch #	6830	Avg Cumulative Reward: 1.29	64.86
+2025-04-29 07:20:05.132112 - Epoch #	6840	Avg Cumulative Reward: 0.74	66.78
+2025-04-29 07:21:16.751234 - Epoch #	6850	Avg Cumulative Reward: 1.77	71.62
+2025-04-29 07:22:34.644492 - Epoch #	6860	Avg Cumulative Reward: 1.67	77.89
+2025-04-29 07:23:37.078434 - Epoch #	6870	Avg Cumulative Reward: 1.70	62.43
+2025-04-29 07:24:44.912485 - Epoch #	6880	Avg Cumulative Reward: 1.07	67.83
+2025-04-29 07:26:02.087337 - Epoch #	6890	Avg Cumulative Reward: 1.72	77.17
+2025-04-29 07:27:14.028843 - Epoch #	6900	Avg Cumulative Reward: 1.86	71.94
+2025-04-29 07:28:29.985482 - Epoch #	6910	Avg Cumulative Reward: 1.73	75.96
+2025-04-29 07:29:49.960174 - Epoch #	6920	Avg Cumulative Reward: 1.68	79.97
+2025-04-29 07:31:00.178225 - Epoch #	6930	Avg Cumulative Reward: 1.63	70.22
+2025-04-29 07:32:09.869342 - Epoch #	6940	Avg Cumulative Reward: 1.67	69.69
+2025-04-29 07:33:29.256804 - Epoch #	6950	Avg Cumulative Reward: 1.86	79.39
+2025-04-29 07:34:38.765461 - Epoch #	6960	Avg Cumulative Reward: 1.57	69.51
+2025-04-29 07:35:50.200474 - Epoch #	6970	Avg Cumulative Reward: 1.91	71.43
+2025-04-29 07:36:57.700268 - Epoch #	6980	Avg Cumulative Reward: 1.65	67.50
+2025-04-29 07:38:09.266265 - Epoch #	6990	Avg Cumulative Reward: 1.00	71.57
+2025-04-29 07:39:14.372754 - Epoch #	7000	Avg Cumulative Reward: 1.75	65.11
+2025-04-29 07:39:20.807718 - Mean Reward at episode 7000: 0.9089500000000001
+2025-04-29 07:40:20.486097 - Epoch #	7010	Avg Cumulative Reward: 1.54	66.11
+2025-04-29 07:41:20.529444 - Epoch #	7020	Avg Cumulative Reward: 1.63	60.04
+2025-04-29 07:42:30.824807 - Epoch #	7030	Avg Cumulative Reward: 1.59	70.30
+2025-04-29 07:43:39.308607 - Epoch #	7040	Avg Cumulative Reward: 1.73	68.48
+2025-04-29 07:44:41.444581 - Epoch #	7050	Avg Cumulative Reward: 1.78	62.14
+2025-04-29 07:45:48.752571 - Epoch #	7060	Avg Cumulative Reward: 1.64	67.31
+2025-04-29 07:46:48.857330 - Epoch #	7070	Avg Cumulative Reward: 1.75	60.10
+2025-04-29 07:47:59.972864 - Epoch #	7080	Avg Cumulative Reward: 0.70	71.12
+2025-04-29 07:49:13.323919 - Epoch #	7090	Avg Cumulative Reward: 1.91	73.35
+2025-04-29 07:50:18.707086 - Epoch #	7100	Avg Cumulative Reward: 1.66	65.38
+2025-04-29 07:51:30.144751 - Epoch #	7110	Avg Cumulative Reward: 1.72	71.44
+2025-04-29 07:52:41.263161 - Epoch #	7120	Avg Cumulative Reward: 1.74	71.12
+2025-04-29 07:53:45.699147 - Epoch #	7130	Avg Cumulative Reward: 1.66	64.44
+2025-04-29 07:54:54.517172 - Epoch #	7140	Avg Cumulative Reward: 1.69	68.82
+2025-04-29 07:56:07.298747 - Epoch #	7150	Avg Cumulative Reward: 1.73	72.78
+2025-04-29 07:57:15.030782 - Epoch #	7160	Avg Cumulative Reward: 1.73	67.73
+2025-04-29 07:58:30.829209 - Epoch #	7170	Avg Cumulative Reward: 1.72	75.80
+2025-04-29 07:59:38.626736 - Epoch #	7180	Avg Cumulative Reward: 1.42	67.80
+2025-04-29 08:00:55.466342 - Epoch #	7190	Avg Cumulative Reward: 1.59	76.84
+2025-04-29 08:02:10.666362 - Epoch #	7200	Avg Cumulative Reward: 1.90	75.20
+2025-04-29 08:03:26.955193 - Epoch #	7210	Avg Cumulative Reward: 1.68	76.29
+2025-04-29 08:04:34.897237 - Epoch #	7220	Avg Cumulative Reward: 1.57	67.94
+2025-04-29 08:05:39.948998 - Epoch #	7230	Avg Cumulative Reward: 1.86	65.05
+2025-04-29 08:06:54.289142 - Epoch #	7240	Avg Cumulative Reward: 1.82	74.34
+2025-04-29 08:08:05.393851 - Epoch #	7250	Avg Cumulative Reward: 0.91	71.10
+2025-04-29 08:09:10.812418 - Epoch #	7260	Avg Cumulative Reward: 1.56	65.42
+2025-04-29 08:10:13.144182 - Epoch #	7270	Avg Cumulative Reward: 1.66	62.33
+2025-04-29 08:11:16.687455 - Epoch #	7280	Avg Cumulative Reward: 1.48	63.54
+2025-04-29 08:12:20.103769 - Epoch #	7290	Avg Cumulative Reward: 1.79	63.42
+2025-04-29 08:13:29.835648 - Epoch #	7300	Avg Cumulative Reward: 0.93	69.73
+2025-04-29 08:14:32.562347 - Epoch #	7310	Avg Cumulative Reward: 1.75	62.73
+2025-04-29 08:15:40.531517 - Epoch #	7320	Avg Cumulative Reward: 0.71	67.97
+2025-04-29 08:16:49.657038 - Epoch #	7330	Avg Cumulative Reward: 1.84	69.13
+2025-04-29 08:17:54.223333 - Epoch #	7340	Avg Cumulative Reward: 1.88	64.57
+2025-04-29 08:18:52.575699 - Epoch #	7350	Avg Cumulative Reward: 1.43	58.35
+2025-04-29 08:19:58.515203 - Epoch #	7360	Avg Cumulative Reward: 1.44	65.94
+2025-04-29 08:21:04.225876 - Epoch #	7370	Avg Cumulative Reward: 1.88	65.71
+2025-04-29 08:22:13.455093 - Epoch #	7380	Avg Cumulative Reward: 0.66	69.23
+2025-04-29 08:23:18.799690 - Epoch #	7390	Avg Cumulative Reward: 1.56	65.34
+2025-04-29 08:24:24.221621 - Epoch #	7400	Avg Cumulative Reward: 1.54	65.42
+2025-04-29 08:25:28.860181 - Epoch #	7410	Avg Cumulative Reward: 1.67	64.64
+2025-04-29 08:26:28.692129 - Epoch #	7420	Avg Cumulative Reward: 1.67	59.83
+2025-04-29 08:27:37.843233 - Epoch #	7430	Avg Cumulative Reward: 1.59	69.15
+2025-04-29 08:28:41.081617 - Epoch #	7440	Avg Cumulative Reward: 1.81	63.24
+2025-04-29 08:29:49.366560 - Epoch #	7450	Avg Cumulative Reward: 1.40	68.28
+2025-04-29 08:31:01.845856 - Epoch #	7460	Avg Cumulative Reward: 1.85	72.48
+2025-04-29 08:32:10.248352 - Epoch #	7470	Avg Cumulative Reward: 1.62	68.40
+2025-04-29 08:33:19.017955 - Epoch #	7480	Avg Cumulative Reward: 0.84	68.77
+2025-04-29 08:34:22.759718 - Epoch #	7490	Avg Cumulative Reward: 1.49	63.74
+2025-04-29 08:35:27.054635 - Epoch #	7500	Avg Cumulative Reward: 0.67	64.29
+2025-04-29 08:36:36.697279 - Epoch #	7510	Avg Cumulative Reward: 1.63	69.64
+2025-04-29 08:37:39.672906 - Epoch #	7520	Avg Cumulative Reward: 1.58	62.98
+2025-04-29 08:38:41.787939 - Epoch #	7530	Avg Cumulative Reward: 1.71	62.12
+2025-04-29 08:39:47.814072 - Epoch #	7540	Avg Cumulative Reward: 1.78	66.03
+2025-04-29 08:41:02.810804 - Epoch #	7550	Avg Cumulative Reward: 1.51	75.00
+2025-04-29 08:42:11.507105 - Epoch #	7560	Avg Cumulative Reward: 0.86	68.70
+2025-04-29 08:43:24.089229 - Epoch #	7570	Avg Cumulative Reward: 1.72	72.58
+2025-04-29 08:44:29.541959 - Epoch #	7580	Avg Cumulative Reward: 1.75	65.45
+2025-04-29 08:45:28.953592 - Epoch #	7590	Avg Cumulative Reward: 1.85	59.41
+2025-04-29 08:46:36.644507 - Epoch #	7600	Avg Cumulative Reward: 1.70	67.69
+2025-04-29 08:47:45.176595 - Epoch #	7610	Avg Cumulative Reward: 1.61	68.53
+2025-04-29 08:48:55.652086 - Epoch #	7620	Avg Cumulative Reward: 1.91	70.48
+2025-04-29 08:50:05.940829 - Epoch #	7630	Avg Cumulative Reward: 1.17	70.29
+2025-04-29 08:51:14.495108 - Epoch #	7640	Avg Cumulative Reward: 1.70	68.55
+2025-04-29 08:52:24.327084 - Epoch #	7650	Avg Cumulative Reward: 1.70	69.83
+2025-04-29 08:53:37.594535 - Epoch #	7660	Avg Cumulative Reward: 1.89	73.27
+2025-04-29 08:54:47.946866 - Epoch #	7670	Avg Cumulative Reward: 1.72	70.35
+2025-04-29 08:56:00.955239 - Epoch #	7680	Avg Cumulative Reward: 1.87	73.01
+2025-04-29 08:57:04.333903 - Epoch #	7690	Avg Cumulative Reward: 1.67	63.38
+2025-04-29 08:58:10.207940 - Epoch #	7700	Avg Cumulative Reward: 1.61	65.87
+2025-04-29 08:59:20.584470 - Epoch #	7710	Avg Cumulative Reward: 1.72	70.38
+2025-04-29 09:00:37.050442 - Epoch #	7720	Avg Cumulative Reward: 1.70	76.47
+2025-04-29 09:01:42.948784 - Epoch #	7730	Avg Cumulative Reward: 1.84	65.90
+2025-04-29 09:02:53.035928 - Epoch #	7740	Avg Cumulative Reward: 1.08	70.09
+2025-04-29 09:04:02.404488 - Epoch #	7750	Avg Cumulative Reward: 1.72	69.37
+2025-04-29 09:05:11.060679 - Epoch #	7760	Avg Cumulative Reward: 1.63	68.66
+2025-04-29 09:06:13.827415 - Epoch #	7770	Avg Cumulative Reward: 1.86	62.77
+2025-04-29 09:07:24.886234 - Epoch #	7780	Avg Cumulative Reward: 0.39	71.06
+2025-04-29 09:08:28.865314 - Epoch #	7790	Avg Cumulative Reward: 1.86	63.98
+2025-04-29 09:09:45.077865 - Epoch #	7800	Avg Cumulative Reward: 1.85	76.21
+2025-04-29 09:10:51.173312 - Epoch #	7810	Avg Cumulative Reward: 1.62	66.10
+2025-04-29 09:11:57.785796 - Epoch #	7820	Avg Cumulative Reward: 1.63	66.61
+2025-04-29 09:12:56.759998 - Epoch #	7830	Avg Cumulative Reward: 1.60	58.97
+2025-04-29 09:14:04.784727 - Epoch #	7840	Avg Cumulative Reward: 1.63	68.02
+2025-04-29 09:15:17.100075 - Epoch #	7850	Avg Cumulative Reward: 1.86	72.32
+2025-04-29 09:16:29.281202 - Epoch #	7860	Avg Cumulative Reward: 1.67	72.18
+2025-04-29 09:17:38.527642 - Epoch #	7870	Avg Cumulative Reward: 1.91	69.25
+2025-04-29 09:18:42.521569 - Epoch #	7880	Avg Cumulative Reward: 1.71	63.99
+2025-04-29 09:19:45.540597 - Epoch #	7890	Avg Cumulative Reward: 1.70	63.02
+2025-04-29 09:20:56.915795 - Epoch #	7900	Avg Cumulative Reward: 1.81	71.38
+2025-04-29 09:22:05.551327 - Epoch #	7910	Avg Cumulative Reward: 1.82	68.64
+2025-04-29 09:23:11.104302 - Epoch #	7920	Avg Cumulative Reward: 1.88	65.55
+2025-04-29 09:24:18.342502 - Epoch #	7930	Avg Cumulative Reward: 1.61	67.24
+2025-04-29 09:25:24.793660 - Time between reward step: #	58846.6658809185
+2025-04-29 09:25:24.793781 - Average Score: 0.955 Elapsed time: 16:20:47.248950
+2025-04-29 09:25:31.834257 - Epoch #	7940	Avg Cumulative Reward: 1.68	73.49
+2025-04-29 09:26:41.161129 - Epoch #	7950	Avg Cumulative Reward: 1.62	69.33
+2025-04-29 09:27:49.852470 - Epoch #	7960	Avg Cumulative Reward: 1.88	68.69
+2025-04-29 09:29:03.516362 - Epoch #	7970	Avg Cumulative Reward: 1.79	73.66
+2025-04-29 09:30:11.251940 - Epoch #	7980	Avg Cumulative Reward: 1.91	67.74
+2025-04-29 09:31:22.670100 - Epoch #	7990	Avg Cumulative Reward: 1.60	71.42
+2025-04-29 09:32:22.545523 - Epoch #	8000	Avg Cumulative Reward: 1.90	59.88
+2025-04-29 09:32:29.047160 - Mean Reward at episode 8000: 0.9443
+2025-04-29 09:33:28.995355 - Epoch #	8010	Avg Cumulative Reward: 1.80	66.45
+2025-04-29 09:34:42.120392 - Epoch #	8020	Avg Cumulative Reward: 1.89	73.13
+2025-04-29 09:35:49.039226 - Epoch #	8030	Avg Cumulative Reward: 1.81	66.92
+2025-04-29 09:36:53.017681 - Epoch #	8040	Avg Cumulative Reward: 1.44	63.98
+2025-04-29 09:38:02.239402 - Epoch #	8050	Avg Cumulative Reward: 2.00	69.22
+2025-04-29 09:39:06.898978 - Epoch #	8060	Avg Cumulative Reward: 1.84	64.66
+2025-04-29 09:40:11.862186 - Epoch #	8070	Avg Cumulative Reward: 1.58	64.96
+2025-04-29 09:41:17.720614 - Epoch #	8080	Avg Cumulative Reward: 1.61	65.86
+2025-04-29 09:42:24.427558 - Epoch #	8090	Avg Cumulative Reward: 1.67	66.71
+2025-04-29 09:43:27.145135 - Epoch #	8100	Avg Cumulative Reward: 1.43	62.72
+2025-04-29 09:44:25.067529 - Epoch #	8110	Avg Cumulative Reward: 1.60	57.92
+2025-04-29 09:45:25.188685 - Epoch #	8120	Avg Cumulative Reward: 1.84	60.12
+2025-04-29 09:46:37.799790 - Epoch #	8130	Avg Cumulative Reward: 1.54	72.61
+2025-04-29 09:47:42.683814 - Epoch #	8140	Avg Cumulative Reward: 1.68	64.88
+2025-04-29 09:48:46.085762 - Epoch #	8150	Avg Cumulative Reward: 1.77	63.40
+2025-04-29 09:49:45.511318 - Epoch #	8160	Avg Cumulative Reward: 1.81	59.43
+2025-04-29 09:50:53.445799 - Epoch #	8170	Avg Cumulative Reward: 1.72	67.93
+2025-04-29 09:52:04.075459 - Epoch #	8180	Avg Cumulative Reward: 1.76	70.63
+2025-04-29 09:53:11.293484 - Epoch #	8190	Avg Cumulative Reward: 1.60	67.22
+2025-04-29 09:54:20.085195 - Epoch #	8200	Avg Cumulative Reward: 1.83	68.79
+2025-04-29 09:55:18.531842 - Epoch #	8210	Avg Cumulative Reward: 1.88	58.45
+2025-04-29 09:56:27.776634 - Epoch #	8220	Avg Cumulative Reward: 1.73	69.24
+2025-04-29 09:57:31.430805 - Epoch #	8230	Avg Cumulative Reward: 1.66	63.65
+2025-04-29 09:58:38.661579 - Epoch #	8240	Avg Cumulative Reward: 1.68	67.23
+2025-04-29 09:59:37.765914 - Epoch #	8250	Avg Cumulative Reward: 0.74	59.10
+2025-04-29 10:00:41.739865 - Epoch #	8260	Avg Cumulative Reward: 1.69	63.97
+2025-04-29 10:01:53.649908 - Epoch #	8270	Avg Cumulative Reward: 1.62	71.91
+2025-04-29 10:02:56.718361 - Epoch #	8280	Avg Cumulative Reward: 0.96	63.07
+2025-04-29 10:04:02.251631 - Epoch #	8290	Avg Cumulative Reward: 1.64	65.53
+2025-04-29 10:05:19.127917 - Epoch #	8300	Avg Cumulative Reward: 1.96	76.88
+2025-04-29 10:06:26.120505 - Epoch #	8310	Avg Cumulative Reward: 1.77	66.99
+2025-04-29 10:07:31.717789 - Epoch #	8320	Avg Cumulative Reward: 1.49	65.60
+2025-04-29 10:08:33.785784 - Epoch #	8330	Avg Cumulative Reward: 1.82	62.07
+2025-04-29 10:09:41.544841 - Epoch #	8340	Avg Cumulative Reward: 1.21	67.76
+2025-04-29 10:10:51.221611 - Epoch #	8350	Avg Cumulative Reward: 1.90	69.68
+2025-04-29 10:11:50.507798 - Epoch #	8360	Avg Cumulative Reward: 1.77	59.29
+2025-04-29 10:12:48.912517 - Epoch #	8370	Avg Cumulative Reward: 1.41	58.40
+2025-04-29 10:13:54.358572 - Epoch #	8380	Avg Cumulative Reward: 1.00	65.45
+2025-04-29 10:15:00.471773 - Epoch #	8390	Avg Cumulative Reward: 1.89	66.11
+2025-04-29 10:16:08.082255 - Epoch #	8400	Avg Cumulative Reward: 1.94	67.61
+2025-04-29 10:17:19.885727 - Epoch #	8410	Avg Cumulative Reward: 1.27	71.80
+2025-04-29 10:18:28.148313 - Epoch #	8420	Avg Cumulative Reward: 1.95	68.26
+2025-04-29 10:19:35.528535 - Epoch #	8430	Avg Cumulative Reward: 1.90	67.38
+2025-04-29 10:20:34.551571 - Epoch #	8440	Avg Cumulative Reward: 1.84	59.02
+2025-04-29 10:21:42.364250 - Epoch #	8450	Avg Cumulative Reward: 1.90	67.81
+2025-04-29 10:22:44.629632 - Epoch #	8460	Avg Cumulative Reward: 1.70	62.27
+2025-04-29 10:23:46.767919 - Epoch #	8470	Avg Cumulative Reward: 1.87	62.14
+2025-04-29 10:24:47.409992 - Epoch #	8480	Avg Cumulative Reward: 1.68	60.64
+2025-04-29 10:25:52.436629 - Epoch #	8490	Avg Cumulative Reward: 1.92	65.03
+2025-04-29 10:27:04.438165 - Epoch #	8500	Avg Cumulative Reward: 1.69	72.00
+2025-04-29 10:27:37.782277 - Time between reward step: #	62579.65449810028
+2025-04-29 10:27:37.782415 - Average Score: 0.960 Elapsed time: 17:23:00.237576
+2025-04-29 10:27:50.394892 - Time between reward step: #	62592.26711297035
+2025-04-29 10:27:50.395014 - Average Score: 0.960 Elapsed time: 17:23:12.850183
+2025-04-29 10:28:10.917823 - Time between reward step: #	62612.79004406929
+2025-04-29 10:28:10.917948 - Average Score: 0.970 Elapsed time: 17:23:33.373118
+2025-04-29 10:28:10.918060 - Epoch #	8510	Avg Cumulative Reward: 1.94	66.48
+2025-04-29 10:28:28.293039 - Time between reward step: #	62630.1652610302
+2025-04-29 10:28:28.293163 - Average Score: 0.970 Elapsed time: 17:23:50.748331
+2025-04-29 10:29:22.893568 - Epoch #	8520	Avg Cumulative Reward: 1.90	71.98
+2025-04-29 10:30:28.811387 - Epoch #	8530	Avg Cumulative Reward: 1.84	65.92
+2025-04-29 10:31:32.709549 - Epoch #	8540	Avg Cumulative Reward: 1.86	63.90
+2025-04-29 10:32:37.031772 - Epoch #	8550	Avg Cumulative Reward: 1.45	64.32
+2025-04-29 10:33:51.418295 - Epoch #	8560	Avg Cumulative Reward: 2.00	74.39
+2025-04-29 10:34:55.133666 - Epoch #	8570	Avg Cumulative Reward: 1.84	63.72
+2025-04-29 10:36:07.465821 - Epoch #	8580	Avg Cumulative Reward: 1.08	72.33
+2025-04-29 10:37:12.277205 - Epoch #	8590	Avg Cumulative Reward: 1.93	64.81
+2025-04-29 10:38:26.178125 - Epoch #	8600	Avg Cumulative Reward: 1.83	73.90
+2025-04-29 10:39:26.574932 - Epoch #	8610	Avg Cumulative Reward: 1.58	60.40
+2025-04-29 10:40:36.124171 - Epoch #	8620	Avg Cumulative Reward: 1.98	69.55
+2025-04-29 10:41:41.075303 - Epoch #	8630	Avg Cumulative Reward: 1.89	64.95
+2025-04-29 10:42:45.302694 - Epoch #	8640	Avg Cumulative Reward: 1.94	64.23
+2025-04-29 10:43:42.982801 - Epoch #	8650	Avg Cumulative Reward: 1.80	57.68
+2025-04-29 10:44:51.806206 - Epoch #	8660	Avg Cumulative Reward: 0.89	68.82
+2025-04-29 10:46:01.305344 - Epoch #	8670	Avg Cumulative Reward: 1.09	69.50
+2025-04-29 10:47:06.900454 - Epoch #	8680	Avg Cumulative Reward: 1.77	65.60
+2025-04-29 10:48:16.975168 - Epoch #	8690	Avg Cumulative Reward: 1.64	70.07
+2025-04-29 10:49:26.511960 - Epoch #	8700	Avg Cumulative Reward: 1.06	69.54
+2025-04-29 10:50:39.070259 - Epoch #	8710	Avg Cumulative Reward: 2.03	72.56
+2025-04-29 10:51:50.835713 - Epoch #	8720	Avg Cumulative Reward: 1.97	71.77
+2025-04-29 10:52:58.692184 - Epoch #	8730	Avg Cumulative Reward: 1.84	67.86
+2025-04-29 10:54:01.362540 - Epoch #	8740	Avg Cumulative Reward: 1.90	62.67
+2025-04-29 10:55:11.442434 - Epoch #	8750	Avg Cumulative Reward: 1.96	70.08
+2025-04-29 10:56:15.832198 - Epoch #	8760	Avg Cumulative Reward: 1.33	64.39
+2025-04-29 10:57:18.468038 - Epoch #	8770	Avg Cumulative Reward: 1.86	62.64
+2025-04-29 10:58:25.127955 - Epoch #	8780	Avg Cumulative Reward: 1.93	66.66
+2025-04-29 10:59:27.532593 - Epoch #	8790	Avg Cumulative Reward: 1.89	62.40
+2025-04-29 10:59:34.244044 - Time between reward step: #	64496.11626505852
+2025-04-29 10:59:34.244161 - Average Score: 0.975 Elapsed time: 17:54:56.699331
+2025-04-29 11:00:35.782023 - Epoch #	8800	Avg Cumulative Reward: 1.92	68.25
+2025-04-29 11:01:42.294757 - Epoch #	8810	Avg Cumulative Reward: 1.11	66.51
+2025-04-29 11:02:50.365629 - Epoch #	8820	Avg Cumulative Reward: 1.90	68.07
+2025-04-29 11:03:59.376539 - Epoch #	8830	Avg Cumulative Reward: 1.80	69.01
+2025-04-29 11:05:04.365213 - Epoch #	8840	Avg Cumulative Reward: 1.92	64.99
+2025-04-29 11:06:07.465410 - Epoch #	8850	Avg Cumulative Reward: 1.89	63.10
+2025-04-29 11:07:08.319488 - Epoch #	8860	Avg Cumulative Reward: 1.72	60.85
+2025-04-29 11:08:08.776206 - Epoch #	8870	Avg Cumulative Reward: 1.93	60.46
+2025-04-29 11:09:16.112685 - Epoch #	8880	Avg Cumulative Reward: 1.95	67.34
+2025-04-29 11:10:25.431311 - Epoch #	8890	Avg Cumulative Reward: 1.96	69.32
+2025-04-29 11:11:37.364445 - Epoch #	8900	Avg Cumulative Reward: 1.82	71.93
+2025-04-29 11:12:27.610448 - Time between reward step: #	65269.48266887665
+2025-04-29 11:12:27.610572 - Average Score: 0.980 Elapsed time: 18:07:50.065741
+2025-04-29 11:12:46.044417 - Epoch #	8910	Avg Cumulative Reward: 1.92	68.68
+2025-04-29 11:13:58.701418 - Epoch #	8920	Avg Cumulative Reward: 1.61	72.66
+2025-04-29 11:15:04.633348 - Epoch #	8930	Avg Cumulative Reward: 1.72	65.93
+2025-04-29 11:16:08.699946 - Epoch #	8940	Avg Cumulative Reward: 0.90	64.07
+2025-04-29 11:17:20.027857 - Epoch #	8950	Avg Cumulative Reward: 1.93	71.33
+2025-04-29 11:18:27.238686 - Epoch #	8960	Avg Cumulative Reward: 1.90	67.21
+2025-04-29 11:19:41.408522 - Epoch #	8970	Avg Cumulative Reward: 1.97	74.17
+2025-04-29 11:20:45.515957 - Epoch #	8980	Avg Cumulative Reward: 1.67	64.11
+2025-04-29 11:21:49.124483 - Epoch #	8990	Avg Cumulative Reward: 1.84	63.61
+2025-04-29 11:22:53.688551 - Epoch #	9000	Avg Cumulative Reward: 1.92	64.56
+2025-04-29 11:23:01.417573 - Mean Reward at episode 9000: 0.9350999999999999
+2025-04-29 11:24:02.012634 - Epoch #	9010	Avg Cumulative Reward: 1.85	68.32
+2025-04-29 11:25:01.251148 - Epoch #	9020	Avg Cumulative Reward: 1.51	59.24
+2025-04-29 11:25:57.267882 - Epoch #	9030	Avg Cumulative Reward: 1.84	56.02
+2025-04-29 11:26:58.715091 - Epoch #	9040	Avg Cumulative Reward: 1.70	61.45
+2025-04-29 11:28:00.214391 - Epoch #	9050	Avg Cumulative Reward: 1.85	61.50
+2025-04-29 11:29:01.664362 - Epoch #	9060	Avg Cumulative Reward: 1.94	61.45
+2025-04-29 11:30:07.494435 - Epoch #	9070	Avg Cumulative Reward: 1.88	65.83
+2025-04-29 11:31:10.575469 - Epoch #	9080	Avg Cumulative Reward: 1.38	63.08
+2025-04-29 11:32:13.724857 - Epoch #	9090	Avg Cumulative Reward: 1.92	63.15
+2025-04-29 11:33:22.340365 - Epoch #	9100	Avg Cumulative Reward: 2.00	68.62
+2025-04-29 11:34:26.560322 - Epoch #	9110	Avg Cumulative Reward: 1.03	64.22
+2025-04-29 11:35:28.542068 - Epoch #	9120	Avg Cumulative Reward: 1.88	61.98
+2025-04-29 11:36:34.197085 - Epoch #	9130	Avg Cumulative Reward: 1.83	65.66
+2025-04-29 11:37:36.617777 - Epoch #	9140	Avg Cumulative Reward: 0.95	62.42
+2025-04-29 11:38:37.559863 - Epoch #	9150	Avg Cumulative Reward: 1.71	60.94
+2025-04-29 11:39:48.217012 - Epoch #	9160	Avg Cumulative Reward: 1.66	70.66
+2025-04-29 11:40:52.348940 - Epoch #	9170	Avg Cumulative Reward: 0.94	64.13
+2025-04-29 11:41:54.408535 - Epoch #	9180	Avg Cumulative Reward: 1.86	62.06
+2025-04-29 11:42:59.603747 - Epoch #	9190	Avg Cumulative Reward: 1.99	65.20
+2025-04-29 11:44:07.404499 - Epoch #	9200	Avg Cumulative Reward: 0.96	67.80
+2025-04-29 11:45:10.997259 - Epoch #	9210	Avg Cumulative Reward: 1.97	63.59
+2025-04-29 11:46:19.922119 - Epoch #	9220	Avg Cumulative Reward: 1.95	68.92
+2025-04-29 11:47:21.178887 - Epoch #	9230	Avg Cumulative Reward: 1.84	61.26
+2025-04-29 11:48:28.194852 - Epoch #	9240	Avg Cumulative Reward: 0.82	67.02
+2025-04-29 11:49:36.813439 - Epoch #	9250	Avg Cumulative Reward: 1.67	68.62
+2025-04-29 11:50:36.472371 - Epoch #	9260	Avg Cumulative Reward: 1.86	59.66
+2025-04-29 11:51:40.988242 - Epoch #	9270	Avg Cumulative Reward: 1.92	64.52
+2025-04-29 11:52:38.615429 - Epoch #	9280	Avg Cumulative Reward: 1.87	57.63
+2025-04-29 11:53:45.325223 - Epoch #	9290	Avg Cumulative Reward: 1.91	66.71
+2025-04-29 11:54:48.035011 - Epoch #	9300	Avg Cumulative Reward: 1.85	62.71
+2025-04-29 11:56:00.121683 - Epoch #	9310	Avg Cumulative Reward: 1.91	72.09
+2025-04-29 11:57:10.135844 - Epoch #	9320	Avg Cumulative Reward: 1.80	70.01
+2025-04-29 11:58:15.446419 - Epoch #	9330	Avg Cumulative Reward: 1.75	65.31
+2025-04-29 11:59:24.224484 - Epoch #	9340	Avg Cumulative Reward: 0.97	68.78
+2025-04-29 12:00:25.742699 - Epoch #	9350	Avg Cumulative Reward: 1.77	61.52
+2025-04-29 12:01:34.077656 - Epoch #	9360	Avg Cumulative Reward: 1.95	68.33
+2025-04-29 12:02:40.485694 - Epoch #	9370	Avg Cumulative Reward: 1.38	66.41
+2025-04-29 12:03:46.542457 - Epoch #	9380	Avg Cumulative Reward: 1.56	66.06
+2025-04-29 12:04:52.636761 - Epoch #	9390	Avg Cumulative Reward: 1.81	66.09
+2025-04-29 12:05:51.315596 - Epoch #	9400	Avg Cumulative Reward: 1.64	58.68
+2025-04-29 12:06:55.763306 - Epoch #	9410	Avg Cumulative Reward: 1.64	64.45
+2025-04-29 12:07:56.439504 - Epoch #	9420	Avg Cumulative Reward: 1.87	60.68
+2025-04-29 12:08:52.033217 - Epoch #	9430	Avg Cumulative Reward: 1.76	55.59
+2025-04-29 12:09:57.270855 - Epoch #	9440	Avg Cumulative Reward: 1.94	65.24
+2025-04-29 12:11:13.060268 - Epoch #	9450	Avg Cumulative Reward: 1.59	75.79
+2025-04-29 12:12:14.138320 - Epoch #	9460	Avg Cumulative Reward: 1.89	61.08
+2025-04-29 12:13:15.878403 - Epoch #	9470	Avg Cumulative Reward: 1.98	61.74
+2025-04-29 12:14:20.367788 - Epoch #	9480	Avg Cumulative Reward: 1.95	64.49
+2025-04-29 12:15:20.507284 - Epoch #	9490	Avg Cumulative Reward: 1.92	60.14
+2025-04-29 12:16:25.567640 - Epoch #	9500	Avg Cumulative Reward: 1.87	65.06
+2025-04-29 12:16:51.851856 - Time between reward step: #	69133.72407603264
+2025-04-29 12:16:51.851978 - Average Score: 0.985 Elapsed time: 19:12:14.307147
+2025-04-29 12:17:31.475821 - Epoch #	9510	Avg Cumulative Reward: 1.92	65.91
+2025-04-29 12:18:39.376149 - Epoch #	9520	Avg Cumulative Reward: 1.24	67.90
+2025-04-29 12:19:43.450272 - Epoch #	9530	Avg Cumulative Reward: 1.92	64.07
+2025-04-29 12:20:50.249632 - Epoch #	9540	Avg Cumulative Reward: 1.85	66.80
+2025-04-29 12:21:56.062034 - Epoch #	9550	Avg Cumulative Reward: 0.71	65.81
+2025-04-29 12:23:04.043535 - Epoch #	9560	Avg Cumulative Reward: 1.90	67.98
+2025-04-29 12:24:15.441936 - Epoch #	9570	Avg Cumulative Reward: 1.68	71.40
+2025-04-29 12:25:23.491637 - Epoch #	9580	Avg Cumulative Reward: 1.09	68.05
+2025-04-29 12:26:27.496088 - Epoch #	9590	Avg Cumulative Reward: 1.48	64.00
+2025-04-29 12:27:33.746490 - Epoch #	9600	Avg Cumulative Reward: 1.82	66.25
+2025-04-29 12:28:38.335919 - Epoch #	9610	Avg Cumulative Reward: 1.88	64.59
+2025-04-29 12:29:41.901702 - Epoch #	9620	Avg Cumulative Reward: 1.84	63.57
+2025-04-29 12:30:51.380882 - Epoch #	9630	Avg Cumulative Reward: 1.47	69.48
+2025-04-29 12:31:57.203460 - Epoch #	9640	Avg Cumulative Reward: 1.84	65.82
+2025-04-29 12:32:59.393658 - Epoch #	9650	Avg Cumulative Reward: 1.90	62.19
+2025-04-29 12:34:05.227278 - Epoch #	9660	Avg Cumulative Reward: 1.96	65.83
+2025-04-29 12:35:09.971039 - Epoch #	9670	Avg Cumulative Reward: 1.86	64.74
+2025-04-29 12:36:20.843789 - Epoch #	9680	Avg Cumulative Reward: 1.90	70.87
+2025-04-29 12:37:22.724513 - Epoch #	9690	Avg Cumulative Reward: 1.65	61.88
+2025-04-29 12:38:28.418895 - Epoch #	9700	Avg Cumulative Reward: 1.85	65.69
+2025-04-29 12:39:37.083161 - Epoch #	9710	Avg Cumulative Reward: 1.95	68.66
+2025-04-29 12:40:37.328478 - Epoch #	9720	Avg Cumulative Reward: 1.78	60.25
+2025-04-29 12:41:38.054731 - Epoch #	9730	Avg Cumulative Reward: 1.38	60.73
+2025-04-29 12:42:45.995416 - Epoch #	9740	Avg Cumulative Reward: 1.67	67.94
+2025-04-29 12:43:53.686780 - Epoch #	9750	Avg Cumulative Reward: 1.81	67.69
+2025-04-29 12:45:05.105491 - Epoch #	9760	Avg Cumulative Reward: 1.86	71.42
+2025-04-29 12:46:12.337158 - Epoch #	9770	Avg Cumulative Reward: 1.92	67.23
+2025-04-29 12:47:16.409505 - Epoch #	9780	Avg Cumulative Reward: 0.91	64.07
+2025-04-29 12:48:25.107209 - Epoch #	9790	Avg Cumulative Reward: 1.64	68.70
+2025-04-29 12:49:32.575270 - Epoch #	9800	Avg Cumulative Reward: 1.96	67.47
+2025-04-29 12:50:40.842190 - Epoch #	9810	Avg Cumulative Reward: 1.93	68.27
+2025-04-29 12:51:47.095092 - Epoch #	9820	Avg Cumulative Reward: 2.00	66.25
+2025-04-29 12:52:47.842967 - Epoch #	9830	Avg Cumulative Reward: 1.86	60.75
+2025-04-29 12:53:49.580775 - Epoch #	9840	Avg Cumulative Reward: 1.84	61.74
+2025-04-29 12:54:54.018628 - Epoch #	9850	Avg Cumulative Reward: 1.90	64.44
+2025-04-29 12:55:56.303476 - Epoch #	9860	Avg Cumulative Reward: 1.84	62.28
+2025-04-29 12:57:00.471543 - Epoch #	9870	Avg Cumulative Reward: 1.90	64.17
+2025-04-29 12:58:05.490146 - Epoch #	9880	Avg Cumulative Reward: 2.02	65.02
+2025-04-29 12:58:16.678911 - Time between reward step: #	71618.55113387108
+2025-04-29 12:58:16.679031 - Average Score: 0.990 Elapsed time: 19:53:39.134200
+2025-04-29 12:59:08.406651 - Epoch #	9890	Avg Cumulative Reward: 1.60	62.92
+2025-04-29 13:00:19.071620 - Epoch #	9900	Avg Cumulative Reward: 1.97	70.66
+2025-04-29 13:01:22.866885 - Epoch #	9910	Avg Cumulative Reward: 1.95	63.80
+2025-04-29 13:02:30.178390 - Epoch #	9920	Avg Cumulative Reward: 1.94	67.31
+2025-04-29 13:03:37.281174 - Epoch #	9930	Avg Cumulative Reward: 2.00	67.10
+2025-04-29 13:04:40.227337 - Epoch #	9940	Avg Cumulative Reward: 1.80	62.95
+2025-04-29 13:05:45.987421 - Epoch #	9950	Avg Cumulative Reward: 1.95	65.76
+2025-04-29 13:06:45.910838 - Epoch #	9960	Avg Cumulative Reward: 1.88	59.92
+2025-04-29 13:07:57.177868 - Epoch #	9970	Avg Cumulative Reward: 1.95	71.27
+2025-04-29 13:09:00.342392 - Epoch #	9980	Avg Cumulative Reward: 1.56	63.16
+2025-04-29 13:10:05.971186 - Epoch #	9990	Avg Cumulative Reward: 1.67	65.63
+2025-04-29 13:11:14.363782 - Epoch #	10000	Avg Cumulative Reward: 1.80	68.39
+2025-04-29 13:11:21.944167 - Mean Reward at episode 10000: 0.94935
+2025-04-29 13:12:20.388705 - Epoch #	10010	Avg Cumulative Reward: 2.00	66.02
+2025-04-29 13:13:29.106967 - Epoch #	10020	Avg Cumulative Reward: 1.98	68.72
+2025-04-29 13:14:30.431540 - Epoch #	10030	Avg Cumulative Reward: 1.91	61.32
+2025-04-29 13:15:31.605524 - Epoch #	10040	Avg Cumulative Reward: 1.88	61.17
+2025-04-29 13:16:35.081512 - Epoch #	10050	Avg Cumulative Reward: 1.53	63.48
+2025-04-29 13:17:34.348792 - Epoch #	10060	Avg Cumulative Reward: 1.93	59.27
+2025-04-29 13:18:36.143750 - Epoch #	10070	Avg Cumulative Reward: 1.69	61.79
+2025-04-29 13:19:37.586229 - Epoch #	10080	Avg Cumulative Reward: 1.76	61.44
+2025-04-29 13:20:37.277347 - Epoch #	10090	Avg Cumulative Reward: 1.91	59.69
+2025-04-29 13:21:43.284087 - Epoch #	10100	Avg Cumulative Reward: 2.07	66.01
+2025-04-29 13:22:40.802963 - Epoch #	10110	Avg Cumulative Reward: 1.84	57.52
+2025-04-29 13:23:51.395875 - Epoch #	10120	Avg Cumulative Reward: 1.93	70.59
+2025-04-29 13:24:52.668468 - Epoch #	10130	Avg Cumulative Reward: 1.93	61.27
+2025-04-29 13:25:57.555332 - Epoch #	10140	Avg Cumulative Reward: 1.84	64.89
+2025-04-29 13:26:57.030101 - Epoch #	10150	Avg Cumulative Reward: 1.93	59.47
+2025-04-29 13:28:04.838525 - Epoch #	10160	Avg Cumulative Reward: -0.21	67.81
+2025-04-29 13:29:07.823290 - Epoch #	10170	Avg Cumulative Reward: 1.86	62.98
+2025-04-29 13:30:18.563683 - Epoch #	10180	Avg Cumulative Reward: 2.03	70.74
+2025-04-29 13:31:19.569127 - Epoch #	10190	Avg Cumulative Reward: 1.93	61.01
+2025-04-29 13:32:27.094866 - Epoch #	10200	Avg Cumulative Reward: 1.34	67.53
+2025-04-29 13:33:30.469145 - Epoch #	10210	Avg Cumulative Reward: 1.78	63.37
+2025-04-29 13:34:33.103296 - Epoch #	10220	Avg Cumulative Reward: 0.98	62.63
+2025-04-29 13:35:32.106917 - Epoch #	10230	Avg Cumulative Reward: 1.86	59.00
+2025-04-29 13:36:30.040180 - Epoch #	10240	Avg Cumulative Reward: 1.84	57.93
+2025-04-29 13:37:39.822108 - Epoch #	10250	Avg Cumulative Reward: 2.03	69.78
+2025-04-29 13:38:39.634298 - Epoch #	10260	Avg Cumulative Reward: 2.00	59.81
+2025-04-29 13:39:49.345205 - Epoch #	10270	Avg Cumulative Reward: 2.01	69.71
+2025-04-29 13:40:55.082478 - Epoch #	10280	Avg Cumulative Reward: 1.97	65.74
+2025-04-29 13:42:00.566672 - Epoch #	10290	Avg Cumulative Reward: 2.00	65.48
+2025-04-29 13:43:04.448147 - Epoch #	10300	Avg Cumulative Reward: 1.94	63.88
+2025-04-29 13:44:02.204429 - Epoch #	10310	Avg Cumulative Reward: 1.56	57.76
+2025-04-29 13:45:03.310942 - Epoch #	10320	Avg Cumulative Reward: 1.94	61.11
+2025-04-29 13:46:06.398906 - Epoch #	10330	Avg Cumulative Reward: 1.97	63.09
+2025-04-29 13:47:05.001859 - Epoch #	10340	Avg Cumulative Reward: 1.93	58.60
+2025-04-29 13:48:15.932297 - Epoch #	10350	Avg Cumulative Reward: 1.96	70.93
+2025-04-29 13:49:17.208518 - Epoch #	10360	Avg Cumulative Reward: 1.73	61.28
+2025-04-29 13:50:17.367228 - Epoch #	10370	Avg Cumulative Reward: 1.87	60.16
+2025-04-29 13:51:25.942975 - Epoch #	10380	Avg Cumulative Reward: 2.00	68.58
+2025-04-29 13:52:26.513214 - Epoch #	10390	Avg Cumulative Reward: 1.72	60.57
+2025-04-29 13:53:25.981978 - Epoch #	10400	Avg Cumulative Reward: 1.91	59.47
+2025-04-29 13:54:32.352146 - Epoch #	10410	Avg Cumulative Reward: 1.98	66.37
+2025-04-29 13:55:38.297832 - Epoch #	10420	Avg Cumulative Reward: 1.80	65.95
+2025-04-29 13:56:42.275988 - Epoch #	10430	Avg Cumulative Reward: 1.92	63.98
+2025-04-29 13:57:49.663215 - Epoch #	10440	Avg Cumulative Reward: 2.03	67.39
+2025-04-29 13:58:54.655180 - Epoch #	10450	Avg Cumulative Reward: 1.98	64.99

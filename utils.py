@@ -48,7 +48,7 @@ def get_screen(env):
     if RENDER and "ARAS" in modelPath:
         show_image(screen, window_name="Latent Image", scale_factor=4)
 
-    screen = torch.from_numpy(screen)
+    screen = torch.from_numpy(screen.copy())
     screen = screen.unsqueeze(0).unsqueeze(0)
     y_relative = torch.tensor([y_relative], dtype=torch.float32, device=device).unsqueeze(0).unsqueeze(0)
 

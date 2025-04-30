@@ -1,11 +1,3 @@
-"""
-Baseline DQN code from: 
-    https://github.com/mahyaret/kuka_rl/blob/master/kuka_rl.ipynb
-    https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
-    https://source.coderefinery.org/JosteinDanielsen/msc-thesis/-/tree/master/kuka_eye_dqn
-
-"""
-
 import random
 import numpy as np
 from collections import namedtuple
@@ -41,9 +33,6 @@ env = jacoDiverseObjectEnv(actionRepeat=80, renders=RENDER, isDiscrete=True, max
 
 env.cid = pb.connect(pb.DIRECT)
 
-# Choose system (CPU/GPU), depending if Nvidia Cuda is available
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
@@ -63,11 +52,6 @@ def select_action(state, relative_position, i_episode, step=None):
         valid_actions = [0, 1, 3]  # Exclude actions 2 and 4
         random_action = random.choice(valid_actions)
         return torch.tensor([[random_action]], device=device, dtype=torch.long)        
-        # return torch.tensor([[random.randrange(n_actions)]], device=device, dtype=torch.long)
-
-    ####### TEST ######
-    # action_sequence = [0] * 9 + [3] * 10 + [1] * 20 + [3] *20
-    # return torch.tensor([[action_sequence[step]]], device=device, dtype=torch.long)
 
 def log(m):
     ct = datetime.datetime.now()
@@ -149,12 +133,6 @@ def optimize_model():
     loss.backward()
     torch.nn.utils.clip_grad_norm_(policy_net.parameters(), max_norm=1)
     optimizer.step()
-
-    # Debugging logs
-    # print(f"Loss: {loss.item():.4f}")
-    # print(f"State batch images shape: {state_batch_images.shape}")
-    # print(f"State batch y_relative shape: {state_batch_y_relative.shape}")
-
 
 
 '''

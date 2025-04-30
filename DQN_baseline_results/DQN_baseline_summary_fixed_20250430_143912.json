@@ -1,0 +1,1 @@
+{"scenario": "fixed", "model_path": "./models/DQN_baseline_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt", "num_episodes": 500, "success_rate": 0.994, "avg_steps": 32.506, "avg_user_inputs": 264.08, "avg_error_actions": 3.708, "avg_amplified_actions": 19.302, "timestamp": "20250430_143912"}
