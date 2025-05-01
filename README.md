@@ -2,7 +2,12 @@
 
 <img src="figs/Conceptual_Design.png" alt="Conceptual Design" width="500"/>
 
-![Model Overview](figs/diagram.jpeg)
+![Model Overview](figs/Diagram.jpeg)
+
+## Demo
+
+![Click here to watch the video!](https://github.com/ali-rabiee/amplification_DRL/blob/main/demo/amplification_demo.gif?raw=true)
+
 
 ## Overview
 
@@ -160,9 +165,6 @@ The testing scripts track several key metrics:
 
 Results are saved as JSON files in the respective results directories.
 
-## Demo
-
-![Click here to watch the video!](https://github.com/ali-rabiee/amplification_DRL/blob/main/demo/amplification_demo.gif?raw=true)
 
 ## License
 
