@@ -2,6 +2,4 @@ venv/
 runs/
 .vscode/
 __pycache__/
-plot/
-figs/
 dump.py
