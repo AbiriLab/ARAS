@@ -21,8 +21,7 @@ from hindsight_optimizer import HindsightOptimizer
 from config import SCENARIO, RENDER, EPISODE_NUMBER
 
 def run_hindsight_optimization():
-    """Run the hindsight optimization with synthetic user data."""
-    
+
     np.random.seed(42)
     random.seed(42)
     

@@ -207,7 +207,7 @@ for seed in range(seeds_total):
     print("\n" + "=" * 50)
     print(f"FINAL RESULTS FOR SCENARIO: {SCENARIO}")
     print("=" * 50)
-    print(f"Success Rate: {avg_success_rate:.2f} ({s}/{EPISODE_NUMBER})")
+    print(f"Success Rate: {avg_success_rate:.4f} ({s}/{EPISODE_NUMBER})")
     print(f"Average Steps: {avg_steps:.2f}")
     print(f"Average User Inputs: {avg_total_inputs:.2f}")
     print(f"Average Error Actions: {avg_error_actions:.2f}")

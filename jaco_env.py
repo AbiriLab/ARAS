@@ -131,8 +131,6 @@ class jacoDiverseObjectEnv(gym.Env):
         return self._scenario == target or self._scenario == 'dynamic_both'
 
     def reset(self):
-        """Environment reset called at the beginning of an episode."""
-        # Set the camera settings.
         look = [0.23, 0.2, 0.54]
         distance = 1.
         pitch = -56 + self._cameraRandom * np.random.uniform(-3, 3)
@@ -157,61 +155,46 @@ class jacoDiverseObjectEnv(gym.Env):
         pb.setPhysicsEngineParameter(numSolverIterations=150)
         pb.setTimeStep(self._timeStep)
 
-        # Load plane and table in the environment
         plane = pb.loadURDF(os.path.join(self._urdfRoot, "plane.urdf"), 0, 0, -0.66)
         table = pb.loadURDF(os.path.join(self._urdfRoot, "table/table.urdf"), 0.5, 0, -0.66, 0, 0, 0, 1)
         
-        # Set gravity 
         pb.setGravity(0, 0, -9.81)
 
-        # Load jaco robotic arm into the environment
         self._jaco = jaco.jaco(urdfRootPath=self._urdfRoot, timeStep=self._timeStep, renders=self._renders)
         self._envStepCounter = 0
         pb.stepSimulation()
 
-        # Load objects
         obj_urdfList = self.object_placer._get_random_object(self._numObjects, self._isTest)
 
-        # Load containers in the environment
         container_urdfList = [os.path.join(self._urdfRoot, 'tray/tray.urdf')] * self._numContainers
         
-        # Place loaded object randomly in the environment
         self._objectUids, self.container_uid = self.object_placer._randomly_place_objects(obj_urdfList, container_urdfList)
         for id in self._objectUids:
             pb.changeDynamics(id, -1, mass=0.03, lateralFriction=2, restitution=0.1, spinningFriction=0.4, contactStiffness=2000, contactDamping=8000)
 
-        # Human intention
         self.intention_object = random.choice(self._objectUids)
         self.intention_container = random.choice(self.container_uid)
         
-        # Get mug position in xyz
         self._mugPos = np.array(pb.getBasePositionAndOrientation(self.intention_object)[0]) 
         pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
 
-        # Adjust to "true" center of mug. Without self._mugPos[2] (z-direction) is the bottom of the cup
         self._mugPos[2] = self._mugPos[2] + 0.045
         
-        # Get container position in xyz
         self._containerPos = np.array(pb.getBasePositionAndOrientation(self.intention_container)[0])
         pb.changeVisualShape(self.intention_container, -1, rgbaColor=[0, 1, 0, 1])
 
-        # Get current gripper and mug position for current euclidean distance
         self.endEffectorPos_original = self._getGripper()
         
-        # GetEuclideanDistances
         self._gripper2mug_orignial = np.linalg.norm(self._mugPos[:2] - self.endEffectorPos_original[:2])  
         self._gripper2bin_orignial = np.linalg.norm(self._containerPos[:2] - self.endEffectorPos_original[:2])
 
-        # Get camera images & Human input
         self._observation = self._get_observation()
         
-        # Initialize trajectory list
         self.gripper_trajectory = []  
 
 
 
     def _get_observation(self):
-        """Captures the current environment state as an observation, including the relative y-axis position of the mug to the gripper."""
         
         # # gripper view
         # com_p = self._getGripper()
@@ -257,7 +240,6 @@ class jacoDiverseObjectEnv(gym.Env):
         if self._scenario == 'fixed':
             pass
      
-        # Dynamic pickup: change intention object
         if self._is_active_scenario('dynamic_pickup') and self._gripperState == "open" and self._env_step > 2 and not self._dynamic_pickup_flag:
             pb.changeVisualShape(self.intention_object, -1, rgbaColor=[1, 0, 0, 1])
             new_objects = [obj for obj in self._objectUids if obj != self.intention_object]
@@ -267,7 +249,6 @@ class jacoDiverseObjectEnv(gym.Env):
             self._mugPos[2] += 0.045
             self._dynamic_pickup_flag = True
 
-        # Dynamic dropoff: change intention container
         if self._is_active_scenario('dynamic_dropoff') and self._gripperState == "close" and self._env_step > 20 and not self._dynamic_dropoff_flag:
             pb.changeVisualShape(self.intention_container, -1, rgbaColor=[.5, .5, .5, 1])
             new_objects = [obj for obj in self.container_uid if obj != self.intention_container]
@@ -294,7 +275,7 @@ class jacoDiverseObjectEnv(gym.Env):
         return observation
 
     def step(self, action):
-        dv = self._dv  # Velocity per physics step.
+        dv = self._dv  
         dx, dy, dz, close_gripper = 0, 0, 0, 0
 
         if self._AutoXDistance:
@@ -324,31 +305,26 @@ class jacoDiverseObjectEnv(gym.Env):
 
     def _step_continuous(self, action):
 
-        # If grasp action is true, no other movement in any direction
         if action[3]:
             action[0] = action[1] = action[2] = 0
 
         if self._AutoGrasp:
             action[3] = abs(self._mugPos[0] - self._getGripper()[0]) < 0.03
         
-        # Store trajectories
         gripper_pos = self._getGripper()
         self.gripper_trajectory.append(gripper_pos[:2]) 
 
         _cur, _ = pb.getBasePositionAndOrientation(self.intention_container)
         limit_action = np.sign(_cur[1] - gripper_pos[1]) * self._dv
         
-        # Check the boundries and limitations of the environment actions 
         if gripper_pos[0] > self._forward_limit:
             action[0] = max(0, self._forward_limit - gripper_pos[0])
             action[1] = limit_action
 
-        # Check left limit
         if gripper_pos[1] > self._left_limit:
             action[1] = max(0, self._left_limit - gripper_pos[1])
             action[0] = limit_action
 
-        # Check right limit
         if gripper_pos[1] < self._right_limit:
             action[1] = min(0, self._right_limit - gripper_pos[1])
             action[0] = limit_action
@@ -360,7 +336,6 @@ class jacoDiverseObjectEnv(gym.Env):
             if self._termination():
                 break
         
-        # If grasp action is true (action[3]==1), attempt grasp
         if action[3] and self._gripperState == 'open':
             self._jaco.apply_grasp()
             self._gripperState = 'close'
@@ -371,26 +346,21 @@ class jacoDiverseObjectEnv(gym.Env):
             self._attempt = True
 
         else:
-            # Perform commanded action.
+
             self._jaco.apply_move(action)
 
         self._env_step += 1
 
-        # Return reward
+
         reward = self._reward(self._observation[1], action) # self.observation[1] is the relative position
-
-        # Get new observation
         self._observation = self._get_observation()
-
-        # If done is true, the episode ends
         done = self._termination()
 
         debug = {'task_success': self._taskSuccess}
         return self._observation, reward, done, debug  
 
     def _reward(self, command_action, taken_action):
-
-        """Calculates the reward for the episode, ensuring it is normalized to [0, 1]."""
+        
         # Constants
         self._taskSuccess = 0
         failure_penalty = -0.5
@@ -404,13 +374,10 @@ class jacoDiverseObjectEnv(gym.Env):
         following_rew_value = 0.015
         following_penalty_value = -0.03
 
-        # Initialize variables
-        # progress_reward = 0
         following_rew = 0
         total_reward = 0
         normalized_reward = 0
 
-        # Environment information
         bin_position = self._containerPos
         cur_mugPos, _ = pb.getBasePositionAndOrientation(self.intention_object)
         gripperPos = self._getGripper()
@@ -428,19 +395,17 @@ class jacoDiverseObjectEnv(gym.Env):
         if self._isTest:
             return 1.0 if mug2bin < placement_threshold else 0.0
 
-        # Direction following reward
         if (command_action != 0 and command_action == dy) or (command_action == 0 and dx > 0):
             following_rew += following_rew_value
         else:
             following_rew += following_penalty_value
 
-        # Distance based reward: Calculate progress or penalty based on the change in distance to the mug
         if self._gripperState == 'open':
             
             if hasattr(self, '_prev_gripper2mug'):
-                if gripper2mug < self._prev_gripper2mug:  # Getting closer
+                if gripper2mug < self._prev_gripper2mug:  
                     progress_reward = progress_reward_value 
-                else:  # No progress or moving away
+                else:  
                     progress_reward = lack_of_progress_penalty
             else:
                 if gripper2mug < self._gripper2mug_orignial:
@@ -448,35 +413,30 @@ class jacoDiverseObjectEnv(gym.Env):
                 else: 
                     progress_reward = lack_of_progress_penalty
                 
-            # Update the previous distance
+    
             self._prev_gripper2mug = gripper2mug
 
         elif self._gripperState == 'close':
-            # Calculate progress or penalty based on the change in distance to the bin
+        
             if hasattr(self, '_prev_gripper2bin'):
-                if gripper2bin < self._prev_gripper2bin:  # Getting closer
+                if gripper2bin < self._prev_gripper2bin: 
                     progress_reward = progress_reward_value
                 else:  
                     progress_reward = lack_of_progress_penalty
             else:
-                # No previous state available, only calculate the progress reward
                 if gripper2bin < self._gripper2bin_orignial:
                     progress_reward = progress_reward_value 
-                else:  # No progress or moving away
+                else: 
                     progress_reward = lack_of_progress_penalty
 
-
-            # Update the previous distance
             self._prev_gripper2bin = gripper2bin
 
         progress_reward = np.clip(progress_reward, lack_of_progress_penalty, progress_reward_value)
 
-        # Check for task success (placement)
         if self._attempt and mug2bin < placement_threshold:
             self._taskSuccess += 1
             total_reward = placement_success_reward
 
-        # Check for successful grasp
         elif cur_mugPos[2] > 0.05 and not self._grasp_successfull:
             total_reward = grasp_success_reward
             self._grasp_successfull = True
@@ -494,11 +454,7 @@ class jacoDiverseObjectEnv(gym.Env):
 
 
     def _termination(self):
-        """Terminates the episode if we have tried to grasp or if we are above
-        maxSteps steps.
-        """
         return self._attempt or self._env_step >= self._maxSteps
-
 
     if parse_version(gym.__version__) < parse_version('0.9.6'):
         _reset = reset

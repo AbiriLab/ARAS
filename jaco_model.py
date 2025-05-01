@@ -53,15 +53,11 @@ class jaco:
     def reset(self):
         
         objects = pb.loadURDF(os.path.join('jaco/j2n6s300_color copy.urdf',), useFixedBase=True)
-        # Convert into to tuple
         objects = (objects,)
-        #print(type(objects))
         self.jacoUid = objects[0]
 
-        # Keep robot at same position after every reset
         jaco_orientation_euler = [0, 0, 0]
         jaco_orientation_quaternion = pb.getQuaternionFromEuler(jaco_orientation_euler)
-        # pb.resetBasePositionAndOrientation(self.jacoUid, [-0.76, -0.06, 0.47],jaco_orientation_quaternion)
         pb.resetBasePositionAndOrientation(self.jacoUid, [-0.5, -0.05, -0.34], jaco_orientation_quaternion)
 
 
@@ -92,8 +88,6 @@ class jaco:
             jointInfo = pb.getJointInfo(self.jacoUid, i)
             qIndex = jointInfo[3]
             if qIndex > -1:
-                #print("motorname")
-                #print(jointInfo[1])
                 self.motorNames.append(str(jointInfo[1]))
                 self.motorIndices.append(i)
 
@@ -122,8 +116,7 @@ class jaco:
             # self.endEffectorPos[1] = self.endEffectorPos[1] + dy
             # self.endEffectorPos[2] = self.endEffectorPos[2] + dz
             # pos = self.endEffectorPos
-            
-            # Leave wirst orientation like it is for now   
+             
             orn = state[1] 
                 
             if (self.useNullSpace == 1):
@@ -140,7 +133,6 @@ class jaco:
                                                                 restPoses=self.rp)
             else:
                 if (self.useOrientation == 1):
-                    # This is selected for computation
                     jointPoses = pb.calculateInverseKinematics(self.jacoUid,
                                                                 self.jacoEndEffectorIndex,
                                                                 pos, # state[0],#pos,
@@ -149,7 +141,6 @@ class jaco:
                 else:
                     jointPoses = pb.calculateInverseKinematics(self.jacoUid, self.jacoEndEffectorIndex, pos)
 
-            # Insert zeros for the non-movable joints, because pb.calculateInverseKinematics returns just a tuple for the movable joints    
             list_jointPoses = list(jointPoses)
             list_jointPoses.insert(0, 0)
             list_jointPoses.insert(1, 0)
@@ -170,7 +161,6 @@ class jaco:
                         )
                 pb.stepSimulation()
             else:
-                # Reset the joint state (ignoring all dynamics, not recommended to use during simulation)
                 for i in range(self.numJoints):
                     pb.resetJointState(self.jacoUid, i, jointPoses[i])
 
@@ -186,7 +176,6 @@ class jaco:
 
 
     def apply_grasp(self, initial_finger_angle=0.6, final_finger_angle=5, step_increment=0.001, finger_force_multiplier=1,  AutoLift=True):
-        # Close fingers
         
         finger_angle = initial_finger_angle
         
@@ -209,9 +198,7 @@ class jaco:
 
             if finger_angle > final_finger_angle:
                 finger_angle = final_finger_angle # Upper limit
-                # break
 
-        # Close fingertips
         tip_angle = initial_finger_angle  # Re-use initial_finger_angle if starting from the same position
         for _ in range(100):
 
@@ -232,7 +219,6 @@ class jaco:
             if tip_angle > final_finger_angle:
                 tip_angle = final_finger_angle # Upper limit
 
-        # # Lift gripper after grasp  
         if AutoLift:  
             for _ in range(90): # 160
                 self.apply_move([0, 0, 0.01])
@@ -242,17 +228,14 @@ class jaco:
 
 
     def apply_release(self, initial_finger_angle=0.6, final_finger_angle=0, step_increment=0.001, finger_force_multiplier=1, AutoLower=True):
-        # Open fingers
 
-        # Lower gripper after release
         if AutoLower:
             for _ in range(45):
-                self.apply_move([0, 0, -0.01])  # Assuming apply_move function exists for moving the arm
+                self.apply_move([0, 0, -0.01])  
                 pb.stepSimulation()
                 if self.renders:
                     time.sleep(self._timeStep)
 
-        # Open fingers
         finger_angle = initial_finger_angle
         for _ in range(700):
             pb.setJointMotorControlArray(
@@ -270,12 +253,8 @@ class jaco:
             finger_angle -= step_increment
             
             if finger_angle < final_finger_angle:
-                finger_angle = final_finger_angle # Lower limit
+                finger_angle = final_finger_angle 
 
-            # if self.renders:
-            #     time.sleep(self._timeStep)
-
-        # Open fingertips
         tip_angle = initial_finger_angle
         for _ in range(500):
             pb.setJointMotorControlArray(
@@ -293,10 +272,8 @@ class jaco:
             tip_angle -= step_increment
             
             if tip_angle < final_finger_angle:
-                tip_angle = final_finger_angle # Lower limit
+                tip_angle = final_finger_angle 
 
-            # if self.renders:
-            #     time.sleep(self._timeStep)
 
 
 

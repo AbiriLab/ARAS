@@ -33,7 +33,7 @@ policy_net = DQN(screen_height, screen_width, env.action_space.n, stack_size=4).
 target_net = DQN(screen_height, screen_width, env.action_space.n, stack_size=4).to(device)
 
 # Load checkpoint
-checkpoint_path = "/home/tnlab/Projects/github/ARAS/models/DQN_baseline_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt"
+checkpoint_path = "./models/DQN_baseline_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt"
 checkpoint = torch.load(checkpoint_path, map_location=device)
 
 policy_net.load_state_dict(checkpoint['policy_net_state_dict'])
@@ -43,10 +43,12 @@ target_net.load_state_dict(checkpoint['target_net_state_dict'])
 optimizer = torch.optim.Adam(policy_net.parameters(), lr=LEARNING_RATE)
 optimizer.load_state_dict(checkpoint['optimizer_policy_net_state_dict'])
 
-# Add noise to weights (e.g., 1% noise)
 with torch.no_grad():
-    for param in policy_net.parameters():
-        param.add_(0.008 * torch.randn_like(param))
+    for name, param in policy_net.named_parameters():
+        if any(key in name for key in ["fc1", "fc2", "conv1", "relative_embedding"]):
+            print(f"Adding noise to: {name}")
+            param.add_(0.004 * torch.randn_like(param))
+
 
 # Update target_net with noisy policy_net
 target_net.load_state_dict(policy_net.state_dict())
@@ -56,6 +58,6 @@ torch.save({
     'policy_net_state_dict': policy_net.state_dict(),
     'target_net_state_dict': target_net.state_dict(),
     'optimizer_policy_net_state_dict': optimizer.state_dict()
-}, "/home/tnlab/Projects/github/ARAS/models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt")
+}, "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt")
 
 print("Noisy model saved.")

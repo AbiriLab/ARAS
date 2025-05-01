@@ -11,15 +11,15 @@ EPISODE_NUMBER = 500
 
 ##########################################
 ########### TRAINING PARAMETERS ##########
-PRETRAINED_MODEL_PATH = "/home/tnlab/Projects/github/ARAS/models/DQN_baseline_bs64_ss4_rb30000_gamma0.8_decaylf20000_lr1e-05.pt"
-MODEL_NAME = 'DQN_baseline'
+PRETRAINED_MODEL_PATH = ""
+MODEL_NAME = 'ARAS' # ['DQN', 'ARAS']
 
 num_episodes = 20000  #[25000,100000,500000] 
 logfilename = 'learnDQN.log'
 
 # Hyperparameters
 BATCH_SIZE = 64 
-GAMMA = 0.3
+GAMMA = 0.8
 EPS_START = 0.8 # Max of exploration rate
 EPS_END = 0.1  # min of exploration rate
 EPS_DECAY_LAST_FRAME = 5000 # last episode to have decay in exploration rate

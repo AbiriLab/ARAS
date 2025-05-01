@@ -11,12 +11,7 @@ import numpy as np
 from collections import deque
 class HindsightOptimizer:
     def __init__(self, env):
-        """
-        Hindsight optimizer for shared autonomy using synthetic user inputs.
-        
-        Args:
-            env: The jacoDiverseObjectEnv instance
-        """
+
         self.env = env
         self.object_beliefs = None
         self.container_beliefs = None
@@ -41,7 +36,6 @@ class HindsightOptimizer:
         self.initialized = False
         
     def initialize_beliefs(self):
-        """Initialize beliefs after environment has been reset and objects created."""
         if hasattr(self.env, '_objectUids') and hasattr(self.env, 'container_uid'):
             self.object_beliefs = np.ones(len(self.env._objectUids)) / len(self.env._objectUids)
             self.container_beliefs = np.ones(len(self.env.container_uid)) / len(self.env.container_uid)
@@ -54,11 +48,7 @@ class HindsightOptimizer:
         return False
         
     def generate_synthetic_user_input(self):
-        """
-        Generate synthetic user input based on the current state and intended goal.
-        Returns:
-            str: "left", "right", or "neutral"
-        """
+
         if not self.initialized:
             if not self.initialize_beliefs():
                 return "neutral"  
@@ -84,12 +74,7 @@ class HindsightOptimizer:
         return user_input
     
     def update_beliefs(self, user_input):
-        """
-        Update belief distributions based on user input.
-        
-        Args:
-            user_input: User input ("left", "right", or "neutral")
-        """
+
         if not self.initialized:
             if not self.initialize_beliefs():
                 return
@@ -131,15 +116,7 @@ class HindsightOptimizer:
                 self.container_beliefs = self.container_beliefs / np.sum(self.container_beliefs)
     
     def compute_action_for_goal(self, goal_pos):
-        """
-        Compute optimal action for a specific goal.
-        
-        Args:
-            goal_pos: Position of the goal
-            
-        Returns:
-            action_idx: Index of the action to take
-        """
+
         gripper_pos = self.env._getGripper()[:2]
         delta_x = goal_pos[0] - gripper_pos[0]
         delta_y = goal_pos[1] - gripper_pos[1]
@@ -171,16 +148,7 @@ class HindsightOptimizer:
                 return 4  
     
     def select_action(self, user_input=None):
-        """
-        Select action based on belief over goals and user input.
-        
-        Args:
-            user_input: User input ("left", "right", or "neutral"). 
-                       If None, will generate synthetic input.
-            
-        Returns:
-            action_idx: Index of the selected action
-        """
+
         if not self.initialized:
             if not self.initialize_beliefs():
                 return 0  
@@ -211,7 +179,6 @@ class HindsightOptimizer:
         return np.argmax(action_values)
     
     def reset(self):
-        """Reset beliefs when environment resets."""
         self.initialized = False
         self.initialize_beliefs()
         

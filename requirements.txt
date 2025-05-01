@@ -1,0 +1,24 @@
+# Core dependencies for ARAS project
+numpy>=1.20.0
+torch>=1.9.0
+torchvision>=0.10.0
+pybullet>=3.2.0
+gym>=0.26.0
+opencv-python>=4.5.0
+matplotlib>=3.5.0
+pillow>=9.0.0
+tensorboardX>=2.4.0
+setuptools>=40.0.0  # Needed for pkg_resources
+
+# Data visualization and IPython (used in utils.py)
+ipython>=7.0.0
+
+# Command line parsing
+optparse-pretty>=0.1.1
+
+# Standard libraries (already part of Python, listed for clarity)
+# collections, datetime, time, os, json, random, math, glob
+
+# Optional dependencies (may be needed depending on your setup)
+# jupyter
+# tqdm

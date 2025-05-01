@@ -22,12 +22,10 @@ from config import *
 import os
 import json
 
-# Set seed fixed for reproducibility, also try different seeds
 torch.manual_seed(0)
 random.seed(0)
 np.random.seed(0)
 
-# Load env
 env = jacoDiverseObjectEnv(actionRepeat=80, renders=RENDER, isDiscrete=True, maxSteps=70, dv=0.02,
                            AutoXDistance=False, AutoGrasp=True, width=64, height=64, numObjects=3, numContainers=3)
 
@@ -38,7 +36,6 @@ Transition = namedtuple('Transition',
 
 
 def select_action(state, relative_position, i_episode, step=None):
-    # global steps_done
     global eps_threshold
     sample = random.random()
     eps_threshold = max(EPS_END, EPS_START - (i_episode / EPS_DECAY_LAST_FRAME))
@@ -48,8 +45,7 @@ def select_action(state, relative_position, i_episode, step=None):
             return policy_net(state, relative_position).max(1)[1].view(1, 1)
         
     else:
-        # Exploration: Choose a random action from valid actions only
-        valid_actions = [0, 1, 3]  # Exclude actions 2 and 4
+        valid_actions = [0, 1, 3] 
         random_action = random.choice(valid_actions)
         return torch.tensor([[random_action]], device=device, dtype=torch.long)        
 
@@ -64,19 +60,11 @@ def log(m):
     return ts
 
 def save_episode_data(data, file_path="/trajectory_data/trajectory_data.json"):
-    """
-    Save trajectory data to a JSON file, converting NumPy arrays to lists.
-    Args:
-        data: List of trajectory information (gripper, goal, bin positions).
-        file_path: Path to the JSON file.
-    """
 
-    # Ensure the directory exists
     directory = os.path.dirname(file_path)
     if directory and not os.path.exists(directory):
         os.makedirs(directory)
 
-    # Convert all NumPy arrays in the data to lists
     for entry in data:
         entry["trajectory"] = [pos.tolist() for pos in entry["trajectory"]]
         entry["goal_position"] = entry["goal_position"]
@@ -84,7 +72,6 @@ def save_episode_data(data, file_path="/trajectory_data/trajectory_data.json"):
         entry["steps"] = int(entry["steps"])
         entry["success"] = bool(entry["success"]) 
 
-    # Save to JSON
     with open(file_path, 'w') as f:
         json.dump(data, f)
 
@@ -92,43 +79,34 @@ def save_episode_data(data, file_path="/trajectory_data/trajectory_data.json"):
 Training loop
 '''
 
-# Update network
 def optimize_model():
     if len(memory) < BATCH_SIZE:
         return
     transitions = memory.sample(BATCH_SIZE)
     batch = Transition(*zip(*transitions))
 
-    # Non-final mask
     non_final_mask = torch.tensor([s is not None for s in batch.next_state], device=device, dtype=torch.bool)
     non_final_next_states = [s for s in batch.next_state if s is not None]
 
-    # Separate image and y_relative components
     non_final_next_states_images = torch.cat([s[0].to(device) for s in non_final_next_states]) if non_final_next_states else torch.empty(0, device=device)
     non_final_next_states_y_relative = torch.cat([s[1].to(device) for s in non_final_next_states]) if non_final_next_states else torch.empty(0, device=device)
 
-    # Current state
     state_batch_images = torch.cat([s[0].to(device) for s in batch.state])
     state_batch_y_relative = torch.cat([s[1].to(device) for s in batch.state])
 
     action_batch = torch.cat(batch.action).to(device)
     reward_batch = torch.cat(batch.reward).to(device)
 
-    # Forward pass
     state_action_values = policy_net(state_batch_images, state_batch_y_relative).gather(1, action_batch)
 
-    # Compute next state values
     next_state_values = torch.zeros(BATCH_SIZE, device=device)
     if len(non_final_next_states_images) > 0:
         next_state_values[non_final_mask] = target_net(non_final_next_states_images, non_final_next_states_y_relative).max(1)[0].detach()
 
-    # Compute expected state-action values
     expected_state_action_values = (next_state_values * GAMMA) + reward_batch
 
-    # Compute loss
     loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
 
-    # Optimize the model
     optimizer.zero_grad()
     loss.backward()
     torch.nn.utils.clip_grad_norm_(policy_net.parameters(), max_norm=1)
@@ -156,14 +134,9 @@ probability of choosing a random action will start at EPS_START and
 will decay exponentially towards EPS_END. EPS_DECAY controls the rate of the decay.
 '''
 
-# Get screen size so that we can initialize layers correctly based on shape
-# returned from pybullet (128, 128, 3)
-
 init_screen, _ = get_screen(env)
 print(init_screen.shape)
 _, _, screen_height, screen_width = init_screen.shape
-
-# Get number of actions from gym action space
 n_actions = env.action_space.n
 
 eps_threshold = 0
@@ -203,7 +176,6 @@ if __name__ == "__main__":
 
     LOG_ON_SCREEN = True if options.both == True else False
 
-    # Init replay buffer, policy net and target net
     STACK_SIZE = Stack_Size
     memory = ReplayMemory(REPLAY_BUFFER_SIZE, Transition)
 
@@ -212,24 +184,20 @@ if __name__ == "__main__":
 
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
-    # Use ADAM as optimizer
     optimizer = optim.Adam(policy_net.parameters(), lr=LEARNING_RATE)
 
-    # Check if the pretrained model file exists and load it
     if os.path.isfile(PRETRAINED_MODEL_PATH):
         print("Loading pre-trained model from", PRETRAINED_MODEL_PATH)
         checkpoint = torch.load(PRETRAINED_MODEL_PATH, map_location=device)
         policy_net.load_state_dict(checkpoint['policy_net_state_dict'])
         target_net.load_state_dict(checkpoint['target_net_state_dict'])
         
-        # Optionally load the optimizer state as well
         optimizer.load_state_dict(checkpoint['optimizer_policy_net_state_dict'])
         
         print("Pre-trained model loaded successfully!")
     else:
         print("Pre-trained model not found. Starting training from scratch.")
 
-    # Name of saved .log file and .pt model
     filename = "bs"+str(BATCH_SIZE)+"_ss" + str(STACK_SIZE) + "_rb" + str(REPLAY_BUFFER_SIZE)+"_gamma"+str(GAMMA)+"_decaylf"+str(EPS_DECAY_LAST_FRAME)+"_lr"+str(LEARNING_RATE)
 
     if options.logfile_name == "":
@@ -243,7 +211,6 @@ if __name__ == "__main__":
     else:
         print("Print all logging info")
 
-    # Path of saved model
     PATH = f"models/{MODEL_NAME}_{filename}.pt" 
     if LOGFILE_POINTER == None:
         os.makedirs(os.path.dirname(LOGFILE), exist_ok=True)
@@ -255,11 +222,9 @@ if __name__ == "__main__":
 
     old_epoch_ts = -1
 
-  # Begin training
     cumulative_rewards_ten_episodes = 0
     for i_episode in range(num_episodes):
         training_data = []
-        # Print Epochs
         if i_episode % 10 == 0:
             ct = datetime.datetime.now()
             new_epoch_ts = ct.timestamp()
@@ -277,26 +242,21 @@ if __name__ == "__main__":
                 )
                 cumulative_rewards_ten_episodes = 0
 
-        # Initialize the environment and state
         env.reset()
-        state, y_relative = get_screen(env)  # Adjusted to new function
-
+        state, y_relative = get_screen(env)  
         stacked_states = collections.deque(STACK_SIZE * [state], maxlen=STACK_SIZE)
-        stacked_y_relative = collections.deque(STACK_SIZE * [y_relative], maxlen=STACK_SIZE)  # Track y_relative
+        stacked_y_relative = collections.deque(STACK_SIZE * [y_relative], maxlen=STACK_SIZE)  
 
-        cumulative_reward_episode = 0  # Initialize at the start of the episode
+        cumulative_reward_episode = 0 
         for t in count():
-            # Prepare the inputs for the network
             stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
             y_relative_t = torch.cat(tuple(stacked_y_relative), dim=1)
-            # Select and perform an action
             action = select_action(stacked_states_t, y_relative_t, i_episode, t)  
             _, reward, done, _ = env.step(action.item())
             progress_reward, following_rew, total_reward = reward
             reward = torch.tensor([total_reward], device=device)
             cumulative_reward_episode += reward.cpu().numpy().item()
 
-            # Collect trajectory data for the episode
             episode_data = {
                 "episode": i_episode,
                 "trajectory": env.gripper_trajectory,
@@ -307,7 +267,6 @@ if __name__ == "__main__":
             }
             training_data.append(episode_data)
 
-            # Observe new state and relative position
             next_state, next_y_relative = get_screen(env)
 
             if not done:
@@ -322,27 +281,22 @@ if __name__ == "__main__":
                 next_stacked_states = None
                 next_stacked_y_relative = None
 
-            # Store the transition in memory
             memory.push((stacked_states_t, y_relative_t), action, 
                         (next_stacked_states_t, next_stacked_y_relative_t), reward)
 
-            # Move to the next state
             stacked_states = next_stacked_states
             stacked_y_relative = next_stacked_y_relative
 
-            # Perform one step of the optimization (on the target network)
             optimize_model()
 
             if done:
                 cumulative_rewards_ten_episodes += cumulative_reward_episode
-                # print(cumulative_reward_episode)
                 reward = reward.cpu().numpy().item()
                 ten_rewards += reward
                 total_rewards.append(reward)
                 mean_reward = np.mean(total_rewards[-100:])
                 writer.add_scalar("epsilon", eps_threshold, i_episode)
                 if (best_mean_reward is None or best_mean_reward < mean_reward) and i_episode > 100:
-                    # For saving the model and possibly resuming training
                     torch.save({
                             'policy_net_state_dict': policy_net.state_dict(),
                             'target_net_state_dict': target_net.state_dict(),
@@ -369,18 +323,15 @@ if __name__ == "__main__":
                 ten_rewards = 0
 
 
-        # Save data every 1000 episodes
         if (i_episode + 1) % 2000 == 0:
             save_episode_data(training_data, f"./trajectory_train_data/trajectory_data_{i_episode+1}.json")
-            training_data = []  # Reset data list to avoid memory issues
+            training_data = []  
 
-
-        # Update the target network, copying all weights and biases in DQN
         if i_episode % TARGET_UPDATE == 0:
             target_net.load_state_dict(policy_net.state_dict())
             log(f"Mean Reward at episode {i_episode}: {mean_reward}")
 
-        # Declare termination condition of the training
+
         if i_episode >= 10000 and mean_reward > 0.999:
             print('Environment solved in {:d} episodes!\tAverage Score: {:.3f}'.format(i_episode+1, mean_reward))
             break
@@ -397,35 +348,28 @@ if __name__ == "__main__":
 Evaluation
 '''
 episode = 10
-scores_window = collections.deque(maxlen=100)  # Last 100 scores
-
-# Assuming env is properly initialized and policy_net is defined
+scores_window = collections.deque(maxlen=100)  
 env.cid = pb.connect(pb.DIRECT)
 
-# Load the model
 checkpoint = torch.load(PATH)
 policy_net.load_state_dict(checkpoint['policy_net_state_dict'])
 
-# Evaluate the model
 for i_episode in range(episode):
     env.reset()
-    state, y_relative = get_screen(env)  # Adjusted to new function
+    state, y_relative = get_screen(env) 
     stacked_states = collections.deque(STACK_SIZE*[state], maxlen=STACK_SIZE)
-    stacked_y_relatives = collections.deque(STACK_SIZE*[y_relative], maxlen=STACK_SIZE)  # Track y_relative
+    stacked_y_relatives = collections.deque(STACK_SIZE*[y_relative], maxlen=STACK_SIZE) 
     
     for t in count():
         stacked_states_t = torch.cat(tuple(stacked_states), dim=1)
-        stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1)  # Use the mean y_relative
-        
-        # Select and perform an action
-        # Now using the policy network with both state and y_relative
+        stacked_y_relatives_t = torch.cat(tuple(stacked_y_relatives), dim=1) 
+
         action = policy_net(stacked_states_t, stacked_y_relatives_t).max(1)[1].view(1, 1)
         _, reward, done, _ = env.step(action.item())
     
-        # Observe new state and y_relative
         next_state, next_y_relative = get_screen(env)
         stacked_states.append(next_state)
-        stacked_y_relatives.append(next_y_relative)  # Update stacked y_relatives
+        stacked_y_relatives.append(next_y_relative)  
         
         if done:
             break

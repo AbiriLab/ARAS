@@ -1,0 +1,1 @@
+{"scenario": "dynamic_dropoff", "model_path": "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt", "num_episodes": 500, "success_rate": 0.896, "avg_steps": 34.436, "avg_user_inputs": 261.88, "avg_error_actions": 4.802, "avg_amplified_actions": 21.342, "timestamp": "20250501_134613"}
