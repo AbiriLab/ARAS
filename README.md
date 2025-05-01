@@ -1,6 +1,6 @@
 # ARAS (Adaptive Reinforcement learning for Amplification of limited inputs in Shared autonomy)
 
-<img src="figs/Conceptual_Design.png" alt="Conceptual Design" width="500"/>
+<!-- <img src="figs/Conceptual_Design.png" alt="Conceptual Design" width="500"/> -->
 
 ![Model Overview](figs/Diagram.jpeg)
 
