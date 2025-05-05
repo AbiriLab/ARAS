@@ -3,7 +3,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ##########################################
 ########### TESTING PARAMETERS ##########
-RENDER = False
+RENDER = True
 modelPath = "./models/ARAS_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt" # ARAS
 # modelPath = "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt" # DQN
 SCENARIO = "dynamic_both" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
