@@ -37,7 +37,7 @@ STACK_SIZE = int(modelPath.split("ss",1)[1].split("_rb",1)[0]) #[1,4,10]
 seeds_total = 1
 
 # Directory to save trajectory data
-modelname = "ARAS" if "ARAS" in MODEL_NAME else "DQN_baseline"
+modelname = "ARAS" if "ARAS" in modelPath else "DQN_baseline"
 save_dir = f"./{modelname}_results"
 os.makedirs(save_dir, exist_ok=True)
 

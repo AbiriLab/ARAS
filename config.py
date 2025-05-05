@@ -7,7 +7,7 @@ RENDER = False
 # modelPath = "./models/DQNBaseline_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt" # ARAS
 modelPath = "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt" # DQN
 SCENARIO = "dynamic_both" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
-EPISODE_NUMBER = 500
+EPISODE_NUMBER = 1
 
 ##########################################
 ########### TRAINING PARAMETERS ##########
