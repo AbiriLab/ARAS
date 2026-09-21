@@ -1,0 +1,18 @@
+{
+ "method": "ARAS",
+ "scenario": "dynamic_both",
+ "noise_kind": "drop",
+ "noise_p": 0.05,
+ "num_episodes": 500,
+ "seed": 0,
+ "model": "./models/ARAS_v8_inference.pt",
+ "inference_in_loop": true,
+ "success_rate": 0.864,
+ "avg_steps": 43.948,
+ "avg_user_inputs": 522.64,
+ "avg_error_actions": 8.76,
+ "avg_amplified_actions": 17.816,
+ "timestamp": "20260919_080938",
+ "avg_gate_open_frac": 0.5870777826376168,
+ "avg_infer_acc": 0.9649731389992032
+}

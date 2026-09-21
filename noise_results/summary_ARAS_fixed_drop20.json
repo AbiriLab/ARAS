@@ -1,0 +1,18 @@
+{
+ "method": "ARAS",
+ "scenario": "fixed",
+ "noise_kind": "drop",
+ "noise_p": 0.2,
+ "num_episodes": 500,
+ "seed": 0,
+ "model": "./models/ARAS_v8_inference.pt",
+ "inference_in_loop": true,
+ "success_rate": 0.96,
+ "avg_steps": 34.472,
+ "avg_user_inputs": 325.16,
+ "avg_error_actions": 4.792,
+ "avg_amplified_actions": 18.214,
+ "timestamp": "20260919_074708",
+ "avg_gate_open_frac": 0.6537470742485519,
+ "avg_infer_acc": 0.9968913069164864
+}

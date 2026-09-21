@@ -6,17 +6,16 @@
 
 ## Demo
 
-![Click here to watch the video!](https://github.com/ali-rabiee/amplification_DRL/blob/main/demo/amplification_demo.gif?raw=true)
+![Click here to watch the video!](demo/amplification_demo.gif)
 
 
 ## Overview
 
 ARAS (Adaptive Reinforcement learning for Amplification of limited inputs in Shared autonomy) is a framework designed to assist users with severe mobility impairments in controlling robotic systems through limited inputs. By leveraging deep reinforcement learning, ARAS can amplify minimal user inputs into complex, goal-directed robotic movements while adapting to the user's intentions in real-time.
 
-This repository implements three approaches for shared autonomy control:
+This repository implements two approaches for shared autonomy control:
 1. **ARAS**: Our novel approach using latent space representations and adaptive goal inference
-2. **DQN Baseline**: A standard deep Q-network implementation with raw inputs (baseline)
-3. **Hindsight Optimization (HO)**: A belief-based optimization strategy for action selection (baseline)
+2. **Hindsight Optimization (HO)**: A belief-based optimization strategy for action selection (baseline)
 
 ## Key Features
 
@@ -37,8 +36,10 @@ This repository implements three approaches for shared autonomy control:
 - **`utils.py`**: Utility functions for data processing, visualization, and more
 - **`trainDQN.py`**: Script for training DQN-based models (both ARAS and baseline)
 - **`testDQN.py`**: Evaluation script for trained DQN models
-- **`run_hindsight.py`**: Implementation and evaluation of Hindsight 
 - **`hindsight_optimizer.py`**: Implementation of the Hindsight Optimization algorithm
+- **`noisy_common.py`**: Bayesian goal inference, confidence gate, and command-noise models
+- **`test_noisy.py`**: End-to-end evaluation of ARAS and HO (paper protocol)
+- **`finetune_inference.py`**: Fine-tuning with inference in the loop (produces the deployed checkpoint)
 
 ## Installation
 
@@ -64,7 +65,7 @@ The `config.py` file is the central configuration hub. Key parameters include:
 ```python
 # Testing parameters
 RENDER = True  # Set to True to visualize the environment
-modelPath = "./models/DQNBaseline_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt"  # ARAS
+modelPath = "./models/ARAS_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt"  # ARAS
 # modelPath = "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt"  # DQN
 SCENARIO = "dynamic_both"  # Options: "fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"
 EPISODE_NUMBER = 500
@@ -109,7 +110,7 @@ python testDQN.py
 ```
 
 Before testing, configure in `config.py`:
-- Select the model to test by setting `modelPath` to either the ARAS or DQN baseline model
+- Select the checkpoint with `modelPath` (deployed `ARAS_v8_inference.pt`, or the pre-fine-tune `ARAS_v7` checkpoint for the goal-identified upper bound)
 - Choose the scenario type with `SCENARIO` ("fixed", "dynamic_pickup", "dynamic_dropoff", or "dynamic_both")
 - Set `RENDER = True` to visualize the environment during testing
 - Adjust `EPISODE_NUMBER` to control the number of test episodes
@@ -118,13 +119,45 @@ Test results will be saved in the model-specific results directory.
 
 ### Hindsight Optimization
 
-To run the Hindsight Optimization approach: (Select the Scenario in config.py)
+HO is evaluated through the same end-to-end harness:
 
 ```bash
-python run_hindsight.py
+python test_noisy.py --method HO --scenario fixed --p 0.0
 ```
 
-Results will be saved in the `hindsight_results` directory.
+Results are saved in the `noise_results` directory.
+
+### System-Level Evaluation and Command-Noise Robustness (paper protocol)
+
+`testDQN.py` evaluates the policy with the goal supplied to the latent mask
+directly (a goal-identified upper bound). The evaluation reported in the paper
+runs the full pipeline -- windowed Bayesian goal inference and the confidence
+gate (`noisy_common.py`) -- in the loop, with optional corruption of the
+command token the controller observes:
+
+```bash
+# clean, end-to-end (paper Table I)
+python test_noisy.py --method ARAS --scenario fixed --p 0.0
+
+# 10% misdecoded commands (paper Fig. and Supplementary Table SV)
+python test_noisy.py --method ARAS --scenario dynamic_both --kind flip --p 0.10
+python test_noisy.py --method HO   --scenario dynamic_both --kind drop --p 0.10
+```
+
+`--kind flip` replaces a token with an incorrect value, `--kind drop` with
+neutral. Results (per-episode metrics, gate-open fraction, and goal-inference
+accuracy) are saved in `noise_results/`; the JSONs backing the paper are
+committed there.
+
+Because the confidence gate withholds the goal mask when belief is diffuse,
+the deployed policy is the shipped `models/ARAS_v8_inference.pt`, produced by
+fine-tuning the original checkpoint for 5,000 episodes with inference in the
+loop (clean commands):
+
+```bash
+python finetune_inference.py            # reproduces ARAS_v8_inference.pt
+python finetune_variants.py --help      # noise/scenario-randomized variants (all performed worse)
+```
 
 ## Models
 
@@ -136,10 +169,6 @@ Key differences from baseline:
 - Uses segmentation masks as input instead of raw grayscale images
 - Enhanced ability to identify objects of interest and relevant goal locations
 - Better performance in dynamic environments where goals change during execution
-
-### DQN Baseline
-
-The DQN baseline uses raw grayscale images as input to the neural network. It serves as a comparison point for the more advanced ARAS model.
 
 ### Hindsight Optimization (HO)
 

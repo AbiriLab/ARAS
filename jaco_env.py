@@ -176,12 +176,14 @@ class jacoDiverseObjectEnv(gym.Env):
         self.intention_container = random.choice(self.container_uid)
         
         self._mugPos = np.array(pb.getBasePositionAndOrientation(self.intention_object)[0]) 
-        pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
+        if self._renders:
+            pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
 
         self._mugPos[2] = self._mugPos[2] + 0.045
         
         self._containerPos = np.array(pb.getBasePositionAndOrientation(self.intention_container)[0])
-        pb.changeVisualShape(self.intention_container, -1, rgbaColor=[0, 1, 0, 1])
+        if self._renders:
+            pb.changeVisualShape(self.intention_container, -1, rgbaColor=[0, 1, 0, 1])
 
         self.endEffectorPos_original = self._getGripper()
         
@@ -241,20 +243,24 @@ class jacoDiverseObjectEnv(gym.Env):
             pass
      
         if self._is_active_scenario('dynamic_pickup') and self._gripperState == "open" and self._env_step > 2 and not self._dynamic_pickup_flag:
-            pb.changeVisualShape(self.intention_object, -1, rgbaColor=[1, 0, 0, 1])
+            if self._renders:
+                pb.changeVisualShape(self.intention_object, -1, rgbaColor=[1, 0, 0, 1])
             new_objects = [obj for obj in self._objectUids if obj != self.intention_object]
             self.intention_object = random.choice(new_objects)
             self._mugPos = np.array(pb.getBasePositionAndOrientation(self.intention_object)[0])
-            pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
+            if self._renders:
+                pb.changeVisualShape(self.intention_object, -1, rgbaColor=[0, 1, 0, 1])
             self._mugPos[2] += 0.045
             self._dynamic_pickup_flag = True
 
         if self._is_active_scenario('dynamic_dropoff') and self._gripperState == "close" and self._env_step > 20 and not self._dynamic_dropoff_flag:
-            pb.changeVisualShape(self.intention_container, -1, rgbaColor=[.5, .5, .5, 1])
+            if self._renders:
+                pb.changeVisualShape(self.intention_container, -1, rgbaColor=[.5, .5, .5, 1])
             new_objects = [obj for obj in self.container_uid if obj != self.intention_container]
             self.intention_container = random.choice(new_objects)
             self._containerPos = np.array(pb.getBasePositionAndOrientation(self.intention_container)[0])
-            pb.changeVisualShape(self.intention_container, -1, rgbaColor=[0, 1, 0, 1])
+            if self._renders:
+                pb.changeVisualShape(self.intention_container, -1, rgbaColor=[0, 1, 0, 1])
             self._dynamic_dropoff_flag = True
 
 

@@ -1,0 +1,18 @@
+{
+ "method": "ARAS",
+ "scenario": "dynamic_both",
+ "noise_kind": "flip",
+ "noise_p": 0.0,
+ "num_episodes": 300,
+ "seed": 0,
+ "model": "./models/ARAS_v8d_mixed_eps.pt",
+ "inference_in_loop": true,
+ "success_rate": 0.49333333333333335,
+ "avg_steps": 58.83,
+ "avg_user_inputs": 874.1333333333333,
+ "avg_error_actions": 19.633333333333333,
+ "avg_amplified_actions": 15.123333333333333,
+ "timestamp": "20260919_104742",
+ "avg_gate_open_frac": 0.5178342310242033,
+ "avg_infer_acc": 0.9545130120290856
+}

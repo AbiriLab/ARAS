@@ -8,13 +8,11 @@ opencv-python>=4.5.1.48
 matplotlib>=3.5.0
 pillow>=9.0.0
 tensorboardX>=2.4.0
-setuptools>=40.0.0  # Needed for pkg_resources
+setuptools<81  # pkg_resources (removed in setuptools 81)
 
 # Data visualization and IPython (used in utils.py)
 ipython>=7.0.0
 
-# Command line parsing
-optparse-pretty>=0.1.1
 
 # Standard libraries (already part of Python, listed for clarity)
 # collections, datetime, time, os, json, random, math, glob

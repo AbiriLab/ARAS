@@ -3,11 +3,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ##########################################
 ########### TESTING PARAMETERS ##########
-RENDER = True
-modelPath = "./models/ARAS_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt" # ARAS
-# modelPath = "./models/DQN_baseline_v2_bs64_ss4_rb30000_gamma0.3_decaylf5000_lr1e-05.pt" # DQN
+RENDER = False
+# modelPath = "./models/ARAS_v7_bs64_ss4_rb30000_gamma0.5_decaylf20000_lr1e-05.pt" # pre-fine-tune checkpoint (reproduces the goal-identified upper bound via testDQN.py)
+modelPath = "./models/ARAS_v8_inference.pt" # deployed (inference-in-the-loop) checkpoint
 SCENARIO = "dynamic_both" # ["fixed", "dynamic_pickup", "dynamic_dropoff", "dynamic_both"]
-EPISODE_NUMBER = 50
+EPISODE_NUMBER = 500
 
 ##########################################
 ########### TRAINING PARAMETERS ##########

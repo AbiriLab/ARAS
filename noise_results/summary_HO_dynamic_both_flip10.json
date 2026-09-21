@@ -1,0 +1,16 @@
+{
+ "method": "HO",
+ "scenario": "dynamic_both",
+ "noise_kind": "flip",
+ "noise_p": 0.1,
+ "num_episodes": 500,
+ "seed": 0,
+ "model": null,
+ "inference_in_loop": false,
+ "success_rate": 0.624,
+ "avg_steps": 38.924,
+ "avg_user_inputs": 395.28,
+ "avg_error_actions": 7.168,
+ "avg_amplified_actions": 19.16,
+ "timestamp": "20260919_012344"
+}
